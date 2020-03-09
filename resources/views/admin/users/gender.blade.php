@@ -1,0 +1,1 @@
+{{\App\Enums\GenderType::getDescription($gender)}}

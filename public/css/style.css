@@ -1,0 +1,25 @@
+.dt-button{
+    background-image: none !important;
+    color: #fff !important;
+    border: 0 !important;
+}
+.dt-button.btn-primary{
+    background-color: #3c8dbc !important;
+}
+
+.dt-button.btn-default{
+    background-color: #f4f4f4 !important;
+}
+.dt-button.btn-success{
+    background-color: #00a65a !important;
+}
+
+.dt-button.btn-info{
+    background-color: #00c0ef !important;
+}
+
+body, h1,h2,h3,h4,h5,h6{
+    font-family: 'Cairo';
+}
+
+

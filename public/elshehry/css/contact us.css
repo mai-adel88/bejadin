@@ -1,0 +1,16 @@
+input{
+    padding: 10px;
+    font-size: 20px;
+    margin-bottom: 20px
+}
+textarea{
+    padding: 10px;
+    font-size: 20px;
+}
+.submit{
+    margin-bottom: 0;
+    border: none;
+    padding: 10px 60px;
+    background: #00a8ff;
+    color: white;
+}

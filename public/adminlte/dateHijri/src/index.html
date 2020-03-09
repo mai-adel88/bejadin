@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8" />
+    <title>
+        Bootstrap Hijri Date Picker
+    </title>
+
+    
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+
+</head>
+<body class="bg-light">
+
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Checkout form</h2>
+            <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <div class="input-group date">
+                        <input type='text' class="form-control" id="hijri-date-input" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/momentjs.js"></script>
+    <script src="js/moment-with-locales.js"></script>
+    <script src="js/moment-hijri.js"></script>
+    <script src="js/bootstrap-hijri-datetimepicker.js"></script>
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+            initHijrDatePicker();
+
+            //initHijrDatePickerDefault();
+
+        });
+
+        function initHijrDatePicker() {
+
+            $("#hijri-date-input").hijriDatePicker({
+                locale: "ar-sa",
+
+                //format: "DD-MM-YYYY",
+                //hijriFormat:"iYYYY-iMM-iDD",
+
+                //dayViewHeaderFormat: "MMMM YYYY",
+                //hijriDayViewHeaderFormat: "iMMMM iYYYY",
+                showSwitcher: true,
+
+                allowInputToggle: true,
+                showTodayButton: false,
+                useCurrent: true,
+                isRTL: false,
+                keepOpen: false,
+                hijri: true,
+                debug: true,
+                showClear: true,
+                showTodayButton: true,
+                showClose: true
+            });
+        }
+
+        function initHijrDatePickerDefault() {
+
+            $("#hijri-date-input").hijriDatePicker();
+        }
+
+
+    </script>
+
+</body>
+</html>
