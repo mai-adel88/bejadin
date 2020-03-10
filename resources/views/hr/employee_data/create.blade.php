@@ -1316,9 +1316,9 @@
                                             </div>
                                             <div class="row form-group">
                                                 <label for="Pasprt_Ty" class="col-md-5 pl-0">{{trans('hr.Pasprt_Ty')}}</label>
-                                                <div class="select_com_td col-md-7 p-0 p-7-2">
+                                                <div class="col-md-7 p-0 p-7-2">
                                                     {{ Form::select('Pasprt_Ty',\App\Enums\Hr\PassportType::toSelectArray() ,null,
-                                                    array_merge(['id'=>'Pasprt_Ty', 'class' => 'select2 form-control Pasprt_Ty','placeholder'=>trans('admin.select')])) }}
+                                                    array_merge(['id'=>'Pasprt_Ty', 'class' => 'form-control Pasprt_Ty','placeholder'=>trans('admin.select')])) }}
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -1343,8 +1343,8 @@
                                             <!-- وظيفة تاشيرة القدوم -->
                                             <div class="row form-group">
                                                 <label for="In_Job" class="col-md-6 pl-0 p-0">{{trans('hr.In_Job')}}</label>
-                                                <div class="select_com_td col-md-6 p-0 p-7-2">
-                                                    <select id="In_Job" name="In_Job" class="In_Job select2 form-control">
+                                                <div class="col-md-6 p-0 p-7-2">
+                                                    <select id="In_Job" name="In_Job" class="In_Job form-control" style="border-radius: 4px;">
                                                         <option disabled selected>{{trans('admin.select')}}</option>
                                                         @foreach($job_gov as $gov)
                                                             <option value="{{$gov->Job_No}}">{{$gov->Job_NmAr}}</option>
@@ -1364,10 +1364,12 @@
                                             <!-- not yet -->
                                             <div class="row form-group">
                                                 <label for="In_Port" class="col-md-6 p-0 pl-0">{{trans('hr.In_Port')}}</label>
-                                                <div class="select_com_td col-md-6 p-0 p-7-2">
-                                                    <select name="In_Port" class="In_Port select2 form-control">
-                                                        <option value=""></option>
-                                                        <option value=""></option>
+                                                <div class="col-md-6 p-0 p-7-2">
+                                                    <select name="In_Port" class="In_Port form-control" style="border-radius: 4px;">
+                                                        <option disabled selected>{{trans('admin.select')}}</option>
+                                                        @foreach($ports as $port)
+                                                            <option value="{{$port->Ports_No}}">{{$port->{'Ports_Nm'.ucfirst(session('lang'))} }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -1397,10 +1399,12 @@
                                             </div>
                                             <div class="row form-group">
                                                 <label for="Out_Port" class="col-md-6 p-0 pl-0">{{trans('hr.Out_Port')}}</label>
-                                                <div class="select_com_td col-md-6 p-0 p-7-2">
-                                                    <select id="Out_Port" name="Out_Port" class="Out_Port select2 form-control">
-                                                        <option value=""></option>
-                                                        <option value=""></option>
+                                                <div class="col-md-6 p-0 p-7-2">
+                                                    <select id="Out_Port" name="Out_Port" class="Out_Port form-control" style="border-radius: 4px;">
+                                                    <option disabled selected>{{trans('admin.select')}}</option>
+                                                        @foreach($ports as $port)
+                                                            <option value="{{$port->Ports_No}}">{{$port->{'Ports_Nm'.ucfirst(session('lang'))} }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>

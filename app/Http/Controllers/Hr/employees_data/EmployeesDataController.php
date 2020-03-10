@@ -12,6 +12,7 @@ use App\Models\Hr\HREmpAttach; // المرفقات
 use App\Models\Hr\DepmCmp;
 use App\Models\Hr\HREmpadr; // العناوين
 use App\Models\Hr\Pyjobs;
+use App\Models\Hr\HrAstPorts; 
 use App\Models\Admin\GLaccBnk;
 use App\Models\Hr\LocClass;
 use App\Http\Controllers\Controller;
@@ -52,12 +53,13 @@ class EmployeesDataController extends Controller
             $last =  1;
         }
 
-        $companies = HRMainCmpnam::get(); // الشركات
-        $departments = DepmCmp::get(); // الاقسام
-        $jobs = Pyjobs::get(); // الوظائف
+        $companies = HRMainCmpnam::get();   // الشركات
+        $departments = DepmCmp::get();      // الاقسام
+        $jobs = Pyjobs::get();              // الوظائف
         $administrations = LocClass::get(); // الادارة
-        $countries = country::get();    //الدول
-        $cities = city::get();          //المدينه
+        $ports = HrAstPorts::get();        // منافذ الدخول والمغادره
+        $countries = country::get();        //الدول
+        $cities = city::get();              //المدينه
 
         // البنك للشركه )التعاقد)
         $flags = GLaccBnk::all();
@@ -72,14 +74,14 @@ class EmployeesDataController extends Controller
         $job_cmp = Pyjobs::where('job_cmpny', 1)->get();
         //الوظيفه بالحكومه / تأشيرة القدوم
         $job_gov = Pyjobs::where('job_gov', 1)->get();
-        $job_affairs = Pyjobs::where('job_cmpny', 1)->get(); // الوظيفة بالشئون
+        $job_affairs = Pyjobs::where('job_cmpny', 1)->get();        // الوظيفة بالشئون
         $licences = HrAstPlcLicns::where('cty_jobactv', 1)->get(); // الترخيص
         $drivelicences = HrAstPlcLicns::where('cty_drivlic', 1)->get(); // ماكن اصدار رخصة القيادة
         $residencelicences = HrAstPlcLicns::where('cty_resident', 1)->get(); // الاقامة
         $civilcelicences = HrAstPlcLicns::where('cty_Nat_id', 1)->get(); // الهوية
-        $job_techs = Pyjobs::where('job_tech', 1)->get(); // التخصص المهنى
+        $job_techs = Pyjobs::where('job_tech', 1)->get();               // التخصص المهنى
 
-        return view('hr.employee_data.create', compact('full_names','civilcelicences','residencelicences','drivelicences','job_techs','licences','companies','jobs','departments','last','administrations', 'banks','countries','cities','job_cmp','job_gov'));
+        return view('hr.employee_data.create', compact('ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','companies','jobs','departments','last','administrations', 'banks','countries','cities','job_cmp','job_gov'));
     }
 
     /**
@@ -372,11 +374,12 @@ class EmployeesDataController extends Controller
     {
         $emp_data = HrEmpmfs::findOrFail($ID_NO);
         $companies = HRMainCmpnam::get(); // الشركات
-        $departments = DepmCmp::get(); // الاقسام
-        $jobs = Pyjobs::get(); // الوظائف
+        $departments = DepmCmp::get();    // الاقسام
+        $jobs = Pyjobs::get();            // الوظائف
         $administrations = LocClass::get(); // الادارة
         $countries = country::get();    //الدول
         $cities = city::get();          //المدينه
+        $ports = HrAstPorts::get();    // منافذ الدخول والمغادره
 
         // البنك للشركه )التعاقد)
         $flags = GLaccBnk::all();
@@ -398,7 +401,7 @@ class EmployeesDataController extends Controller
         $civilcelicences = HrAstPlcLicns::where('cty_Nat_id', 1)->get(); // الهوية
         $job_techs = Pyjobs::where('job_tech', 1)->get(); // التخصص المهنى
 
-        return view('hr.employee_data.show', compact(['civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov']));
+        return view('hr.employee_data.show', compact(['ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov']));
     }
 
     /**
@@ -410,12 +413,13 @@ class EmployeesDataController extends Controller
     public function edit($ID_NO)
     {
         $emp_data = HrEmpmfs::findOrFail($ID_NO);
-        $companies = HRMainCmpnam::get(); // الشركات
-        $departments = DepmCmp::get(); // الاقسام
-        $jobs = Pyjobs::get(); // الوظائف
+        $companies = HRMainCmpnam::get();   // الشركات
+        $departments = DepmCmp::get();      // الاقسام
+        $jobs = Pyjobs::get();              // الوظائف
+        $ports = HrAstPorts::get();        // منافذ الدخول والمغادره
         $administrations = LocClass::get(); // الادارة
-        $countries = country::get();    //الدول
-        $cities = city::get();          //المدينه
+        $countries = country::get();        //الدول
+        $cities = city::get();              //المدينه
 
         // البنك للشركه )التعاقد)
         $flags = GLaccBnk::all();
@@ -430,14 +434,14 @@ class EmployeesDataController extends Controller
         $job_cmp = Pyjobs::where('job_cmpny', 1)->get();
         //الوظيفه بالحكومه / تأشيرة القدوم
         $job_gov = Pyjobs::where('job_gov', 1)->get();
-        $job_affairs = Pyjobs::where('job_cmpny', 1)->get(); // الوظيفة بالشئون
+        $job_affairs = Pyjobs::where('job_cmpny', 1)->get();        // الوظيفة بالشئون
         $licences = HrAstPlcLicns::where('cty_jobactv', 1)->get(); // الترخيص
         $drivelicences = HrAstPlcLicns::where('cty_drivlic', 1)->get(); // ماكن اصدار رخصة القيادة
         $residencelicences = HrAstPlcLicns::where('cty_resident', 1)->get(); // الاقامة
         $civilcelicences = HrAstPlcLicns::where('cty_Nat_id', 1)->get(); // الهوية
-        $job_techs = Pyjobs::where('job_tech', 1)->get(); // التخصص المهنى
+        $job_techs = Pyjobs::where('job_tech', 1)->get();               // التخصص المهنى
 
-        return view('hr.employee_data.edit', compact('civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov'));
+        return view('hr.employee_data.edit', compact('ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov'));
     }
 
     /**
