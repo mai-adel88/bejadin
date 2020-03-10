@@ -8,11 +8,6 @@ use App\Enums\Hr\AstcHldyEarn;
 use App\Enums\CompanyEmployeeClass;
 use App\Enums\Hr\EducationType;
 use App\Enums\Hr\HrTransType;
-use App\Enums\Hr\EmployeeClass; // فئة الموظفين
-use App\Enums\Hr\MBudg_typ; // فئة الموظفين
-use App\Enums\Hr\PassportType; // انواع جواز السفر
-use App\Enums\Hr\IDType; // انواع الإقامات
-use App\Enums\Hr\DriveLicenceType; // انواع رخص القيادة
 use App\Enums\ShiftTypes;
 use App\Enums\SalaryClassNo;
 use App\Enums\Nationalities;
@@ -20,7 +15,7 @@ use App\Enums\JobStatus;
 use App\Enums\TypeType;
 use App\Enums\RelationType;
 use App\Enums\ReligionType;
-use App\Enums\Hr\SocialType; 
+use App\Enums\SocialType;
 use App\Enums\WorkType;
 use App\Enums\LicenseType;
 use App\Enums\HealthType;
@@ -134,49 +129,12 @@ return [
         EducationType::noRead => 'أميّ',
         EducationType::writingReading => 'يقرأ ويكتب',
         EducationType::primary => 'ابتدائي',
-        EducationType::mediate => 'متوسط',
-        EducationType::secondary => 'ثانوى',
-        EducationType::diploma => 'دبلوم',
-        EducationType::academic => 'جامعى',
-        EducationType::ma => 'ماجستير',
-        EducationType::doctorate => 'دكتوراه',
-    ],
-    EmployeeClass::class => [
-        EmployeeClass::none => 'بدون', 
-        EmployeeClass::ExcellentClass => 'فئة ممتازة',
-        EmployeeClass::ClassA => 'فئة أ', 
-        EmployeeClass::ClassB => 'فئة ب',
-        EmployeeClass::ClassG => 'فئة ج',
-        EmployeeClass::ClassD => 'فئة د',
-    ],
-    MBudg_typ::class => [
-        MBudg_typ::none => 'بدون', 
-        MBudg_typ::year => 'سنة', 
-        MBudg_typ::twoYears => 'سنتين',
-        MBudg_typ::threeYears => 'ثلاث سنوات', 
-        MBudg_typ::fourYears => 'أربع سنوات',
-        MBudg_typ::fiveYears => 'خمس سنوات',
-        MBudg_typ::flexibleYears => 'أكثر',
-    ],
-    IDType::class => [
-        IDType::none => 'بدون', 
-        IDType::systemic => 'نظامية', 
-        IDType::nonSystemic => 'غير نظامية',
-        IDType::nationalityId => 'هوية وطنية', 
-        IDType::workVisiting => 'زيارة عمل',
-    ],
-    DriveLicenceType::class => [
-        DriveLicenceType::none => 'بدون', 
-        DriveLicenceType::spacial => 'خصوصى', 
-        DriveLicenceType::mediate => 'متوسط',
-        DriveLicenceType::generalGreat => 'عمومى كبير', 
-    ],
-    PassportType::class => [
-        PassportType::none => 'بدون', 
-        PassportType::normal => 'عادى', 
-        PassportType::diplomatic => 'دبلوماسى',
-        PassportType::document => 'وثيقة', 
-        PassportType::other => 'أخرى',
+        EducationType::mediate => '',
+        EducationType::secondary => '',
+        EducationType::diploma => '',
+        EducationType::academic => '',
+        EducationType::ma => '',
+        EducationType::doctorate => '',
     ],
     JobStatus::class => [
         JobStatus::none => 'بدون',
@@ -202,6 +160,7 @@ return [
         AstcHldyEarn::annual21 => 'سنويه 21',
         AstcHldyEarn::annual45 => 'سنويه 45',
         AstcHldyEarn::years30  =>  'سنتين 30',
+
     ],
     BranchType::class => [
         BranchType::manage => 'اداره', //0
@@ -636,189 +595,5 @@ return [
         \App\Enums\BarCodeSize::medium => 'متوسط',
         \App\Enums\BarCodeSize::small => 'صغير',
     ],
-    \App\Enums\Hr\HrReligion::class => [
-        \App\Enums\Hr\HrReligion::islam => 'مسلم',
-        \App\Enums\Hr\HrReligion::christian => 'مسيحي',
-        \App\Enums\Hr\HrReligion::jewish => 'يهودي',
-        \App\Enums\Hr\HrReligion::other => 'ديانات أخري',
-    ],
-
-    \App\Enums\Hr\HrTransType::class => [
-        \App\Enums\Hr\HrTransType::none => 'بدون',
-        \App\Enums\Hr\HrTransType::air => 'جواً',
-        \App\Enums\Hr\HrTransType::land => 'براً',
-        \App\Enums\Hr\HrTransType::sea => 'بحراً',
-    ],
-
-    \App\Enums\Hr\HrHousePaymentType::class => [
-        \App\Enums\Hr\HrHousePaymentType::none => 'بدون',
-        \App\Enums\Hr\HrHousePaymentType::monthly => 'شهري',
-        \App\Enums\Hr\HrHousePaymentType::quarterYear => 'ربع سنوي',
-        \App\Enums\Hr\HrHousePaymentType::halfYear => 'نصف سنوي',
-        \App\Enums\Hr\HrHousePaymentType::fullYear => 'سنوي',
-        \App\Enums\Hr\HrHousePaymentType::companyHouse => 'سكن بالشركة',
-    ],
-
-    \App\Enums\Hr\CompanyStatus::class => [
-        \App\Enums\Hr\CompanyStatus::none => 'بدون',
-        \App\Enums\Hr\CompanyStatus::still => 'قائمة',
-        \App\Enums\Hr\CompanyStatus::stop => 'متوقفة',
-        \App\Enums\Hr\CompanyStatus::underCreation => 'تحت الإنشاء',
-    ],
-
-    \App\Enums\Hr\BuildOwnerShip::class => [
-        \App\Enums\Hr\BuildOwnerShip::none => 'بدون',
-        \App\Enums\Hr\BuildOwnerShip::governmentOwn => 'أملاك دولة',
-        \App\Enums\Hr\BuildOwnerShip::rentFromOther => 'تأجير من الغير',
-        \App\Enums\Hr\BuildOwnerShip::CompanyOwn => 'ملك الشركة',
-        \App\Enums\Hr\BuildOwnerShip::specialOwn => 'ملك خاص',
-    ],
-
-    \App\Enums\Hr\FeesPaymentWayTypes::class => [
-        \App\Enums\Hr\FeesPaymentWayTypes::none => 'بدون',
-        \App\Enums\Hr\FeesPaymentWayTypes::monthly => 'شهري',
-        \App\Enums\Hr\FeesPaymentWayTypes::quarterYear => 'ربع سنوي',
-        \App\Enums\Hr\FeesPaymentWayTypes::halfYear => 'نصف سنوي',
-        \App\Enums\Hr\FeesPaymentWayTypes::fullYear => 'سنوي',
-    ],
-
-    \App\Enums\Hr\SalaryPaymentWay::class => [
-        \App\Enums\Hr\SalaryPaymentWay::none => 'بدون',
-        \App\Enums\Hr\SalaryPaymentWay::bank => 'بنك',
-        \App\Enums\Hr\SalaryPaymentWay::cash => 'نقدي',
-        \App\Enums\Hr\SalaryPaymentWay::check => 'شيك',
-    ],
-
-    \App\Enums\Hr\JobStatus::class => [
-        \App\Enums\Hr\JobStatus::none => 'بدون',
-        \App\Enums\Hr\JobStatus::stayWork => 'على رأس العمل',
-        \App\Enums\Hr\JobStatus::inVacation => 'القيام بأجازة',
-        \App\Enums\Hr\JobStatus::finishService => 'إنهاء الخدمة',
-        \App\Enums\Hr\JobStatus::goneNoReturn => 'خرج ولم يعد',
-        \App\Enums\Hr\JobStatus::escape => 'هروب',
-        \App\Enums\Hr\JobStatus::other => 'أخرى',
-    ],
-
-    \App\Enums\Hr\BankPaymentWay::class => [
-        \App\Enums\Hr\BankPaymentWay::none => 'بدون',
-        \App\Enums\Hr\BankPaymentWay::bank => 'بنك',
-        \App\Enums\Hr\BankPaymentWay::cash => 'نقدي',
-        \App\Enums\Hr\BankPaymentWay::check => 'شيك',
-    ],
-
-    \App\Enums\Hr\LegalForPartnersAndDelegates::class => [
-        \App\Enums\Hr\LegalForPartnersAndDelegates::none => 'بدون',
-        \App\Enums\Hr\LegalForPartnersAndDelegates::partner => 'شريك',
-        \App\Enums\Hr\LegalForPartnersAndDelegates::signedDelegate => 'مفوض بالتوقيع',
-        \App\Enums\Hr\LegalForPartnersAndDelegates::agent => 'وكيل',
-    ],
-
-    \App\Enums\Hr\ActiveType::class => [
-        \App\Enums\Hr\ActiveType::none => 'بدون',
-        \App\Enums\Hr\ActiveType::trade => 'تجاري',
-        \App\Enums\Hr\ActiveType::industrial => 'صناعي',
-        \App\Enums\Hr\ActiveType::printAndPackaging => 'طباعة وتغليف',
-        \App\Enums\Hr\ActiveType::building => 'عقارات',
-        \App\Enums\Hr\ActiveType::generalRent => 'أجرة عامة',
-        \App\Enums\Hr\ActiveType::carsRent => 'تأجير سيارات',
-        \App\Enums\Hr\ActiveType::transporter => 'نقليات',
-        \App\Enums\Hr\ActiveType::generalConstruction => 'مقاولات عامة',
-        \App\Enums\Hr\ActiveType::maintenanceAndOperation => 'صيانة وتشغيل',
-        \App\Enums\Hr\ActiveType::schools => 'مدارس',
-        \App\Enums\Hr\ActiveType::hospitals => 'مستشفيات',
-        \App\Enums\Hr\ActiveType::pharmacies => 'صيدليات',
-        \App\Enums\Hr\ActiveType::other => 'أخرى',
-    ],
-
-    \App\Enums\Hr\LocationsType::class => [
-        \App\Enums\Hr\LocationsType::none => 'بدون',
-        \App\Enums\Hr\LocationsType::licencedLocation => 'موقع بترخيص',
-        \App\Enums\Hr\LocationsType::spaceLand => 'أرض فضاء',
-        \App\Enums\Hr\LocationsType::building => 'عقار',
-        \App\Enums\Hr\LocationsType::byWriting => 'بصك',
-        \App\Enums\Hr\LocationsType::withoutWriting => 'بدون صك',
-        \App\Enums\Hr\LocationsType::townShipLicenced => 'مرخص من بلدية',
-        \App\Enums\Hr\LocationsType::gallery => 'معرض',
-        \App\Enums\Hr\LocationsType::hall => 'حوش',
-        \App\Enums\Hr\LocationsType::other => 'أخرى',
-    ],
-
-    \App\Enums\Hr\IDType::class => [
-        \App\Enums\Hr\IDType::none => 'بدون',
-        \App\Enums\Hr\IDType::systemic => 'نظامية',
-        \App\Enums\Hr\IDType::nonSystemic => 'غير نظامية',
-        \App\Enums\Hr\IDType::nationalityId => 'هوية وطنية',
-        \App\Enums\Hr\IDType::workVisiting => 'زيارة عمل',
-    ],
-
-    \App\Enums\Hr\PassportType::class => [
-        \App\Enums\Hr\PassportType::none => 'بدون',
-        \App\Enums\Hr\PassportType::normal => 'عادي',
-        \App\Enums\Hr\PassportType::diplomatic=> 'دبلوماسي',
-        \App\Enums\Hr\PassportType::document => 'وثيقة',
-        \App\Enums\Hr\PassportType::other => 'أخرى',
-    ],
-
-    \App\Enums\Hr\EducationType::class => [
-        \App\Enums\Hr\EducationType::none => 'بدون',
-        \App\Enums\Hr\EducationType::noRead => 'أمي',
-        \App\Enums\Hr\EducationType::writingReading => 'يقرأ ويكتب',
-        \App\Enums\Hr\EducationType::primary => 'ابتدائي',
-        \App\Enums\Hr\EducationType::mediate => 'متوسط',
-        \App\Enums\Hr\EducationType::secondary => 'ثانوي',
-        \App\Enums\Hr\EducationType::diploma => 'دبلوم',
-        \App\Enums\Hr\EducationType::academic => 'جامعي',
-        \App\Enums\Hr\EducationType::ma => 'ماجستير',
-        \App\Enums\Hr\EducationType::doctorate => 'دكتوراه',
-    ],
-
-    \App\Enums\Hr\SpecialNeeds::class => [
-        \App\Enums\Hr\SpecialNeeds::none => 'بدون',
-        \App\Enums\Hr\SpecialNeeds::mentalityObstruction => 'إعاقة ذهنية',
-        \App\Enums\Hr\SpecialNeeds::physicalObstruction => 'إعاقة عضوية',
-    ],
-
-    \App\Enums\Hr\CompanyClass::class => [
-        \App\Enums\Hr\CompanyClass::none => 'بدون',
-        \App\Enums\Hr\CompanyClass::shareHoldingCompany => 'شركة مساهمة',
-        \App\Enums\Hr\CompanyClass::companyHaveMM => 'شركة ذات م م',
-        \App\Enums\Hr\CompanyClass::simpleRecommendationCompany => 'ذات توصية بسيطة',
-        \App\Enums\Hr\CompanyClass::industrialCraft => 'حرفة صناعية',
-        \App\Enums\Hr\CompanyClass::individualFoundation => 'مؤسسة فردية',
-        \App\Enums\Hr\CompanyClass::industrialFoundation => 'منشأة صناعية',
-        \App\Enums\Hr\CompanyClass::specialParticipate => 'مساهمة مقفلة',
-        \App\Enums\Hr\CompanyClass::generalParticipate => 'مساهمة عامة',
-    ],
-
-    \App\Enums\Hr\CompanyEmployeeClass::class => [
-        \App\Enums\Hr\CompanyEmployeeClass::none => 'بدون',
-        \App\Enums\Hr\CompanyEmployeeClass::permanentEmployee => 'موظف دائم',
-        \App\Enums\Hr\CompanyEmployeeClass::temporaryEmployee => 'موظف مؤقت',
-    ],
-
-    \App\Enums\Hr\EmployeeClass::class => [
-        \App\Enums\Hr\EmployeeClass::none => 'بدون',
-        \App\Enums\Hr\EmployeeClass::ExcellentClass => 'فئة ممتازة',
-        \App\Enums\Hr\EmployeeClass::ClassA => 'فئة أ',
-        \App\Enums\Hr\EmployeeClass::ClassB => 'فئة ب',
-        \App\Enums\Hr\EmployeeClass::ClassG => 'فئة ج',
-        \App\Enums\Hr\EmployeeClass::ClassD => 'فئة د',
-    ],
-
-    \App\Enums\Hr\SocialStatus::class => [
-        \App\Enums\Hr\SocialStatus::none => 'بدون',
-        \App\Enums\Hr\SocialStatus::single => 'أعزب',
-        \App\Enums\Hr\SocialStatus::married => 'متزوج',
-        \App\Enums\Hr\SocialStatus::divorced => 'مطلق',
-        \App\Enums\Hr\SocialStatus::widower => 'أرمل',
-    ],
-
-    \App\Enums\Hr\DriveLicenceType::class => [
-        \App\Enums\Hr\DriveLicenceType::none => 'بدون',
-        \App\Enums\Hr\DriveLicenceType::spacial => 'خصوصي',
-        \App\Enums\Hr\DriveLicenceType::mediate => 'متوسط',
-        \App\Enums\Hr\DriveLicenceType::generalGreat => 'عمومي كبير',
-    ],
-
 
 ];

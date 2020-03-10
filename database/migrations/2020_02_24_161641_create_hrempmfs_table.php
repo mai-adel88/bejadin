@@ -73,7 +73,8 @@ class CreateHrempmfsTable extends Migration
             $table->string('Work_CardNo', 20)->nullable();
             $table->string('Work_Period', 20)->nullable();
             $table->string('Work_StDt', 10)->nullable();
-            $table->integer('Month_Salry')->nullable();
+            $table->integer('Month_Salry')->nullable(); // الراتب بالشركة
+            $table->integer('MMonth_Salry')->nullable(); // الراتب بالشئون
             //$table->integer('Bsc_Salary')->nullable();
             $table->smallInteger('Lic_Typ')->nullable(); // enum
             $table->string('Lic_Sdt', 10)->nullable();
@@ -115,42 +116,16 @@ class CreateHrempmfsTable extends Migration
             $table->string('Under_Test', 2)->nullable();
             $table->string('End_Tstdt', 10)->nullable();
             $table->string('End_TstdtHij', 10)->nullable();
-            // // الاجازات HREmphld
-            // $table->integer('HLdy_Ty')->nullable(); // AstcHldyEarn نوع استحقاق الاجازة
-            // $table->integer('DueDt_Hldy')->nullable(); //  تاريخ استحقاق الاجازة
-            // $table->integer('DueDt_HldyHij')->nullable(); //  تاريخ استحقاق الاجازة هجرى
-            // $table->integer('DueDt_Tkt')->nullable(); //  تاريخ استحقاق التذكرة
-            // $table->integer('DueDt_TktHij')->nullable(); //   هجرى تاريخ استحقاق التذكرة
-            // // وقت استحقاق التذاكر
-            // $table->integer('Tkt_Ty1')->nullable(); //   عند الاجازة السنوية
-            // $table->integer('Tkt_Ty2')->nullable(); //   عند الاستقدام
-            // $table->integer('Tkt_Ty3')->nullable(); //   عند نهاية العقد
-            // // شروط إستحقاق التذاكر
-            // $table->integer('Tkt_Ty4')->nullable(); //   لايتم تعويض التذكرة ان لم يكن السفر فعلى
-            // $table->integer('Tkt_Ty5')->nullable(); //   نصف تذكرة فى حالة السفر بالبر او البحر
-            // $table->integer('Tkt_Ty6')->nullable(); //   حق لنا إختيار أرخص الخطوط سواء مباشر او غير مباشر
-            // $table->integer('Tkt_Ty7')->nullable(); //   السفر الفعلى لمحرم المتعاقد
-            // // HrHldTrnsp وسلة السفر
-            // // للموظف وسلة السفر
-            // $table->smallInteger('HldTrnsp_No')->nullable(); // وسلة السفر للموظف
-            // $table->smallInteger('Tkt_No')->nullable(); // عدد التذاكر - للموظف
-            // $table->string('Tkt_Class', 15)->nullable(); // درجة التذكرة - للموظف
-            // $table->string('Tkt_Sector', 50)->nullable(); // إتجاه التذكرة - للموظف
-            // // HldTrnsp_No1 وسلة السفر للزوجة
-            // $table->smallInteger('HldTrnsp_No1')->nullable(); // وسلة السفر للزوجة
-            // $table->smallInteger('Tkt_No1')->nullable(); // عدد التذاكر - الزوجة
-            // $table->string('Tkt_Class1', 5)->nullable(); // درجة التذكرة - للزوجة
-            // $table->string('Tkt_Sector1', 30)->nullable(); // إتجاه التذكرة - للزوجة
-            // // HldTrnsp_No1 وسلة السفر للاولاد
-            // $table->smallInteger('HldTrnsp_No2')->nullable(); // وسلة السفر للزوجة
-            // $table->smallInteger('Tkt_No2')->nullable(); // عدد التذاكر - الزوجة
-            // $table->string('Tkt_Class2', 5)->nullable(); // درجة التذكرة - للزوجة
-            // $table->string('Tkt_Sector2', 30)->nullable(); // إتجاه التذكرة - للزوجة
-            // // التعاقد
-            // $table->integer('Bsc_Salary')->nullable(); // Bsc_Salary الراتب الاساسى
-            // $table->integer('Add_Alw')->nullable(); // اضافى ثابت
-            $table->string('Cnt_Endt')->nullable();
+            // not found
+            $table->string('Cnt_Endt')->nullable(); // نهاية التعاقد
             $table->integer('Job_No')->nullable(); // pyjobs [Job_No] الوظيفة
+            $table->integer('Psprt_Rcv_1')->nullable(); // الجواز موجود
+            $table->integer('Psprt_Rcv_2')->nullable(); // الجواز موجود
+            $table->integer('In_Port')->nullable(); // منفذ الدخول
+            $table->integer('Residn_Plc')->nullable(); //مكان الاصدار
+            $table->integer('Psprt_Rcv_2')->nullable(); // الجواز موجود
+            $table->string('Work_Endt', 10)->nullable();
+            $table->integer('Lic_No')->nullable();
             $table->timestamps();
         });
     }
