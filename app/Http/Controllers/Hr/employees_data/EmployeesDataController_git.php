@@ -122,7 +122,6 @@ class EmployeesDataController extends Controller
             'Blood_Type'=>'sometimes', // فصيلة الدم
             'On_WorkDt' =>'sometimes', // تايخ مباشرة العمل
             'On_WorkDtHij'=>'sometimes', // تايخ مباشرة العمل هجرى
-            'Job_Stu'=>'sometimes', // الحالة
             
             'Status_Type'=>'sometimes', // الحالة الاجتماعية
             'End_Tstdt'  =>'sometimes', // انهاء التجربة
@@ -144,8 +143,6 @@ class EmployeesDataController extends Controller
             'JobPLc_No' => 'sometimes',
             'Jobknd_No' => 'sometimes',
             'Rcrd_LicNo' => 'sometimes',
-            'Rcrd_LicTyp' => 'sometimes', // الفئة
-            'Rcrd_LicTyp1' => 'sometimes', // الفئة بطاقة التسجيل المهنى
             // بياانت الجواز
             'Pasprt_No' => 'sometimes',
             'Pasprt_Ty' => 'sometimes',
@@ -165,13 +162,13 @@ class EmployeesDataController extends Controller
             'Out_Port' => 'sometimes',
             'Trnsfer_Dt' => 'sometimes',
             'Trnsfer_OLdNm' => 'sometimes',
-            'Psprt_Rcv' => 'sometimes', // الجواز موجود نعم
+            'Psprt_Rcv' => 'sometimes',
             // الهوية
             'Budg_typ' => 'sometimes',
             'Cnt_Endt' => 'sometimes', // نهاية التعقاد
-            'Ensurans_No' => 'sometimes', // رقم التامينات الاجتماعية
-            'Work_Lic' => 'sometimes', // Work_Lic ملف مكتب العمل 
-            'Specl_Need' => 'sometimes', // طبيعى / احتياجات خاصة
+            'Ensurans_No' => 'sometimes',
+            'Work_Lic' => 'sometimes',
+            'Specl_Need' => 'sometimes',
             'Lic_Plc' => 'sometimes',
             'Lic_Typ' => 'sometimes',
             'Lic_Edt' => 'sometimes',
@@ -179,19 +176,18 @@ class EmployeesDataController extends Controller
             'Lic_No' => 'sometimes',
             'Work_PLC' => 'sometimes', // مكان الاصدار
             'Work_Endt' => 'sometimes', // 
-            'Work_StDt' => 'sometimes', //  
-            'Residn_Plc' => 'sometimes', // مكان الاصدار
-            'Residn_Ty' => 'sometimes', // النوع
-            'Residn_Edt' => 'sometimes', // الانتهاء
-            'Residn_Sdt' => 'sometimes', // الاصدار
-            'Civl_No' => 'sometimes', // الرقم المدني
-            'CivL_StDt' => 'sometimes', // 
-            'Civl_Plc' => 'sometimes', // مكان الانتهاء
-            'Residn_No' => 'sometimes', //   // بيانات الاقامه الرقم
-            'Cnt_Period' => 'sometimes', // نهاية التعاقد
+            'Work_StDt' => 'sometimes', // 
+            'Work_Lic' => 'sometimes', //
+            'Residn_Plc' => 'sometimes', //
+            'Residn_Ty' => 'sometimes', //
+            'Residn_Edt' => 'sometimes', //
+            'Residn_Sdt' => 'sometimes', //
+            'Residn_No' => 'sometimes', //
+            'Specl_Need' => 'sometimes', //
+            'Ensurans_No' => 'sometimes', //
+            'Work_Lic' => 'sometimes', //
+            'Cnt_Period' => 'sometimes', //
             'MJob_No' => 'sometimes', // الوظيفه بالشئون
-            'Month_Salry' => 'sometimes', // الراتب بالشركة
-            'MMonth_Salry' => 'sometimes', // الراتب بالشئون
             // HREmpAttach
             'Attch_No' => 'sometimes',
             'Ln_No' => 'sometimes',
@@ -371,23 +367,8 @@ class EmployeesDataController extends Controller
     public function show($ID_NO)
     {
         $emp_data = HrEmpmfs::findOrFail($ID_NO);
-        $companies = HRMainCmpnam::get(); // الشركات
-        $departments = DepmCmp::get(); // الاقسام
-        $jobs = Pyjobs::get(); // الوظائف
-        $administrations = LocClass::get(); // الادارة
-        $countries = country::get();    //الدول
         $cities = city::get();          //المدينه
 
-        // البنك للشركه )التعاقد)
-        $flags = GLaccBnk::all();
-        $banks = [];
-        foreach ($flags as $flag) {
-            if ($flag->Bank_No == 1) {
-                array_push($banks, $flag);
-            }
-        }
-
-        //الوظيفه بالشركه / بالشئون
         $job_cmp = Pyjobs::where('job_cmpny', 1)->get();
         //الوظيفه بالحكومه / تأشيرة القدوم
         $job_gov = Pyjobs::where('job_gov', 1)->get();
@@ -398,7 +379,7 @@ class EmployeesDataController extends Controller
         $civilcelicences = HrAstPlcLicns::where('cty_Nat_id', 1)->get(); // الهوية
         $job_techs = Pyjobs::where('job_tech', 1)->get(); // التخصص المهنى
 
-        return view('hr.employee_data.show', compact(['civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov']));
+        return view('hr.employee_data.show', compact(['job_gov','job_techs','civilcelicences','job_cmp','job_affairs','licences','drivelicences','residencelicences','cities','emp_data']));
     }
 
     /**
@@ -455,11 +436,12 @@ class EmployeesDataController extends Controller
         $update_empadr = HREmpadr::where('ID_No', $ID_NO)->find($ID_NO);
         $data = $this->validate($request, [
             'Cmp_No'    => 'required', // رقم الشركة
+            ''=>'', // الحاسب الالى
             'SubCmp_No' =>'sometimes', // القسم
             'Emp_SubNo' =>'sometimes', // رقم الموظف بالقسم
             'Emp_Type'  =>'sometimes', // تصنيف العمالة
             'Emp_No'    => 'sometimes', // رقم
-            'Emp_NmAr'  =>'sometimes', // الاسم
+            'Emp_NmAr'  => 'sometimes', // الاسم
             'Emp_NmAr1' => 'sometimes',
             'Emp_NmAr2' => 'sometimes',
             'Emp_NmAr3' => 'sometimes',
@@ -483,18 +465,20 @@ class EmployeesDataController extends Controller
             'Blood_Type'=>'sometimes', // فصيلة الدم
             'On_WorkDt' =>'sometimes', // تايخ مباشرة العمل
             'On_WorkDtHij'=>'sometimes', // تايخ مباشرة العمل هجرى
-            'Job_Stu'=>'sometimes', // الحالة
-            
+            ''=>'', // القسم بالادارة
             'Status_Type'=>'sometimes', // الحالة الاجتماعية
             'End_Tstdt'  =>'sometimes', // انهاء التجربة
             'End_TstdtHij'=>'sometimes', // انهاء التجربة هجرى
             'Job_No'    =>'sometimes', // الوظيفة
             'Educt_Type'=>'sometimes', // الحالة التعليمية
-            
+            ''=>'', // الحالة
             'Ownr_No'=>'sometimes', // الكفيل
             'EmpType_No'=>'sometimes', // فئة الموظف
             'Bsc_Salary'=>'sometimes',
-            
+            ''=>'', // تاريخ الحالة
+            ''=>'', // صورة الموظف
+
+
             // تراخيص مزاولة المهنة
             'Rcrd_LicNo1' => 'sometimes',
             'Rcrd_Endt' => 'sometimes',
@@ -505,8 +489,6 @@ class EmployeesDataController extends Controller
             'JobPLc_No' => 'sometimes',
             'Jobknd_No' => 'sometimes',
             'Rcrd_LicNo' => 'sometimes',
-            'Rcrd_LicTyp' => 'sometimes', // الفئة
-            'Rcrd_LicTyp1' => 'sometimes', // الفئة بطاقة التسجيل المهنى
             // بياانت الجواز
             'Pasprt_No' => 'sometimes',
             'Pasprt_Ty' => 'sometimes',
@@ -526,13 +508,12 @@ class EmployeesDataController extends Controller
             'Out_Port' => 'sometimes',
             'Trnsfer_Dt' => 'sometimes',
             'Trnsfer_OLdNm' => 'sometimes',
-            'Psprt_Rcv' => 'sometimes', // الجواز موجود نعم
+            'Psprt_Rcv' => 'sometimes',
             // الهوية
-            'Budg_typ' => 'sometimes',
             'Cnt_Endt' => 'sometimes', // نهاية التعقاد
-            'Ensurans_No' => 'sometimes', // رقم التامينات الاجتماعية
-            'Work_Lic' => 'sometimes', // Work_Lic ملف مكتب العمل 
-            'Specl_Need' => 'sometimes', // طبيعى / احتياجات خاصة
+            'Ensurans_No' => 'sometimes',
+            'Work_Lic' => 'sometimes',
+            'Specl_Need' => 'sometimes',
             'Lic_Plc' => 'sometimes',
             'Lic_Typ' => 'sometimes',
             'Lic_Edt' => 'sometimes',
@@ -540,24 +521,31 @@ class EmployeesDataController extends Controller
             'Lic_No' => 'sometimes',
             'Work_PLC' => 'sometimes', // مكان الاصدار
             'Work_Endt' => 'sometimes', // 
-            'Work_StDt' => 'sometimes', //  
-            'Residn_Plc' => 'sometimes', // مكان الاصدار
-            'Residn_Ty' => 'sometimes', // النوع
-            'Residn_Edt' => 'sometimes', // الانتهاء
-            'Residn_Sdt' => 'sometimes', // الاصدار
-            'Civl_No' => 'sometimes', // الرقم المدني
-            'CivL_StDt' => 'sometimes', // 
-            'Civl_Plc' => 'sometimes', // مكان الانتهاء
-            'Residn_No' => 'sometimes', //   // بيانات الاقامه الرقم
-            'Cnt_Period' => 'sometimes', // نهاية التعاقد
+            'Work_StDt' => 'sometimes', // 
+            'Work_Lic' => 'sometimes', //
+            'Residn_Plc' => 'sometimes', //
+            'Residn_Ty' => 'sometimes', //
+            'Residn_Edt' => 'sometimes', //
+            'Residn_Sdt' => 'sometimes', //
+            'Residn_No' => 'sometimes', //
+            'Specl_Need' => 'sometimes', //
+            'Ensurans_No' => 'sometimes', //
+            'Work_Lic' => 'sometimes', //
+            'Cnt_Period' => 'sometimes', //
             'MJob_No' => 'sometimes', // الوظيفه بالشئون
-            'Month_Salry' => 'sometimes', // الراتب بالشركة
-            'MMonth_Salry' => 'sometimes', // الراتب بالشئون
             // HREmpAttach
             'Attch_No' => 'sometimes',
             'Ln_No' => 'sometimes',
             'Attch_Ty' => 'sometimes',
             'Attch_Desc' => 'sometimes' ,
+        ], [
+
+            'Cmp_No'   => trans('admin.Cmp_No'),
+            'Emp_NmAr' => trans('admin.arabic_name'),
+            'Emp_NmEn' => trans('admin.english_name'),
+            'Emp_No'   => trans('admin.numberr'),
+            "integer" => ':attribute '.trans('hr.must_number'),
+
         ]);
 
         if($request->Gross_Salary){
@@ -713,7 +701,12 @@ class EmployeesDataController extends Controller
         }
 
 
-        
+        $data['Picture'] = \Up::upload([
+            'request' => 'Picture',
+            'path'=>'hr/main_company',
+            'upload_type' => 'single',
+
+        ]);
 // dd($data);
         if($request->Emp_NmAr1 Or $request->Emp_NmAr2 Or $request->Emp_NmAr3 Or $request->Emp_NmAr4){
             $data['Emp_NmAr'] = $request->Emp_NmAr1 .' '. $request->Emp_NmAr2 .' '. $request->Emp_NmAr3 .' '. $request->Emp_NmAr4;

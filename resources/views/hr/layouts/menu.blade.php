@@ -673,7 +673,7 @@
                     {{ active_menu('admin/class')[0] }}
                     {{ active_menu('admin/classroom')[0] }}
                     {{ active_menu('admin/discount')[0] }}">
-                        <a href="#">
+                        <a href="{{route('emp_data')}}">
                             <i class="fa fa-bars"></i> <span>{{trans('hr.emp_basic_information')}}</span>
                             <span class="pull-right-container"></span>
                         </a>

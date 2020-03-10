@@ -164,9 +164,6 @@
                     padding: 10px 0;
                     margin: 0px 0px 20px;
                 }
-                .hr_offse-1{
-                    margin-right: 8.333% !important;
-                }
             </style>
         @endpush
         @push('js')
@@ -183,7 +180,7 @@
                     $('input.Cnt_Stdt').change(function () {
                         let Hijri = $(this).val();
                         $.ajax({
-                            url: "{{route('hrhijri')}}",
+                            url: "{{route('hijri')}}",
                             type: 'get',
                             data:{Hijri: Hijri} ,
                             dataType: 'json',
@@ -197,7 +194,7 @@
                     $('input.Cnt_Endt').change(function () {
                         let Hijri = $(this).val();
                         $.ajax({
-                            url: "{{route('hrhijri')}}",
+                            url: "{{route('hijri')}}",
                             type: 'get',
                             data:{Hijri: Hijri} ,
                             dataType: 'json',
@@ -210,7 +207,7 @@
                     $('input.Cnt_Nwdt').change(function () {
                         let Hijri = $(this).val();
                         $.ajax({
-                            url: "{{route('hrhijri')}}",
+                            url: "{{route('hijri')}}",
                             type: 'get',
                             data:{Hijri: Hijri} ,
                             dataType: 'json',
@@ -310,7 +307,7 @@
                 $('input.Start_Date').change(function () {
                     let Hijri = $(this).val();
                     $.ajax({
-                        url: "{{route('hrhijri')}}",
+                        url: "{{route('hijri')}}",
                         type: 'get',
                         data:{Hijri: Hijri} ,
                         dataType: 'json',
@@ -324,7 +321,7 @@
                 $('input.On_WorkDt').change(function () {
                     let Hijri = $(this).val();
                     $.ajax({
-                        url: "{{route('hrhijri')}}",
+                        url: "{{route('hijri')}}",
                         type: 'get',
                         data:{Hijri: Hijri} ,
                         dataType: 'json',
@@ -337,7 +334,7 @@
                 $('input.End_Tstdt').change(function () {
                     let Hijri = $(this).val();
                     $.ajax({
-                        url: "{{route('hrhijri')}}",
+                        url: "{{route('hijri')}}",
                         type: 'get',
                         data:{Hijri: Hijri} ,
                         dataType: 'json',
@@ -350,7 +347,7 @@
                 $('input.DueDt_Hldy').change(function () {
                     let Hijri = $(this).val();
                     $.ajax({
-                        url: "{{route('hrhijri')}}",
+                        url: "{{route('hijri')}}",
                         type: 'get',
                         data:{Hijri: Hijri} ,
                         dataType: 'json',
@@ -363,7 +360,7 @@
                 $('input.DueDt_Tkt').change(function () {
                     let Hijri = $(this).val();
                     $.ajax({
-                        url: "{{route('hrhijri')}}",
+                        url: "{{route('hijri')}}",
                         type: 'get',
                         data:{Hijri: Hijri} ,
                         dataType: 'json',
@@ -443,7 +440,7 @@
                                     <label class="col-md-3">{{trans('hr.company')}}</label>
                                     <div class="col-md-9 p-0">
                                         <select name="Cmp_No" class="Cmp_No form-control">
-                                            <option disabled selected>{{trans('admin.select')}}</option>
+                                            <option value="" disabled selected>{{trans('admin.select')}}</option>
                                             @foreach($companies as $mainCompany)
                                                 <option value="{{$mainCompany->Cmp_No}}">{{$mainCompany->{'Cmp_Nm'.ucfirst(session('lang'))} }}</option>
                                             @endforeach
@@ -502,7 +499,7 @@
                                 <label for="Cntry_No" class="col-md-6">{{trans('hr.Cntry_No')}}</label>
                                 <div class="select_com_td col-md-6 n-mp">
                                     <select id="Cntry_No" name="Cntry_No" class="Cntry_No select2 form-control">
-                                    <option disabled selected>{{trans('admin.select')}}</option>
+                                    <option value="" disabled selected>{{trans('admin.select')}}</option>
                                         @foreach($countries as $country)
                                             <option value="{{$country->id}}">{{$country->country_name_ar}}</option>
                                         @endforeach
@@ -652,7 +649,7 @@
                                     <div class="col-md-4 form-group">
                                         <label for="Status_Type" class="col-md-6 p-0">{{trans('hr.Status_Type')}}</label>
                                         <div id="Status_Type" class="col-md-6 p-0">
-                                            {{ Form::select('Status_Type',\App\Enums\Hr\SocialType::toSelectArray() ,null,
+                                            {{ Form::select('Status_Type',\App\Enums\SocialType::toSelectArray() ,null,
                                                 array_merge(['id'=>'Status_Type', 'class' => 'Status_Type form-control'])) }}
                                         </div>
                                     </div>
@@ -748,13 +745,13 @@
                                             <div class="col-md-12 p-0">
                                                 <div class="form-group row">
                                                     <div class="col-md-6 p-0">
-                                                        <label class="col-md-5 p-0">{{trans('hr.duration_of_vacation')}}</label>
+                                                        <label class="col-md-5 p-0"> مدة الاجازة</label>
                                                         <input type="text" name="HLd_Period" class="p-0 col-md-4 form-control">
                                                     </div><!-- end third col-md-2 -->
-                                                    <div class="col-md-6 p-0">
-                                                        <label for="Cnt_Period_hld" class="col-md-5 p-0">{{trans('hr.cnt_period_hld')}}</label>
-                                                        <input id="Cnt_Period_hld" type="number" name="Cnt_Period" class="p-0 col-md-4 form-control p-0">
-                                                    </div><!-- end third col-md-2 -->
+                                                    <div class="col-md-6 row p-0">
+                                                        <label class="col-md-8 p-0">  مدة العقد / سنة</label>
+                                                        <input type="text" name="Cnt_Period" class="p-0 col-md-4 form-control">
+                                                    </div> <!-- end third col-md-2 -->
                                                 </div>
                                                 <div class="form-group row">
                                                 <!-- DueDt_HldyHij تاريخ استحقاق الاجازة هجرى -->
@@ -781,8 +778,8 @@
                                         <div class="col-md-6 row p-0">
 
                                             <div class="col-md-12">
-                                                <div class="form-group row hr_offse-1">
-                                                    
+                                                <div class="form-group row">
+                                                    <label class="col-md-1"></label>
                                                     <label class="col-md-2">وسيلة السفر</label>
                                                     <label class="col-md-2">عدد التذاكر</label>
                                                     <label class="col-md-3">الدرجة</label>
@@ -907,7 +904,7 @@
                                         <div class="row" style="background-color: #538a9e;color: #fff;margin-top: 10px;">
                                             <div class="col-md-2 p-0 mt-15">
                                                 <label class="col-md-8 p-0" style="padding: 0 7px;">{{trans('hr.duration_contract')}}</label>
-                                                <input name="Cnt_Period" type="number" class="col-md-4 form-control">
+                                                <input name="Cnt_Period" type="text" class="col-md-4 form-control">
                                             </div>
                                             <div class="col-md-3 p-0 mt-15">
                                                 <label class="col-md-6 p-0">{{trans('hr.Huspym_No')}}</label>
@@ -1108,7 +1105,7 @@
                                                     <div class="row form-group">
                                                         <label class="col-md-2">اسم المدينة</label>
                                                         <select name="Emp_City" class="col-md-4 form-control">
-                                                        <option disabled selected>{{trans('hr.select')}}</option>
+                                                        <option value="">{{trans('hr.select')}}</option>
                                                             @foreach($cities as $city)
                                                                 <option value="{{$city->id}}">{{$city->city_name_ar}}</option>
                                                             @endforeach
@@ -1116,7 +1113,7 @@
 
                                                         <label class="col-md-2">المنطقه</label>
                                                         <select name="Stat_No" class="col-md-3 form-control">
-                                                        <option disabled selected>{{trans('hr.select')}}</option>
+                                                        <option value="">{{trans('hr.select')}}</option>
                                                             @foreach($cities as $city)
                                                                 <option value="{{$city->id}}">{{$city->city_name_ar}}</option>
                                                             @endforeach
@@ -1141,7 +1138,7 @@
                                                     </div>
                                                     <div class="row form-group">
                                                         <label class="col-md-2">الايميل</label>
-                                                        <input class="col-md-9 br-5 form-control" id="E_Email" type="text" name="E_Email" >
+                                                        <input class="col-md-9 br-5 form-control" id="E_Email" type="email" name="E_Email" >
                                                     </div>
                                                 </fieldset>
                                             </div> <!-- end of col-md-6 داخل المملكة-->
@@ -1151,7 +1148,7 @@
                                                     <div class="row form-group">
                                                         <label class="col-md-2">الدولة</label>
                                                             <select name="Cntry_No" class="col-md-4 form-control">
-                                                                <option disabled selected>{{trans('admin.select')}}</option>
+                                                                <option value="">{{trans('admin.select')}}</option>
                                                                 @foreach($countries as $country)
                                                                     <option value="{{$country->id}}">{{$country->country_name_ar}}</option>
                                                                 @endforeach
@@ -1345,7 +1342,7 @@
                                                 <label for="In_Job" class="col-md-6 pl-0 p-0">{{trans('hr.In_Job')}}</label>
                                                 <div class="select_com_td col-md-6 p-0 p-7-2">
                                                     <select id="In_Job" name="In_Job" class="In_Job select2 form-control">
-                                                        <option disabled selected>{{trans('admin.select')}}</option>
+                                                        <option>{{trans('admin.select')}}</option>
                                                         @foreach($job_gov as $gov)
                                                             <option value="{{$gov->Job_No}}">{{$gov->Job_NmAr}}</option>
                                                         @endforeach
@@ -1440,7 +1437,7 @@
                                         padding-right: 0;background-color:#3A3767;color: #fff;margin-top: 10px;">
                                             <div class="col-md-3 mt-15 mb-15">
                                                 <label class="col-md-6 p-0" style="padding: 0 7px;">{{trans('hr.Cnt_Endt')}}</label>
-                                                <input name="Cnt_Endt" type="text" class="col-md-5 form-control datepicker">
+                                                <input name="Cnt_Period" type="text" class="col-md-5 form-control datepicker">
                                             </div>
                                             <div class="col-md-3 mt-15">
                                                 <label class="col-md-6">{{trans('hr.office_file')}}</label>
@@ -1467,7 +1464,7 @@
                                                 <input name="Residn_No" type="text" placeholder="{{trans('hr.numberr')}}" class="col-md-3 form-control">
                                                 <input name="Residn_Sdt" type="text" placeholder="{{trans('hr.version')}}" style="margin-left: 2px;" class="col-md-3 datepicker form-control">
                                                 <input name="Residn_Edt" type="text" placeholder="{{trans('hr.finishing')}}" class="col-md-3 form-control datepicker">
-                                            </div> 
+                                            </div>
                                             <div class="col-md-12">
                                                 <label class="col-md-4"></label>
                                                 <label class="col-md-4">{{trans('hr.type')}}</label>
@@ -1481,7 +1478,7 @@
                                                 </div>
                                                     <select name="Residn_Plc" class="col-md-5 form-control">
                                                     @foreach($residencelicences as $residencelicence) 
-                                                        <option value="{{$residencelicence->State_No}}">{{$residencelicence->{'State_Nm'.ucfirst(session('lang'))} }}</option>
+                                                    <option value="{{$residencelicence->State_No}}">{{$residencelicence->{'State_Nm'.ucfirst(session('lang'))} }}</option>
                                                     @endforeach
                                                     </select>
                                             </div>
@@ -1552,14 +1549,15 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <!-- مدة الاقامه Budg_typ -->
+                                            <!-- مدة الاقامه MBudg_typ -->
                                             <div class="row" style="margin-bottom: 15px;">
                                                 <label class="col-md-5">{{trans('hr.duration_stay')}}</label>
                                                 <div class="col-md-6 p-0">
-                                                {{ Form::select('Budg_typ',\App\Enums\Hr\MBudg_typ::toSelectArray() ,null,
-                                                    array_merge(['id'=>'Budg_typ', 'class' => 'select2 form-control Budg_typ','placeholder'=>trans('admin.select')])) }}
+                                                {{ Form::select('MBudg_typ',\App\Enums\Hr\MBudg_typ::toSelectArray() ,null,
+                                                    array_merge(['id'=>'MBudg_typ', 'class' => 'select2 form-control MBudg_typ','placeholder'=>trans('admin.select')])) }}
                                                 </div>
 
+                                                <!-- <select name="MBudg_typ" type="text" class="col-md-6 form-control"></select> -->
                                             </div>
                                             <!-- الراتب بالشركه -->
                                             <div class="row" style="margin-bottom: 15px;">
