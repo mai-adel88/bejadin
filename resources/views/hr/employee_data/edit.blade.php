@@ -1,6 +1,6 @@
 @extends('hr.index')
 
-@section('root_name', trans('hr.title'))
+@section('root_name', trans('hr.dashboard'))
 @section('content')
         @push('css')
             <style>

@@ -10,5 +10,11 @@ class HrOwnrmf extends Model
     public $timestamps = true;
     protected $primaryKey = 'ID_No';
     protected $guarded = [];
+
+    //owners الكفيل
+    public function employees()
+    {
+        return $this->hasMany(HrEmpmfs::class, 'Ownr_No','Ownr_No');
+    }
     
 }

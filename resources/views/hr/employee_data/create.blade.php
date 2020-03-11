@@ -1,6 +1,6 @@
 @extends('hr.index')
 
-@section('root_name', trans('hr.title'))
+@section('root_name', trans('hr.dashboard'))
 @section('content')
         @push('css')
             <style>
@@ -636,12 +636,14 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <!-- owners الكفيل -->
                                     <div class="col-md-12 form-group">
                                         <label class="col-md-4">{{trans('hr.Ownr_No')}}</label>
-                                        <div class="col-md-8">
-                                            <select name="Ownr_No" class="Ownr_No form-control" id="Ownr_No">
-                                                <option value=""></option>
-                                                <option value=""></option>
+                                        <div class="col-md-8 select_com_td">
+                                            <select name="Ownr_No" class="select2 Ownr_No form-control" id="Ownr_No">
+                                                @foreach($owners as $owner)
+                                                <option value="{{$owner->Ownr_No}}" name="Ownr_No" >{{$owner->Ownr_Nm}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

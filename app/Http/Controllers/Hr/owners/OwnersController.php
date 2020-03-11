@@ -1,22 +1,10 @@
 <?php
 
 
-namespace App\Http\Controllers\Hr\employees_data;
+namespace App\Http\Controllers\Hr\owners;
 
-use App\DataTables\Hr\EmployeesDataDataTable;
-use App\Models\Hr\HREmpCnt;
-use App\city;
-use App\Models\Hr\country;
-use App\Models\Hr\HrEmpmfs;
-use App\Models\Hr\HREmpAttach; // المرفقات
-use App\Models\Hr\DepmCmp;
-use App\Models\Hr\HREmpadr; // العناوين
-use App\Models\Hr\Pyjobs;
-use App\Models\Admin\GLaccBnk;
-use App\Models\Hr\LocClass;
+use App\DataTables\Hr\OwnersDataTable;
 use App\Models\Hr\HrOwnrmf; // الكفيل
-use App\Models\Hr\HRMainCmpnam; // الشركات
-use App\Models\Hr\HrAstPlcLicns; // اماكن التراخيص
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -26,7 +14,7 @@ use Illuminate\Validation\ValidationException;
 
 use Up;
 
-class EmployeesDataController extends Controller
+class OwnersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +22,7 @@ class EmployeesDataController extends Controller
      * @param MainCompanyDataTable $dataTable
      * @return Response
      */
-    public function index(EmployeesDataDataTable $dataTable)
+    public function index(OwnersDataTable $dataTable)
     {
         return $dataTable->render('hr.employee_data.index');
     }
@@ -79,9 +67,8 @@ class EmployeesDataController extends Controller
         $residencelicences = HrAstPlcLicns::where('cty_resident', 1)->get(); // الاقامة
         $civilcelicences = HrAstPlcLicns::where('cty_Nat_id', 1)->get(); // الهوية
         $job_techs = Pyjobs::where('job_tech', 1)->get(); // التخصص المهنى
-        $owners = HrOwnrmf::get(); // الكفيل
 
-        return view('hr.employee_data.create', compact('owners','full_names','civilcelicences','residencelicences','drivelicences','job_techs','licences','companies','jobs','departments','last','administrations', 'banks','countries','cities','job_cmp','job_gov'));
+        return view('hr.employee_data.create', compact('full_names','civilcelicences','residencelicences','drivelicences','job_techs','licences','companies','jobs','departments','last','administrations', 'banks','countries','cities','job_cmp','job_gov'));
     }
 
     /**
