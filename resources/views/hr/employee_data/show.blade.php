@@ -1,6 +1,6 @@
 @extends('hr.index')
 
-@section('root_name', trans('hr.title'))
+@section('root_name', trans('hr.dashboard'))
 @section('content')
         @push('css')
             <style>
@@ -489,11 +489,11 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <label class="col-sm-12 col-md-2" for="Emp_NmAr">{{trans('hr.name')}}</label>
-                                    <!-- <input disabled id="Emp_NmAr" name="Emp_NmAr" class="Emp_NmAr col-sm-6 col-md-8 input_number " type="text"> -->
-                                    <input disabled name="Emp_NmAr1" value="{{$emp_data->Emp_NmAr1}}" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text">
+                                    <input value="{{$emp_data->Emp_NmAr}}" disabled id="Emp_NmAr" name="Emp_NmAr" class="Emp_NmAr col-sm-6 col-md-8 input_number " type="text">
+                                    <!-- <input disabled name="Emp_NmAr1" value="{{$emp_data->Emp_NmAr1}}" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text">
                                     <input disabled name="Emp_NmAr2" value="{{$emp_data->Emp_NmAr2}}" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text" >
                                     <input disabled name="Emp_NmAr3" value="{{$emp_data->Emp_NmAr3}}" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text" >
-                                    <input disabled name="Emp_NmAr4" value="{{$emp_data->Emp_NmAr4}}" class="col-sm-6 col-md-2 input_number " type="text" >
+                                    <input disabled name="Emp_NmAr4" value="{{$emp_data->Emp_NmAr4}}" class="col-sm-6 col-md-2 input_number " type="text" > -->
                                 </div>
                                 <!-- PyCntry الجنسية -->
                                 <div class="col-md-2 n-mp">
@@ -517,11 +517,11 @@
 
                                 <div class="col-md-6 col-sm-12 mt-5">
                                     <label class="col-sm-12 col-md-2 p-0" for="Emp_NmEn">{{trans('hr.english_name')}}</label>
-                                    <!-- <input disabled id="Emp_NmEn" name="Emp_NmEn" class="Emp_NmEn col-sm-6 col-md-8 input_number " type="text"> -->
-                                    <input disabled name="Emp_NmEn1" value="{{$emp_data->Emp_NmEn1}}" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text">
+                                    <input value="{{$emp_data->Emp_NmEn}}" disabled id="Emp_NmEn" name="Emp_NmEn" class="Emp_NmEn col-sm-6 col-md-8 input_number " type="text">
+                                    <!-- <input disabled name="Emp_NmEn1" value="{{$emp_data->Emp_NmEn1}}" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text">
                                     <input disabled name="Emp_NmEn2" value="{{$emp_data->Emp_NmEn2}}" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text" >
                                     <input disabled name="Emp_NmEn3" value="{{$emp_data->Emp_NmEn3}}" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text" >
-                                    <input disabled name="Emp_NmEn4" value="{{$emp_data->Emp_NmEn4}}" class="col-sm-6 col-md-2 input_number " type="text" >
+                                    <input disabled name="Emp_NmEn4" value="{{$emp_data->Emp_NmEn4}}" class="col-sm-6 col-md-2 input_number " type="text" > -->
                                 </div>
                                 <!-- // الديانة Reljan -->
                                 <div class="col-md-2 n-mp mt-5">

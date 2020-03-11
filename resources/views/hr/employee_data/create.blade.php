@@ -1,6 +1,6 @@
 @extends('hr.index')
 
-@section('root_name', trans('hr.title'))
+@section('root_name', trans('hr.dashboard'))
 @section('content')
         @push('css')
             <style>
@@ -166,6 +166,9 @@
                 }
                 .hr_offse-1{
                     margin-right: 8.333% !important;
+                }
+                .p-5{
+                    padding:5px;
                 }
             </style>
         @endpush
@@ -442,7 +445,7 @@
                                 <div class="col-md-5">
                                     <label class="col-md-3">{{trans('hr.company')}}</label>
                                     <div class="col-md-9 p-0">
-                                        <select name="Cmp_No" class="Cmp_No form-control">
+                                        <select name="Cmp_No" class="select2 Cmp_No form-control">
                                             <option disabled selected>{{trans('admin.select')}}</option>
                                             @foreach($companies as $mainCompany)
                                                 <option value="{{$mainCompany->Cmp_No}}">{{$mainCompany->{'Cmp_Nm'.ucfirst(session('lang'))} }}</option>
@@ -454,8 +457,8 @@
                                 <div class="col-md-4 p-0">
                                     <label class="col-md-4 ">{{trans('hr.dep')}}</label>
                                     <div class="col-md-8">
-                                        <select name="SubCmp_No" class="SubCmp_No form-control">
-                                            <option value="">{{trans('admin.select')}}</option>
+                                        <select name="SubCmp_No" class="select2 SubCmp_No form-control">
+                                            <option>{{trans('admin.select')}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -471,8 +474,8 @@
                             <div class="col-md-5">
                                 <label class="col-md-4 p-0">{{trans('hr.emp_class')}}</label>
                                 <div class="col-md-8 p-0">
-                                    {{ Form::select('Emp_Type',\App\Enums\CompanyEmployeeClass::toSelectArray() ,null,
-                                    array_merge(['class' => 'form-control Emp_Type'])) }}
+                                    {{ Form::select('Emp_Type',\App\Enums\Hr\CompanyEmployeeClass::toSelectArray() ,null,
+                                    array_merge(['class' => 'form-control Emp_Type p-5'])) }}
                                 </div>
                             </div>
                             <!-- الحاسب الالى -->
@@ -529,8 +532,8 @@
                             <div class="col-md-2 n-mp mt-5">
                                 <label class="col-md-6">{{trans('hr.religion')}}</label>
                                 <div class="col-md-6 n-mp">
-                                    {{ Form::select('Reljan',\App\Enums\ReligionType::toSelectArray() ,null,
-                                    array_merge(['class' => 'Reljan form-control','placeholder'=>trans('admin.select')])) }}
+                                    {{ Form::select('Reljan',\App\Enums\Hr\HrReligion::toSelectArray() ,null,
+                                    array_merge(['class' => 'Reljan form-control select2','placeholder'=>trans('admin.select')])) }}
                                 </div>
                             </div>
                             <!-- Birth_Plac مكان الميلاد -->
@@ -636,12 +639,14 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <!-- owners الكفيل -->
                                     <div class="col-md-12 form-group">
                                         <label class="col-md-4">{{trans('hr.Ownr_No')}}</label>
-                                        <div class="col-md-8">
-                                            <select name="Ownr_No" class="Ownr_No form-control" id="Ownr_No">
-                                                <option value=""></option>
-                                                <option value=""></option>
+                                        <div class="col-md-8 select_com_td">
+                                            <select name="Ownr_No" class="select2 Ownr_No form-control" id="Ownr_No">
+                                                @foreach($owners as $owner)
+                                                <option value="{{$owner->Ownr_No}}" name="Ownr_No" >{{$owner->Ownr_Nm}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

@@ -182,6 +182,11 @@ class HrEmpmfs extends Model
     {
         return $this->belongsTo(Pyjobs::class, 'Job_No','Job_No');
     }
+    //owners الكفيل
+    public function owner()
+    {
+        return $this->belongsTo(HrOwnrmf::class, 'Ownr_No','Ownr_No');
+    }
     
     
 }
