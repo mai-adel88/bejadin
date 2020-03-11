@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models\Hr;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +15,20 @@ class HrDprtmntLoctn extends Model
         'Parnt_DepmLoc', //الرئيسي
         'Level_No', 
         'DepmLoc_NmAr',
-        'DepmLoc_NmEn', 'Level_Status', 'Ownr_No', 'DepmLoc_Actv',
+        'DepmLoc_NmEn', 
+        'Level_Status', 
+        'Ownr_No', 
+        'DepmLoc_Actv',
     ];
+
+
+
+    public function parent(){
+        return $this->hasOne(HrDprtmntLoctn::class, 'DepmLoc_No','Parnt_DepmLoc');
+    }
+
+    public function children(){
+        return $this->hasMany(HrDprtmntLoctn::class, 'Parnt_DepmLoc', 'DepmLoc_No');
+    }
+
 }

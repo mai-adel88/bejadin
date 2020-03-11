@@ -149,6 +149,57 @@ if (!function_exists('hrUrl')){
         return url('hr/'.$value);
     }
 }
+//////جهات العمل HR
+if (!function_exists('load_depLoc')){
+    function load_depLoc($select = null , $cc_hide = null, $Cmp_No){
+
+        $departments = \App\Models\Hr\HrDprtmntLoctn::where('Cmp_No', $Cmp_No)->get(['DepmLoc_Nm'.ucfirst(session('lang')), 'Parnt_DepmLoc', 'DepmLoc_No', 'ID_No']);
+
+        $dep_arr = [];
+        foreach($departments as $department){
+            $list_arr = [];
+            $list_arr['icon'] = '';
+            $list_arr['li_attr'] = '';
+            $list_arr['a_attr'] = '';
+            $list_arr['children'] = [];
+            if ($select !== null and $select == $department->Acc_No){
+                $list_arr['state'] = [
+                    'opened'=>true,
+                    'selected'=>true,
+                    'disabled'=>false
+                ];
+            }
+            if ($cc_hide !== null and $cc_hide == $department->Acc_No){
+                $list_arr['state'] = [
+                    'opened'=>false,
+                    'selected'=>false,
+                    'disabled'=>true
+                ];
+            }
+
+            $levelType = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->Level_No;
+            $Operation = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->Acc_Typ ? \App\Enums\AccountType::getDescription($department->Acc_Typ) : null;
+            $cc = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->CostCntr_Flag ? '( '.trans('admin.with_cc').' )' : null;
+            $code = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->DepmLoc_No;
+            $list_arr['id'] = $department->DepmLoc_No;
+
+            if( $department->Parnt_Acc !== null){
+                if($department->Parnt_Acc == 0){
+                    $department->Parnt_Acc = '#';
+                    $list_arr['parent'] = $department->Parnt_Acc;
+                }
+                else{
+                    $list_arr['parent'] = $department->Parnt_Acc;
+                }
+            }
+
+            $list_arr['text'] = $department->{'DepmLoc_Nm'.ucfirst(session('lang'))} .' '.'( '.$code.' )'.' '.$Operation.' '.$levelType.' '.$cc;
+            array_push($dep_arr,$list_arr);
+
+        }
+        return json_encode($dep_arr,JSON_UNESCAPED_UNICODE);
+    }
+}
 if (!function_exists('active_menu')){
     function active_menu($link = null) {
 //        users:admin/i

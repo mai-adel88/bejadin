@@ -211,7 +211,6 @@
                     <span class="info-box-icon bg-aqua"><i class="fa fa-compass"></i></span>
                     <div class="info-box-content">
                         <h5><a href="{{route('emp_data')}}">{{trans('hr.employee_data')}}</a></h5>
-                        <!-- <h5><a href="{{route('employeeData.index')}}">{{trans('hr.employee_data')}}</a></h5> -->
                     </div>
                 </div>
                 <!-- /.info-box -->
@@ -230,6 +229,16 @@
                     <span class="info-box-icon bg-aqua"><i class="fa fa-compass"></i></span>
                     <div class="info-box-content">
                         <h5><a href="{{route('hrdepartments.index')}}">{{trans('hr.departments')}}</a></h5>
+                    </div>
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- الإدارات  وجهات العمل -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-street-view"></i></span>
+                    <div class="info-box-content">
+                        <h5><a href="{{route('departmentLoc.pages')}}">{{trans('hr.dep_loc')}}</a></h5>
                     </div>
                 </div>
                 <!-- /.info-box -->

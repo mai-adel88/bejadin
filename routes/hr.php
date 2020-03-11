@@ -46,6 +46,14 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
             Route::resource('hrdepartments', 'HrDepartmentsController');
             Route::get('createdepNo', 'HrDepartmentsController@createdepNo')->name('createdepNo');
             Route::get('editdepNo', 'HrDepartmentsController@editdepNo')->name('editdepNo');
+            //الادارات وجهات العمل
+            Route::view('/departmentLoc_data', 'hr.pages.department_loaction')->name('departmentLoc.pages');
+            Route::resource('departmentLoc', 'HrDprtmntLoctnController');
+            Route::post('departmentLoc/initChartDepLoc','HrDprtmntLoctnController@initChartDepLoc')->name('initChartDepLoc');
+            Route::post('departmentLoc/getDepartments','HrDprtmntLoctnController@getDepartments')->name('getDepartments');
+            Route::post('departmentLoc/createNewDepNo','HrDprtmntLoctnController@createNewDepNo')->name('createNewDepNo');
+            Route::post('departmentLoc/getDepLocEditBlade','HrDprtmntLoctnController@getDepLocEditBlade')->name('getDepLocEditBlade');
+
         });
 
         Route::group(['namespace' => 'employees_data'], function (){
@@ -59,6 +67,7 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
            Route::get('hrhijri', 'EmployeesDataController@convertToDateToHijri')->name('hrhijri');
            Route::resource('pyjobs', 'PyjobsController');
            Route::view('/emp_data', 'hr.pages.emp_data_page')->name('emp_data');
+           
        });
         
         

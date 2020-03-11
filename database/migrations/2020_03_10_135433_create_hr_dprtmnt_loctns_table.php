@@ -24,7 +24,7 @@ class CreateHrDprtmntLoctnsTable extends Migration
             $table->string('DepmLoc_NmEn')->nullable();
             $table->integer('Level_Status')->nullable();
             $table->integer('Ownr_No')->nullable();
-            $table->integer('DepmLoc_Actv')->nullable();
+            $table->integer('DepmLoc_Actv')->default(1); // فعال / غير فعال 
             $table->timestamps();
         });
     }

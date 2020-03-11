@@ -168,6 +168,7 @@ return [
     'com_license_types' => 'أنواع الترخيص للشركات',
     'com_license_providers' => 'جهات إصدار الرخص للشركات',
     'com_status' => 'حالة الشركة',
+    'activity'      =>'النشاط',
     'com_owner_build' => 'ملكية العقار للشركة',
     'edit_com_information' => 'تعديل البيانات للشركات',
     'payment_fees_way_types' => 'أنواع طرق دفع الرسوم',
@@ -351,6 +352,7 @@ return [
     'com_license_providers_name_ar' => 'اسم جهة الإصدار عربي',
     'com_license_providers_name_en' => 'اسم جهة الإصدار إنجليزي',
     'nationality_create' => 'إنشاء جنسية جديدة',
+    'select_activity'    =>'اختر النشاط',
     'nationality_edit' => 'تعديل جنسية ',
     'nationality_show' => 'عرض جنسية ',
     'nationality_nuber' => 'رقم الجنسية',
@@ -551,7 +553,8 @@ return [
     'departmrnt_name_ar' => 'اسم القسم بالعربى',
     'departmrnt_name_en' => 'اسم القسم بالانجليزى',
     'department_edit' => 'تعديل القسم',
-
-
-    
+    //الادارات وجهات العمل
+    'dep_loc'       =>'الادارات وجهات العمل',
+    'dep_number'    =>'رقم الاداره',
+    'Create_new_dep'=>'اضافة جهة عمل',
 ];
