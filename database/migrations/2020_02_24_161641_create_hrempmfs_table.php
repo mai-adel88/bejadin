@@ -25,7 +25,7 @@ class CreateHrempmfsTable extends Migration
             $table->enum('Reljan',[1,2,3,4])->nullable(); // HrReligion
             $table->enum('Educt_Type',[1,2,3,4,5,6,7,8,9,10])->nullable();
             $table->enum('Status_Type',[1,2,3,4,5])->nullable();
-            $table->enum('Gender',[1,2])->nullable(); // النوع
+            $table->enum('Gender',[0,1])->nullable(); // النوع
             $table->smallInteger('Depm_No')->nullable();
             $table->bigInteger('Loc_No')->nullable();
             $table->enum('Job_Stu',[1,2,3,4,5,6,7])->nullable();
