@@ -180,36 +180,71 @@ class HrDprtmntLoctnController extends Controller
             $chart_item =HrDprtmntLoctn::where('DepmLoc_No', $request->DepmLoc_No)
                 ->where('Cmp_No', session('Chart_Cmp_No'))
                 ->first();
-            // $total = $this->getTotalTransaction($chart_item);
             return view('hr.settings.department_Location.edit', ['title' => trans('hr.dep_loc'),
-                'chart' => $chart, 'cmps' => $cmps, 'chart_item' => $chart_item, 'total' => $total,
+                'chart' => $chart, 'cmps' => $cmps, 'chart_item' => $chart_item,
                 ]);
         }
     }
 
-    public function show(HrDprtmntLoctn $hrDprtmntLoctn)
+
+
+    public function update(Request $request, $id)
     {
-        //
+
+        $chart = HrDprtmntLoctn::where('DepmLoc_No', $id)->where('Cmp_No', session('Chart_Cmp_No'))->first();
+        if($chart->Level_Status == 0){
+
+            $data = $this->validate($request,[
+                'Cmp_No' => 'required',
+                'DepmLoc_NmAr' => 'required',
+                'DepmLoc_NmEn' => 'sometimes',
+            ],[],[
+                'Cmp_No' => trans('admin.cmp_no'),
+                'DepmLoc_NmAr' => trans('admin.arabic_name'),
+                'DepmLoc_NmEn' => trans('admin.english_name'),
+            ]);
+
+            $chart->Cmp_No = $request->Cmp_No;
+            $chart->DepmLoc_NmAr = $request->DepmLoc_NmAr;
+            $chart->DepmLoc_NmEn = $request->DepmLoc_NmEn;
+            $chart->DepmLoc_No = $request->DepmLoc_No;
+            $chart->save();
+            return redirect()->route('departmentLoc.index')->with(session()->flash('message',trans('admin.success_update')));
+        }
+        else{
+            $data = $this->validate($request,[
+                'Cmp_No' => 'required',
+                'DepmLoc_NmAr' => 'required',
+                'DepmLoc_NmEn' => 'sometimes',
+
+            ],[],[
+                'Cmp_No' => trans('admin.cmp_no'),
+                'DepmLoc_NmAr' => trans('admin.arabic_name'),
+                'DepmLoc_NmEn' => trans('admin.english_name'),
+
+            ]);
+
+            $chart->Cmp_No = $request->Cmp_No;
+            $chart->DepmLoc_NmAr = $request->DepmLoc_NmAr;
+            $chart->DepmLoc_NmEn = $request->DepmLoc_NmEn;
+            $chart->save();
+
+            return redirect()->route('departmentLoc.index')->with(session()->flash('message',trans('admin.success_update')));
+        }
     }
 
     
 
-    public function edit(HrDprtmntLoctn $hrDprtmntLoctn)
+
+    public function destroy($id)
     {
-        //
-    }
-
-
-    public function update(Request $request, HrDprtmntLoctn $hrDprtmntLoctn)
-    {
-        //
-    }
-
-    
-
-
-    public function destroy(HrDprtmntLoctn $hrDprtmntLoctn)
-    {
-        //
+        $chart = HrDprtmntLoctn::where('DepmLoc_No', $id)->first();
+        if(count($chart->children) > 0){
+            return back()->with(session()->flash('error',trans('admin.chart_has_children')));
+        }
+        else{
+            $chart->delete();
+            return redirect()->route('departmentLoc.index')->with(session()->flash('message',trans('admin.success_deleted')));
+        }
     }
 }

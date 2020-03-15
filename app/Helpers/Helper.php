@@ -162,14 +162,14 @@ if (!function_exists('load_depLoc')){
             $list_arr['li_attr'] = '';
             $list_arr['a_attr'] = '';
             $list_arr['children'] = [];
-            if ($select !== null and $select == $department->Acc_No){
+            if ($select !== null and $select == $department->DepmLoc_No){
                 $list_arr['state'] = [
                     'opened'=>true,
                     'selected'=>true,
                     'disabled'=>false
                 ];
             }
-            if ($cc_hide !== null and $cc_hide == $department->Acc_No){
+            if ($cc_hide !== null and $cc_hide == $department->DepmLoc_No){
                 $list_arr['state'] = [
                     'opened'=>false,
                     'selected'=>false,
@@ -178,7 +178,7 @@ if (!function_exists('load_depLoc')){
             }
 
             $levelType = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->Level_No;
-            $Operation = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->Acc_Typ ? \App\Enums\AccountType::getDescription($department->Acc_Typ) : null;
+            // $Operation = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->Acc_Typ ? \App\Enums\AccountType::getDescription($department->Acc_Typ) : null;
             $cc = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->CostCntr_Flag ? '( '.trans('admin.with_cc').' )' : null;
             $code = \App\Models\Hr\HrDprtmntLoctn::where('DepmLoc_No',$department->DepmLoc_No)->first()->DepmLoc_No;
             $list_arr['id'] = $department->DepmLoc_No;
@@ -193,7 +193,7 @@ if (!function_exists('load_depLoc')){
                 }
             }
 
-            $list_arr['text'] = $department->{'DepmLoc_Nm'.ucfirst(session('lang'))} .' '.'( '.$code.' )'.' '.$Operation.' '.$levelType.' '.$cc;
+            $list_arr['text'] = $department->{'DepmLoc_Nm'.ucfirst(session('lang'))} .' '.'( '.$code.' )'.'  '.$levelType.' '.$cc;
             array_push($dep_arr,$list_arr);
 
         }

@@ -30,7 +30,6 @@
 
                             $('#jstree').jstree({
                                 "core" : {
-                                    // 'data' : "{!! load_cc('parent_id', '', '') !!}",
                                     'data' : tree,
                                     "themes" : {
                                         "variant" : "large"
