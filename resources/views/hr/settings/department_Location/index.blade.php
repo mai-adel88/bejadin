@@ -7,7 +7,7 @@
         $(document).ready(function () {
 
             var timer = 0;
-            var delay = 200;
+            var delay = 100;
             var prevent = false;
 
             $(document).on('change', '#Select_Cmp_No', function(){
@@ -74,8 +74,6 @@
                                 });
 
                                 //handle click event
-                                // timer = setTimeout(function() {
-                                // if (!prevent) {
                                 handle_click(r[0], result);
                                 // }
                                 // prevent = false;

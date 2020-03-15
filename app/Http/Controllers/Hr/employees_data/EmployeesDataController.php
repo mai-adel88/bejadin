@@ -83,7 +83,7 @@ class EmployeesDataController extends Controller
         $job_techs = Pyjobs::where('job_tech', 1)->get(); // التخصص المهنى
         $owners = HrOwnrmf::get(); // الكفيل
 
-        return view('hr.employee_data.create', compact('owners','full_names','civilcelicences','residencelicences','drivelicences','job_techs','licences','companies','jobs','departments','last','administrations', 'banks','countries','cities','job_cmp','job_gov'));
+        return view('hr.employee_data.create', compact('ports','owners','full_names','civilcelicences','residencelicences','drivelicences','job_techs','licences','companies','jobs','departments','last','administrations', 'banks','countries','cities','job_cmp','job_gov'));
     }
 
     /**

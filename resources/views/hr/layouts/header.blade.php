@@ -50,7 +50,7 @@
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{url('/')}}/public/hr/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="{{url('/')}}/public/hr/css/buttons.dataTables.min.css">
-{{--    <link rel="stylesheet" href="{{url('/')}}/public/hr/jstree/dist/themes/default/style.min.css">--}}
+    <link rel="stylesheet" href="{{url('/')}}/public/hr/jstree/dist/themes/default/style.min.css">
     <!-- bootstrap wysihtml5 - text editor -->
 {{--    <link rel="stylesheet" href="{{url('/')}}/public/hr/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">--}}
     <link rel="stylesheet" href="{{url('/')}}/public/hr/css/select2.min.css">

@@ -108,7 +108,6 @@ class HrDprtmntLoctnController extends Controller
     
     public function store(Request $request)
     {
-// dd($request->all());
         if($request->Level_Status == 0){
             $data = $this->validate($request,[
                 'Cmp_No'       => 'required',

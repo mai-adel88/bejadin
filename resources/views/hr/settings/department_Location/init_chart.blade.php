@@ -29,7 +29,7 @@
 
                             $('#jstree').jstree({
                                 "core" : {
-                                    //'data' : {!! load_prj('parent_id', '', '') !!},
+                                    'data' : {!! load_depLoc('parent_id', '', '') !!},
                                     "themes" : {
                                         "variant" : "large"
                                     },
@@ -104,7 +104,7 @@
 
             $('#jstree').jstree({
                 "core" : {
-                    //'data' : {!! load_cc('parent_id', '', '') !!},
+                    'data' : {!! load_depLoc('parent_id', '', '') !!},
                     "themes" : {
                         "variant" : "large"
                     },

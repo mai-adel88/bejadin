@@ -13,14 +13,11 @@
 
     {{-- رقم الاداره --}}
     <div class="row">
-        <label for="DepmLoc_No" class="col-md-2">{{trans('admin.account_number')}}:</label>
-        <input type="text" name="DepmLoc_No" id="DepmLoc_No" class="form-control col-md-4" value="{{$DepmLoc_No}}">
-    </div>
+        <label for="DepmLoc_No" class="col-md-2">{{trans('hr.dep_number')}}:</label>
+        <input type="text" name="DepmLoc_No" readonly id="DepmLoc_No" class="form-control col-md-3" value="{{$DepmLoc_No}}">
     {{-- رقم الاداره --}}
 
-
     {{-- فعال / غير فعال --}}
-    <div class="row">
 
         <div class="form-group col-md-4">
             @foreach(\App\Enums\dataLinks\StatusTreeType::toSelectArray() as $key => $value)
