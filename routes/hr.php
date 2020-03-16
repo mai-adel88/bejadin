@@ -54,6 +54,10 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
             Route::post('departmentLoc/createNewDepNo','HrDprtmntLoctnController@createNewDepNo')->name('createNewDepNo');
             Route::post('departmentLoc/getDepLocEditBlade','HrDprtmntLoctnController@getDepLocEditBlade')->name('getDepLocEditBlade');
 
+            // العناوين
+            Route::view('/address_data', 'hr.pages.address')->name('address.pages');
+            Route::resource('address', 'AddressController');
+
         });
 
         Route::group(['namespace' => 'employees_data'], function (){
