@@ -7,13 +7,13 @@
     <input type="text" name="Level_Status" id="Level_No" value="{{1}}" hidden>
     {{-- Parnt_Acc end --}}
 
-    <div class="row col-md-2 pull-left">
+    <div class="row col-md-12 pull-left">
         <button type="submit" class="btn btn-primary pull-left"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
     </div>
 
     {{-- رقم الاداره --}}
     <div class="row">
-        <label for="DepmLoc_No" class="col-md-3">{{trans('hr.dep_number')}}:</label>
+        <label for="DepmLoc_No" class="col-md-4">{{trans('hr.dep_number')}}:</label>
         <input type="text" name="DepmLoc_No" readonly id="DepmLoc_No" class="form-control col-md-2" value="{{$DepmLoc_No}}">
     {{-- رقم الاداره --}}
 
@@ -31,23 +31,23 @@
 
     {{-- اسم الاداره عربى --}}
     <div class="form-group row">
-        <label class="col-md-2" for="DepmLoc_NmAr">{{trans('admin.name_ar')}}:</label>
-            <input type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-9 form-control">
+        <label class="col-md-4" for="DepmLoc_NmAr">{{trans('admin.name_ar')}}:</label>
+            <input type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-8 form-control">
         </div>
     {{-- نهاية اشم الاداره عربى --}}
 
     {{-- اسم الاداره انجليزى --}}
     <div class="form-group row">
-        <label class="col-md-2" for="DepmLoc_NmEn">En</label>
-        <input type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-9 form-control">
+        <label class="col-md-4" for="DepmLoc_NmEn">En</label>
+        <input type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-8 form-control">
     </div>
     {{-- نهاية اسم الاداره انجليزى --}}
 
     {{-- الكفيل --}}
     <div class="form-group row">
-        <label class="col-md-2" for="Ownr_No">{{trans('hr.Ownr_No')}}</label>
-        <select name="Ownr_No" id="Ownr_No" class=" col-md-9 form-control">
-            <option disables selected>{{}}</option>
+        <label class="col-md-4" for="Ownr_No">{{trans('hr.Ownr_No')}}</label>
+        <select name="Ownr_No" id="Ownr_No" class=" col-md-8 form-control">
+            <option disables selected>{{trans('admin.select')}}</option>
         </select>
     </div>
     {{--    الكفيل --}}

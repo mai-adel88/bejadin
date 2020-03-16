@@ -260,35 +260,44 @@
                         <input type="text" name="Level_No" id="Level_No" value="{{1}}" hidden>
                         {{-- Parnt_DepmLoc end --}}
 
-                        <div class="row">
-                            <div class="col-md-1 pull-left">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                            </div>
+                        
+                        <div class="row col-md-12 pull-left">
+                            <button type="submit" class="btn btn-primary pull-left"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                        </div>
 
                             {{-- رقم الاداره --}}
+                        <div class="row">
                             <label for="DepmLoc_No" class="col-md-4">{{trans('hr.dep_number')}}:</label>
                             <input type="text" name="DepmLoc_No" readonly id="Costcntr_No" class="form-control col-md-3" value="{{$Depm_No}}">
+                        </div>
                             {{-- رقم الاداره --}}
-                            <br><br>
-
+                            <br>
                             {{-- تصنيف الاداره رئيسي / فرعي --}}
                             <input type="text" value="{{0}}" name="Level_Status" hidden>
                             {{-- نهاية تصنيف الاداره --}}
-                        </div>
 
                         {{-- اسم الاداره عربى --}}
                         <div class="form-group row">
                             <label class="col-md-4" for="DepmLoc_NmAr">{{trans('admin.name_ar')}}:</label>
-                                <input type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-7 form-control">
-                            </div>
+                                <input type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-8 form-control">
+                        </div>
                         {{-- نهاية اسم الاداره عربى --}}
 
                         {{-- اسم الاداره انجليزى --}}
                         <div class="form-group row">
                             <label class="col-md-4" for="DepmLoc_NmEn">En</label>
-                            <input type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-7 form-control">
+                            <input type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-8 form-control">
                         </div>
                         {{-- نهاية اسم الاداره انجليزى --}}
+                        
+                        {{-- الكفيل --}}
+                        <div class="form-group row">
+                            <label class="col-md-4" for="Ownr_No">{{trans('hr.Ownr_No')}}</label>
+                            <select name="Ownr_No" id="Ownr_No" class=" col-md-8 form-control">
+                                <option disables selected>{{trans('admin.select')}}</option>
+                            </select>
+                        </div>
+                        {{--    الكفيل --}}
 
                     {!! Form::close() !!}
                     
