@@ -232,10 +232,10 @@
         @include('admin.layouts.message')
         <!-- /.box-header -->
         <div class="box-body table-responsive" id="create_chart">
-            <div class="row">
+            <div class="row col-md-10">
 
                 {{-- chart tree start --}}
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="box-header">
                         <div class="form-group row">
                             <h3 class="box-title col-md-2">{{trans('admin.companies')}}</h3>
@@ -260,20 +260,20 @@
                 {{-- chart tree end --}}
 
                 {{-- form start --}}
-                <div class="col-md-6" id="chart_form">
+                <div class="col-md-5" id="chart_form">
                     {!! Form::open(['method'=>'POST','route' => ['departmentLoc.update', $chart_item->DepmLoc_No? $chart_item->DepmLoc_No : null], 'id' => 'edit_form','files' => true]) !!}
                         {{csrf_field()}}
                         {{method_field('PUT')}}
 
                         {{-- رقم الاداره --}}
-                        <label for="DepmLoc_No" class="col-md-2">{{trans('hr.dep_number')}}:</label>
-                        <input disabled type="text" name="DepmLoc_No" id="DepmLoc_No" class="form-control col-md-1" value="{{$chart_item->DepmLoc_No}}">
+                        <label for="DepmLoc_No" class="col-md-3">{{trans('hr.dep_number')}}:</label>
+                        <input disabled type="text" name="DepmLoc_No" id="DepmLoc_No" class="form-control col-md-3" value="{{$chart_item->DepmLoc_No}}">
                         {{-- رقم الاداره --}}
 
                         {{-- تصنيف الاداره --}}
                         <div class="form-group">
                            <div class="row">
-                               <div class="col-md-4">
+                               <div class="col-md-6">
                                     @foreach(\App\Enums\dataLinks\TypeAccountType::toSelectArray() as $key => $value)
                                         <input class="checkbox-inline" type="radio"
                                             name="Level_Status" id="Level_Status" value="{{$key}}"
@@ -305,16 +305,16 @@
 
                         {{-- اسم الاداره عربى --}}
                         <div class="form-group row">
-                            <label class="col-md-2" for="DepmLoc_NmAr">{{trans('admin.account_name')}}:</label>
-                                <input disabled type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-9 form-control"
+                            <label class="col-md-4" for="DepmLoc_NmAr">{{trans('admin.account_name')}}:</label>
+                                <input disabled type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-7 form-control"
                                 value="{{$chart_item->DepmLoc_NmAr? $chart_item->DepmLoc_NmAr : null}}">
                             </div>
                         {{-- نهاية اشم الاداره عربى --}}
 
                         {{-- اسم الاداره انجليزى --}}
                         <div class="form-group row">
-                            <label class="col-md-2" for="DepmLoc_NmEn">{{trans('admin.account_name_en')}}:</label>
-                            <input disabled type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-9 form-control"
+                            <label class="col-md-4" for="DepmLoc_NmEn">{{trans('admin.account_name_en')}}:</label>
+                            <input disabled type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-7 form-control"
                                 value="{{$chart_item->DepmLoc_NmEn? $chart_item->DepmLoc_NmEn : null}}">
                         </div>
                         {{-- نهاية اسم الاداره انجليزى --}}

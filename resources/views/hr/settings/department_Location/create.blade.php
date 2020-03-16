@@ -7,19 +7,19 @@
     <input type="text" name="Level_Status" id="Level_No" value="{{1}}" hidden>
     {{-- Parnt_Acc end --}}
 
-    <div class="col-md-1 pull-left">
+    <div class="row col-md-2 pull-left">
         <button type="submit" class="btn btn-primary pull-left"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
     </div>
 
     {{-- رقم الاداره --}}
     <div class="row">
-        <label for="DepmLoc_No" class="col-md-2">{{trans('hr.dep_number')}}:</label>
-        <input type="text" name="DepmLoc_No" readonly id="DepmLoc_No" class="form-control col-md-3" value="{{$DepmLoc_No}}">
+        <label for="DepmLoc_No" class="col-md-3">{{trans('hr.dep_number')}}:</label>
+        <input type="text" name="DepmLoc_No" readonly id="DepmLoc_No" class="form-control col-md-2" value="{{$DepmLoc_No}}">
     {{-- رقم الاداره --}}
 
     {{-- فعال / غير فعال --}}
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             @foreach(\App\Enums\dataLinks\StatusTreeType::toSelectArray() as $key => $value)
                 <input class="checkbox-inline" type="radio"
                     name="DepmLoc_Actv" id="Acc_Actv" value="{{$key}}"
@@ -42,6 +42,15 @@
         <input type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-9 form-control">
     </div>
     {{-- نهاية اسم الاداره انجليزى --}}
+
+    {{-- الكفيل --}}
+    <div class="form-group row">
+        <label class="col-md-2" for="Ownr_No">{{trans('hr.Ownr_No')}}</label>
+        <select name="Ownr_No" id="Ownr_No" class=" col-md-9 form-control">
+            <option disables selected>{{}}</option>
+        </select>
+    </div>
+    {{--    الكفيل --}}
 
 
 

@@ -14,24 +14,15 @@ class HrDprtmntLoctnController extends Controller
     {
         $chart = HrDprtmntLoctn::get(['DepmLoc_Nm'.ucfirst(session('lang'))]);
         if(count($chart) > 0){
-            if(session('Cmp_No') == -1){
-                $cmps = HRMainCmpnam::get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
-            }
-            else{
-                $cmps = HRMainCmpnam::where('Cmp_No', session('Cmp_No'))->get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No'])->first();
-            }
+            
+            $cmps = HRMainCmpnam::get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
 
             $chart_item = HrDprtmntLoctn::first();
             return view('hr.settings.department_Location.index', ['title' => trans('hr.dep_loc'), 'cmps' => $cmps, 'chart_item'=>$chart_item]);
         }
         else{
-            if(session('Cmp_No') == -1){
-                $cmps = HRMainCmpnam::get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
-            }
-            else{
-                $cmps = HRMainCmpnam::where('Cmp_No', session('Cmp_No'))->get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No'])->first();
-            }
-
+            
+            $cmps = HRMainCmpnam::get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
             $Depm_No = $this->createDepNo(0);
             return view('hr.settings.department_Location.init_chart', compact('chart', 'cmps','Depm_No'));
     
@@ -79,12 +70,9 @@ class HrDprtmntLoctnController extends Controller
     }
 
     public function initChartDepLoc(){
-        if(session('Cmp_No') == -1){
-            $cmps = HRMainCmpnam::get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
-        }
-        else{
-            $cmps = HRMainCmpnam::where('Cmp_No', session('Cmp_No'))->get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No'])->first();
-        }
+        
+        $cmps = HRMainCmpnam::where('Cmp_No', session('Cmp_No'))->get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
+        
         $DepmLoc_No = $this->createDepNo(0);
         return view('hr.settings.department_Location.create_main_chart', ['title' => trans('hr.dep_loc')
             , 'cmps' => $cmps, 'DepmLoc_No' => $DepmLoc_No]);
@@ -171,12 +159,8 @@ class HrDprtmntLoctnController extends Controller
 
     public function getDepLocEditBlade(Request $request){
         if($request->ajax()){
-            if(session('Cmp_No') == -1){
-                $cmps = HRMainCmpnam::get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
-            }
-            else{
-                $cmps = HRMainCmpnam::where('Cmp_No', session('Cmp_No'))->get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
-            }
+            $cmps = HRMainCmpnam::where('Cmp_No', session('Cmp_No'))->get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No']);
+            
             $chart = HrDprtmntLoctn::get(['DepmLoc_Nm'.ucfirst(session('lang')), 'DepmLoc_No']);
             $chart_item =HrDprtmntLoctn::where('DepmLoc_No', $request->DepmLoc_No)
                 ->where('Cmp_No', session('Chart_Cmp_No'))
