@@ -20,6 +20,7 @@ class HrDprtmntLoctnController extends Controller
             else{
                 $cmps = HRMainCmpnam::where('Cmp_No', session('Cmp_No'))->get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No'])->first();
             }
+
             $chart_item = HrDprtmntLoctn::first();
             return view('hr.settings.department_Location.index', ['title' => trans('hr.dep_loc'), 'cmps' => $cmps, 'chart_item'=>$chart_item]);
         }
@@ -30,6 +31,7 @@ class HrDprtmntLoctnController extends Controller
             else{
                 $cmps = HRMainCmpnam::where('Cmp_No', session('Cmp_No'))->get(['Cmp_Nm'.ucfirst(session('lang')), 'Cmp_No'])->first();
             }
+
             $Depm_No = $this->createDepNo(0);
             return view('hr.settings.department_Location.init_chart', compact('chart', 'cmps','Depm_No'));
     

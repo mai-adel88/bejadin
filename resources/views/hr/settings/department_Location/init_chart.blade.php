@@ -128,7 +128,7 @@
                     r.push(data.instance.get_node(data.selected[i]).id);
                     name.push(data.instance.get_node(data.selected[i]).text);
                 }
-                $('#modal-delete').attr('action','{{route('departmentLoc')}}/'+r.join(', '));
+                $('#modal-delete').attr('action','{{route('departmentLoc.index')}}/'+r.join(', '));
                 $('#parent_name').text(name);
             });
 
@@ -238,7 +238,7 @@
 
                                 <select name="Cmp_No" id="Select_Cmp_No" class="form-control col-md-8">
                                     <option disabled selected>{{trans('admin.select_Cmp')}}</option>
-                                    @if(count($cmps) > 0)
+                                    @if(isset($cmps) && count($cmps) > 0)
                                         @foreach($cmps as $cmp)
                                             <option value="{{$cmp->Cmp_No}}">{{$cmp->{'Cmp_Nm'.ucfirst(session('lang'))} }}</option>
                                         @endforeach
