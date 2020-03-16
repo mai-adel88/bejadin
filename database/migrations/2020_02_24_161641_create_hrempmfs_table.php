@@ -123,7 +123,7 @@ class CreateHrempmfsTable extends Migration
             $table->integer('Psprt_Rcv_2')->nullable(); // الجواز موجود
             $table->integer('In_Port')->nullable(); // منفذ الدخول
             $table->integer('Residn_Plc')->nullable(); //مكان الاصدار
-            $table->integer('Psprt_Rcv_2')->nullable(); // الجواز موجود
+//            $table->integer('Psprt_Rcv_2')->nullable(); // الجواز موجود
             $table->string('Work_Endt', 10)->nullable();
             $table->integer('Lic_No')->nullable();
             $table->timestamps();
