@@ -50,7 +50,7 @@ class CreateGLjrnTrsTable extends Migration
             $table->float('FTot_Amunt', 50, 10)->nullable(); //المبلغ المطلوب بالعمله الاجنبيه
             $table->float('FTr_Db', 50, 10)->nullable();//الحركه مدين بالعمله الاجنبيه
             $table->float('FTr_Cr', 50, 10)->nullable();//الحركه دائن بالعمله الاجنبيه
-            $table->integer('Slm_No')->nullable();//مندوب المبيعات
+//            $table->integer('Slm_No')->nullable();//مندوب المبيعات
             $table->timestamps();
         });
     }
