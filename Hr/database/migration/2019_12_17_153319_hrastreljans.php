@@ -10,7 +10,7 @@ class Hrastreljans extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+     */ 
     public function up()
     {
         Schema::create('hrastreljans', function (Blueprint $table) {

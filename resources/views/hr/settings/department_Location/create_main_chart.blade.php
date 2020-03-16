@@ -15,21 +15,10 @@
 
         {{-- رقم الاداره --}}
         <label for="DepmLoc_No" class="col-md-2">{{trans('hr.dep_number')}}:</label>
-        <input type="text" readonly name="DepmLoc_No" id="Acc_No" class="form-control col-md-1" value="{{$DepmLoc_No}}">
+        <input type="text" readonly name="DepmLoc_No" readonly id="Acc_No" class="form-control col-md-1" value="{{$DepmLoc_No}}">
         {{-- رقم الاداره --}}
-<br><br>
-        {{-- تصنيف الاداره --}}
-        {{-- <div class="col-md-4 form-group">
-            @foreach(\App\Enums\dataLinks\TypeAccountType::toSelectArray() as $key => $value)
-                <input class="checkbox-inline" type="radio"
-                    name="Level_Status" id="Level_Status" value="{{$key}}"
-                    style="margin: 3px;">
-                <label>{{$value}}</label>
-            @endforeach
-        </div> --}}
-        {{-- نهاية تصنيف الاداره --}}
     </div>
-
+<br>
     {{-- اسم الاداره عربى --}}
     <div class="form-group row">
         <label class="col-md-2" for="DepmLoc_NmAr">{{trans('admin.name_ar')}}</label>

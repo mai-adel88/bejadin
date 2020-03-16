@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class HRMainCmpnam extends Model
 {
     protected $table = 'hrmaincmpnam';
-    public $timestamps = true;
+    public $timestamps = true; 
     protected $primaryKey = 'ID_NO';
     protected $fillable = [
         'Cmp_No',

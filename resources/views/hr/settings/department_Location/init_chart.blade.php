@@ -29,7 +29,7 @@
 
                             $('#jstree').jstree({
                                 "core" : {
-                                    //'data' : {!! load_prj('parent_id', '', '') !!},
+                                    'data' : {!! load_depLoc('parent_id', '', '') !!},
                                     "themes" : {
                                         "variant" : "large"
                                     },
@@ -104,7 +104,7 @@
 
             $('#jstree').jstree({
                 "core" : {
-                    //'data' : {!! load_cc('parent_id', '', '') !!},
+                    'data' : {!! load_depLoc('parent_id', '', '') !!},
                     "themes" : {
                         "variant" : "large"
                     },
@@ -128,7 +128,7 @@
                     r.push(data.instance.get_node(data.selected[i]).id);
                     name.push(data.instance.get_node(data.selected[i]).text);
                 }
-                $('#modal-delete').attr('action','{{aurl('cc')}}/'+r.join(', '));
+                $('#modal-delete').attr('action','{{route('departmentLoc.index')}}/'+r.join(', '));
                 $('#parent_name').text(name);
             });
 
@@ -153,12 +153,12 @@
             function handle_click(e){
                 var node = $(e.target).closest("li");
                 var type = node.attr('rel');
-                var Costcntr_No = node[0].id;
+                var DepmLoc_No = node[0].id;
                 $.ajax({
-                    url: "{{route('getCcEditBlade')}}",
+                    url: "{{route('getDepLocEditBlade')}}",
                     type: "POST",
                     dataType: 'html',
-                    data: {"_token": "{{ csrf_token() }}", Costcntr_No: Costcntr_No },
+                    data: {"_token": "{{ csrf_token() }}", DepmLoc_No: DepmLoc_No },
                     success: function(data){
                         $('#chart_form').html(data);
                     }
@@ -168,12 +168,12 @@
             function handle_dbclick(e){
                 var node = $(e.target).closest("li");
                 var type = node.attr('rel');
-                var Costcntr_No = node[0].id;
+                var DepmLoc_No = node[0].id;
                 $.ajax({
-                    url: "{{route('createCcNewAcc')}}",
+                    url: "{{route('createNewDepNo')}}",
                     type: "POST",
                     dataType: 'html',
-                    data: {"_token": "{{ csrf_token() }}", Costcntr_No: Costcntr_No },
+                    data: {"_token": "{{ csrf_token() }}", DepmLoc_No: DepmLoc_No },
                     success: function(data){
                         $('#chart_form').html(data);
                     }
@@ -195,35 +195,7 @@
                 $('#delete_form').submit()
             });
 
-            $(document).on('change' ,'#Clsacc_No1_Check' , function(){
-                if($(this).is(':checked')){
-                    $('#Clsacc_No1').removeClass('hidden');
-                }
-                else{
-                    $('#Clsacc_No1').addClass('hidden');
-                    $('#Clsacc_No1').val(null);
-                }
-            });
 
-            $(document).on('change', '#Clsacc_No2_Check', function(){
-                if($(this).is(':checked')){
-                    $('#Clsacc_No2').removeClass('hidden');
-                }
-                else{
-                    $('#Clsacc_No2').addClass('hidden');
-                    $('#Clsacc_No2').val(null);
-                }
-            });
-
-            $(document).on('change', '#cc_type_Check', function(){
-                if($(this).is(':checked')){
-                    $('#cc_type').removeClass('hidden');
-                }
-                else{
-                    $('#cc_type').addClass('hidden');
-                    $('#cc_type').val(null);
-                }
-            });
 
             $(document).on('change', '#edit_form :radio[id=Level_Status]', function(){
                 if($(this).is(':checked')){
@@ -232,14 +204,13 @@
                     }
                     else{
                         $('.branch').addClass('hidden');
-                        $('#Acc_Ntr').val(null);
-                        $('#Fbal_DB').val(0);
-                        $('#Fbal_CR').val(0);
-                        $('#Cr_Blnc').val(0);
-                        $('#Acc_Typ').val(null);
-                        $('#Clsacc_No1').val(null);
-                        $('#Clsacc_No2').val(null);
-                        $('#cc_type').val(null);
+                        $('#Parnt_DepmLoc').val(null);
+                        $('#Level_No').val(null);
+                        $('#DepmLoc_NmAr').val(null);
+                        $('#DepmLoc_NmEn').val(null);
+                        $('#Level_Status').val(null);
+                        $('#DepmLoc_Actv').val(null);
+                        $('#Ownr_No').val(null);
                     }
                 }
             });
@@ -267,7 +238,7 @@
 
                                 <select name="Cmp_No" id="Select_Cmp_No" class="form-control col-md-8">
                                     <option disabled selected>{{trans('admin.select_Cmp')}}</option>
-                                    @if(count($cmps) > 0)
+                                    @if(isset($cmps) && count($cmps) > 0)
                                         @foreach($cmps as $cmp)
                                             <option value="{{$cmp->Cmp_No}}">{{$cmp->{'Cmp_Nm'.ucfirst(session('lang'))} }}</option>
                                         @endforeach

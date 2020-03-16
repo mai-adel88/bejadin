@@ -7,7 +7,7 @@
         $(document).ready(function () {
 
             var timer = 0;
-            var delay = 200;
+            var delay = 100;
             var prevent = false;
 
             $(document).on('change', '#Select_Cmp_No', function(){
@@ -30,7 +30,6 @@
 
                             $('#jstree').jstree({
                                 "core" : {
-                                    // 'data' : "{!! load_cc('parent_id', '', '') !!}",
                                     'data' : tree,
                                     "themes" : {
                                         "variant" : "large"
@@ -75,8 +74,6 @@
                                 });
 
                                 //handle click event
-                                // timer = setTimeout(function() {
-                                // if (!prevent) {
                                 handle_click(r[0], result);
                                 // }
                                 // prevent = false;
@@ -221,7 +218,6 @@
                         $('#Fbal_CR').val(0);
                         $('#Cr_Blnc').val(0);
                         $('#Acc_Typ').val(null);
-                        // $('#ClsCostcntr_No1').val(null);
                         $('#ClsCostcntr_No2').val(null);
                         $('#cc_type').val(null);
                     }
@@ -245,7 +241,7 @@
                             <h3 class="box-title col-md-2">{{trans('admin.companies')}}</h3>
                             <select name="Cmp_No" id="Select_Cmp_No" class="form-control col-md-10">
                                 <option disabled selected>{{trans('hr.company')}}</option>
-                                @if(count($cmps) > 0)
+                                @if(isset($cmps) && count($cmps))
                                     @foreach($cmps as $cmp)
                                         <option value="{{$cmp->Cmp_No}}">{{$cmp->{'Cmp_Nm'.ucfirst(session('lang'))} }}</option>
                                     @endforeach
