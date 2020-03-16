@@ -248,7 +248,7 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua"><i class="fa fa-street-view"></i></span>
                     <div class="info-box-content">
-                        <h5><a href="{{route('address.pages')}}">{{trans('hr.address')}}</a></h5>
+                        <h5><a href="{{route('address.index')}}">{{trans('hr.address')}}</a></h5>
                     </div>
                 </div>
                 <!-- /.info-box -->

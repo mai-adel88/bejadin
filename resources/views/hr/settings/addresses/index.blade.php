@@ -1,9 +1,9 @@
 @extends('hr.index')
-@section('title',trans('admin.countries'))
+@section('title',trans('hr.address'))
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">{{trans('admin.addresses')}}</h3>
+            <h3 class="box-title">{{trans('hr.address')}}</h3>
         </div>
         @include('admin.layouts.message')
         <!-- /.box-header -->

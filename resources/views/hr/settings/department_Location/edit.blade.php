@@ -20,12 +20,12 @@
         <button type="submit" class="btn btn-danger" id="delete_button"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
     </div>
 
-    {{-- رقم الحساب --}}
+    {{-- رقم الاداره --}}
     <div class="form-group row">
         <label for="DepmLoc_No" class="col-md-2">{{trans('hr.dep_number')}}:</label>
         <input type="text" name="DepmLoc_No" readonly id="Costcntr_No" class="form-control col-md-2" value="{{$chart_item->DepmLoc_No}}">
     
-    {{-- نهاية تصنيف الحساب --}}
+    {{-- الاداره   --}}
 
     {{-- رقم الشركه --}}
     <input type="text" name="Cmp_No" id="Cmp_No" value="{{$chart_item->Cmp_No}}" hidden>

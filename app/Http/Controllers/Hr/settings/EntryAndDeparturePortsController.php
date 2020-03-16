@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class EntryAndDeparturePortsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      *
      * @param EntryAndDeparturePortsDataTable $dataTable
      * @return void

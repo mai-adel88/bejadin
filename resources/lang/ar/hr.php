@@ -558,6 +558,7 @@ return [
     'dep_number'    =>'رقم الاداره',
     'Create_new_dep'=>'اضافة جهة عمل',
     //    العناوين
-    'address'=>'العناوين',
+    'address'   =>'العناوين',
+    'Add_New_address'   =>'اضافة عنوان جديد',
     ];
 
