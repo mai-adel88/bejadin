@@ -232,7 +232,7 @@
         @include('admin.layouts.message')
         <!-- /.box-header -->
         <div class="box-body table-responsive" id="create_chart">
-            <div class="row col-md-10">
+            <div class="row col-md-12">
 
                 {{-- chart tree start --}}
                 <div class="col-md-7">
@@ -251,7 +251,7 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <a class="btn btn-primary" id="initChartDepLoc">{{trans('hr.Create_new_dep')}}</a>
+                            <a class="btn btn-success" id="initChartDepLoc">{{trans('hr.Create_new_dep')}}</a>
                             <div id="parent_name" style="display: inline-block"></div>
                             <div id="jstree" style="margin-top: 20px"></div>
                         </div>
@@ -265,67 +265,64 @@
                         {{csrf_field()}}
                         {{method_field('PUT')}}
 
-                        <div class="row">
-                            {{-- رقم الاداره --}}
-                            <label for="DepmLoc_No" class="col-md-4">{{trans('hr.dep_number')}}:</label>
-                            <input disabled type="text" name="DepmLoc_No" id="DepmLoc_No" class="form-control col-md-2" value="{{$chart_item->DepmLoc_No}}">
-                            {{-- رقم الاداره --}}
 
-                            {{-- تصنيف الاداره --}}
-                            <div class="col-md-6">
-                                @foreach(\App\Enums\dataLinks\TypeAccountType::toSelectArray() as $key => $value)
-                                    <input class="checkbox-inline" type="radio"
-                                        name="Level_Status" id="Level_Status" value="{{$key}}"
-                                        style="margin: 3px;" disabled
-                                        @if ($chart_item->Level_Status == $key) checked @endif>
-                                    <label>{{$value}}</label>
-                                @endforeach
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <div class="panel-title">{{trans('admin.show')}}</div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        {{-- رقم الاداره --}}
+                                        <label for="DepmLoc_No" class="col-md-4">{{trans('hr.dep_number')}}:</label>
+                                        <input disabled type="text" name="DepmLoc_No" id="DepmLoc_No" class="form-control col-md-2" value="{{$chart_item->DepmLoc_No}}">
+                                        {{-- رقم الاداره --}}
+
+                                        {{-- تصنيف الاداره --}}
+                                        <div class="col-md-6">
+                                            @foreach(\App\Enums\dataLinks\TypeAccountType::toSelectArray() as $key => $value)
+                                                <input class="checkbox-inline" type="radio"
+                                                    name="Level_Status" id="Level_Status" value="{{$key}}"
+                                                    style="margin: 3px;" disabled
+                                                    @if ($chart_item->Level_Status == $key) checked @endif>
+                                                <label>{{$value}}</label>
+                                            @endforeach
+                                        </div>
+                                         {{-- نهاية تصنيف الاداره --}}
+                                    </div> <br>
+                                    {{-- رقم الشركه --}}
+                                    <input type="text" name="Cmp_No" id="Cmp_No" value="{{$chart_item->Cmp_No}}" hidden>
+
+                                    {{-- نهاية رقم الشركه --}}
+
+                                    <div class="col-md-12">
+                                    {{-- اسم الاداره عربى --}}
+                                    <div class="form-group row">
+                                        <label class="col-md-4" for="DepmLoc_NmAr">{{trans('admin.account_name')}}:</label>
+                                        <input disabled type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-8 form-control"
+                                        value="{{$chart_item->DepmLoc_NmAr? $chart_item->DepmLoc_NmAr : null}}">
+                                    </div>
+                                    {{-- نهاية اشم الاداره عربى --}}
+
+                                    {{-- اسم الاداره انجليزى --}}
+                                    <div class="form-group row">
+                                        <label class="col-md-4" for="DepmLoc_NmEn">{{trans('admin.account_name_en')}}:</label>
+                                        <input disabled type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-8 form-control"
+                                        value="{{$chart_item->DepmLoc_NmEn? $chart_item->DepmLoc_NmEn : null}}">
+                                    </div>
+                                    {{-- نهاية اسم الاداره انجليزى --}}
+
+                                    {{-- الكفيل --}}
+                                    <div class="form-group row">
+                                        <label class="col-md-4" for="Ownr_No">{{trans('hr.Ownr_No')}}</label>
+                                        <select name="Ownr_No" id="Ownr_No" class=" col-md-8 form-control">
+                                            <option disables selected>{{trans('admin.select')}}</option>
+                                        </select>
+                                    </div>
+                                    {{--  الكفيل --}}
+                                    </div>
+                                </div>
+
                             </div>
-                            {{-- نهاية تصنيف الاداره --}}
-                        </div>
-                        <br>
-
-                        {{-- رقم الشركه --}}
-                        <input type="text" name="Cmp_No" id="Cmp_No" value="{{$chart_item->Cmp_No}}" hidden>
-                        {{-- <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="Cmp_No">{{trans('admin.cmp_no')}}</label>
-                                <select name="Cmp_No" id="Cmp_No" class="form-control">
-                                    <option>{{trans('admin.select')}}</option>
-                                    @if(count($cmps) > 0)
-                                        @foreach($cmps as $cmp)
-                                            <option value="{{$cmp->Cmp_No? $cmp->Cmp_No : null}}" @if($chart_item->Cmp_No == $cmp->Cmp_No) selected @endif>{{$cmp->{'Cmp_Nm'.ucfirst(session('lang'))} }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div> --}}
-                        {{-- نهاية رقم الشركه --}}
-
-                        {{-- اسم الاداره عربى --}}
-                        <div class="form-group row">
-                            <label class="col-md-4" for="DepmLoc_NmAr">{{trans('admin.account_name')}}:</label>
-                                <input disabled type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-8 form-control"
-                                value="{{$chart_item->DepmLoc_NmAr? $chart_item->DepmLoc_NmAr : null}}">
-                            </div>
-                        {{-- نهاية اشم الاداره عربى --}}
-
-                        {{-- اسم الاداره انجليزى --}}
-                        <div class="form-group row">
-                            <label class="col-md-4" for="DepmLoc_NmEn">{{trans('admin.account_name_en')}}:</label>
-                            <input disabled type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-8 form-control"
-                                value="{{$chart_item->DepmLoc_NmEn? $chart_item->DepmLoc_NmEn : null}}">
-                        </div>
-                        {{-- نهاية اسم الاداره انجليزى --}}
-
-                        {{-- الكفيل --}}
-                        <div class="form-group row">
-                            <label class="col-md-4" for="Ownr_No">{{trans('hr.Ownr_No')}}</label>
-                            <select name="Ownr_No" id="Ownr_No" class=" col-md-8 form-control">
-                                <option disables selected>{{trans('admin.select')}}</option>
-                            </select>
-                        </div>
-                        {{--    الكفيل --}}
 
                     {!! Form::close() !!}
                     <form action="{{route('departmentLoc.destroy', $chart_item->DepmLoc_No? $chart_item->DepmLoc_No : null)}}" method="POST" id="delete_form">
@@ -339,11 +336,4 @@
         </div>
         <!-- /.box-body -->
     </div>
-
-
-
-
-
-
-
 @endsection
