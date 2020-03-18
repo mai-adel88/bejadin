@@ -7,7 +7,7 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
 
     Config::set('auth.defines','hr');
 
-    Route::get('login','HrAuth@login')->name('hrLogin'); 
+    Route::get('login','HrAuth@login')->name('hrLogin');
     Route::post('hr-login','HrAuth@dologin')->name('hrDoLogin')->middleware('guest');
 
     Route::get('lang/{lang}',function ($lang){
@@ -56,13 +56,15 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
 
             // العناوين
             Route::resource('address', 'AddressController');
+            //المرافقين
+            Route::view('emp_dependents/create', 'hr.settings.emp_dependents.create');
+            // Route::resource('emp_dependents', 'EmpDependentsController');
+
 
         });
 
         Route::group(['namespace' => 'employees_data'], function (){
-            /**
-            * hr routes 
-           * **/
+            /***hr routes***/
            // employee data
            Route::resource('employeeData', 'EmployeesDataController');
            Route::get('getdepartment', 'EmployeesDataController@getdepartment')->name('getdepartment');
@@ -70,10 +72,10 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
            Route::get('hrhijri', 'EmployeesDataController@convertToDateToHijri')->name('hrhijri');
            Route::resource('pyjobs', 'PyjobsController');
            Route::view('/emp_data', 'hr.pages.emp_data_page')->name('emp_data');
-           
+
        });
-        
-        
+
+
     });
 
 

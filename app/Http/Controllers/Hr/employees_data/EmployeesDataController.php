@@ -57,7 +57,7 @@ class EmployeesDataController extends Controller
         $companies = HRMainCmpnam::get();   // الشركات
         $departments = DepmCmp::get();      // الاقسام
         $jobs = Pyjobs::get();              // الوظائف
-        $ports = HrAstPorts::get();        // منافذ الدخول والمغادره
+        $ports = HrAstPorts::get();         // منافذ الدخول والمغادره
         $countries = country::get();        //الدول
         $cities = city::get();              //المدينه
 
