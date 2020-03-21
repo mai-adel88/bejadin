@@ -56,6 +56,7 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
 
             // العناوين
             Route::resource('address', 'AddressController');
+            Route::get('get-employee', 'AddressController@getEmployee')->name('get-employee');
 
         });
 
