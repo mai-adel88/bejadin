@@ -12,9 +12,9 @@ use App\Models\Hr\HREmpAttach; // المرفقات
 use App\Models\Hr\DepmCmp;
 use App\Models\Hr\HREmpadr; // العناوين
 use App\Models\Hr\Pyjobs;
-use App\Models\Hr\HrAstPorts; 
+use App\Models\Hr\HrAstPorts;
 use App\Models\Admin\GLaccBnk;
-use App\Models\Hr\LocClass;
+use App\Models\Hr\HrDprtmntLoctn;
 use App\Models\Hr\HrOwnrmf; // الكفيل
 use App\Models\Hr\HRMainCmpnam; // الشركات
 use App\Models\Hr\HrAstPlcLicns; // اماكن التراخيص
@@ -57,8 +57,7 @@ class EmployeesDataController extends Controller
         $companies = HRMainCmpnam::get();   // الشركات
         $departments = DepmCmp::get();      // الاقسام
         $jobs = Pyjobs::get();              // الوظائف
-        $administrations = LocClass::get(); // الادارة
-        $ports = HrAstPorts::get();        // منافذ الدخول والمغادره
+        $ports = HrAstPorts::get();         // منافذ الدخول والمغادره
         $countries = country::get();        //الدول
         $cities = city::get();              //المدينه
 
@@ -81,9 +80,12 @@ class EmployeesDataController extends Controller
         $residencelicences = HrAstPlcLicns::where('cty_resident', 1)->get(); // الاقامة
         $civilcelicences = HrAstPlcLicns::where('cty_Nat_id', 1)->get(); // الهوية
         $job_techs = Pyjobs::where('job_tech', 1)->get(); // التخصص المهنى
-        $owners = HrOwnrmf::get(); // الكفيل
+        $owners  = HrOwnrmf::get(); // الكفيل
+        $Depm_No = HrDprtmntLoctn::where('Level_Status', 0)->get(); // الاداره
+        $Loc_No  = HrDprtmntLoctn::where('Level_Status', 1)->get(); // القسم بالاداره
 
-        return view('hr.employee_data.create', compact('ports','owners','full_names','civilcelicences','residencelicences','drivelicences','job_techs','licences','companies','jobs','departments','last','administrations', 'banks','countries','cities','job_cmp','job_gov'));
+        return view('hr.employee_data.create',
+        compact('Loc_No','Depm_No','ports','owners','full_names','civilcelicences','residencelicences','drivelicences','job_techs','licences','companies','jobs','departments','last', 'banks','countries','cities','job_cmp','job_gov'));
     }
 
     /**
@@ -122,22 +124,23 @@ class EmployeesDataController extends Controller
             'Start_Date'=>'sometimes', // تاريخ التعيين
             'Start_DateHij'=>'sometimes', //  هجرى تاريخ التعيين
             'Depm_No'   =>'sometimes', // الادارة
+            'Loc_No'    =>'sometimes', // الادارة
             'Residn_Chld'=>'sometimes', // المرافقين
             'Blood_Type'=>'sometimes', // فصيلة الدم
             'On_WorkDt' =>'sometimes', // تايخ مباشرة العمل
             'On_WorkDtHij'=>'sometimes', // تايخ مباشرة العمل هجرى
             'Job_Stu'=>'sometimes', // الحالة
-            
+
             'Status_Type'=>'sometimes', // الحالة الاجتماعية
             'End_Tstdt'  =>'sometimes', // انهاء التجربة
             'End_TstdtHij'=>'sometimes', // انهاء التجربة هجرى
             'Job_No'    =>'sometimes', // الوظيفة
             'Educt_Type'=>'sometimes', // الحالة التعليمية
-            
+
             'Ownr_No'=>'sometimes', // الكفيل
             'EmpType_No'=>'sometimes', // فئة الموظف
             'Bsc_Salary'=>'sometimes',
-            
+
             // تراخيص مزاولة المهنة
             'Rcrd_LicNo1' => 'sometimes',
             'Rcrd_Endt' => 'sometimes',
@@ -174,7 +177,7 @@ class EmployeesDataController extends Controller
             'Budg_typ' => 'sometimes',
             'Cnt_Endt' => 'sometimes', // نهاية التعقاد
             'Ensurans_No' => 'sometimes', // رقم التامينات الاجتماعية
-            'Work_Lic' => 'sometimes', // Work_Lic ملف مكتب العمل 
+            'Work_Lic' => 'sometimes', // Work_Lic ملف مكتب العمل
             'Specl_Need' => 'sometimes', // طبيعى / احتياجات خاصة
             'Lic_Plc' => 'sometimes',
             'Lic_Typ' => 'sometimes',
@@ -182,14 +185,14 @@ class EmployeesDataController extends Controller
             'Lic_Sdt' => 'sometimes',
             'Lic_No' => 'sometimes',
             'Work_PLC' => 'sometimes', // مكان الاصدار
-            'Work_Endt' => 'sometimes', // 
-            'Work_StDt' => 'sometimes', //  
+            'Work_Endt' => 'sometimes', //
+            'Work_StDt' => 'sometimes', //
             'Residn_Plc' => 'sometimes', // مكان الاصدار
             'Residn_Ty' => 'sometimes', // النوع
             'Residn_Edt' => 'sometimes', // الانتهاء
             'Residn_Sdt' => 'sometimes', // الاصدار
             'Civl_No' => 'sometimes', // الرقم المدني
-            'CivL_StDt' => 'sometimes', // 
+            'CivL_StDt' => 'sometimes', //
             'Civl_Plc' => 'sometimes', // مكان الانتهاء
             'Residn_No' => 'sometimes', //   // بيانات الاقامه الرقم
             'Cnt_Period' => 'sometimes', // نهاية التعاقد
@@ -328,16 +331,16 @@ class EmployeesDataController extends Controller
                 'Ln_No.*' => 'sometimes',
                 'Attch_Ty.*' => 'sometimes',
                 'Attch_Desc.*' => 'sometimes',
-                
+
             ],[],[
                 'Photo' => trans('admin.photo'),
             ]);
             foreach ($request->Photo as  $key => $Photo)
             {
-                
+
                 $filePath = 'files/employees';
                 $extension = $Photo->getClientOriginalExtension();
-                $name = $Photo->getClientOriginalName(); 
+                $name = $Photo->getClientOriginalName();
                 $fileName = $name . '_' . time() . '.' .$extension;
                 $Photo->move($filePath, $fileName);
                 HREmpAttach::create([
@@ -348,12 +351,12 @@ class EmployeesDataController extends Controller
                     'Ln_No' => $request->Ln_No[$key],
                     'Attch_Ty' => $request->Attch_Ty[$key],
                     'Attch_Desc' => $request->Attch_Desc[$key],
-    
+
                 ]);
             }
         }
 
-        
+
         if($request->Emp_NmAr1 Or $request->Emp_NmAr2 Or $request->Emp_NmAr3 Or $request->Emp_NmAr4){
             $data['Emp_NmAr'] = $request->Emp_NmAr1 .' '. $request->Emp_NmAr2 .' '. $request->Emp_NmAr3 .' '. $request->Emp_NmAr4;
         }
@@ -378,7 +381,6 @@ class EmployeesDataController extends Controller
         $companies = HRMainCmpnam::get(); // الشركات
         $departments = DepmCmp::get();    // الاقسام
         $jobs = Pyjobs::get();            // الوظائف
-        $administrations = LocClass::get(); // الادارة
         $countries = country::get();    //الدول
         $cities = city::get();          //المدينه
         $ports = HrAstPorts::get();    // منافذ الدخول والمغادره
@@ -392,6 +394,9 @@ class EmployeesDataController extends Controller
             }
         }
 
+        $Depm_No = HrDprtmntLoctn::where('Level_Status', 0)->get(); // الاداره
+        $Loc_No  = HrDprtmntLoctn::where('Level_Status', 1)->get(); // القسم بالاداره
+
         //الوظيفه بالشركه / بالشئون
         $job_cmp = Pyjobs::where('job_cmpny', 1)->get();
         //الوظيفه بالحكومه / تأشيرة القدوم
@@ -403,7 +408,8 @@ class EmployeesDataController extends Controller
         $civilcelicences = HrAstPlcLicns::where('cty_Nat_id', 1)->get(); // الهوية
         $job_techs = Pyjobs::where('job_tech', 1)->get(); // التخصص المهنى
 
-        return view('hr.employee_data.show', compact(['ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov']));
+        return view('hr.employee_data.show',
+        compact(['Loc_No','Depm_No','ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov']));
     }
 
     /**
@@ -431,6 +437,8 @@ class EmployeesDataController extends Controller
                 array_push($banks, $flag);
             }
         }
+        $Depm_No = HrDprtmntLoctn::where('Level_Status', 0)->get(); // الاداره
+        $Loc_No  = HrDprtmntLoctn::where('Level_Status', 1)->get(); // القسم بالاداره
 
         //الوظيفه بالشركه / بالشئون
         $job_cmp = Pyjobs::where('job_cmpny', 1)->get();
@@ -443,7 +451,8 @@ class EmployeesDataController extends Controller
         $civilcelicences = HrAstPlcLicns::where('cty_Nat_id', 1)->get(); // الهوية
         $job_techs = Pyjobs::where('job_tech', 1)->get();               // التخصص المهنى
 
-        return view('hr.employee_data.edit', compact('ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov'));
+        return view('hr.employee_data.edit',
+        compact('Loc_No','Depm_No','ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov'));
     }
 
     /**
@@ -485,22 +494,23 @@ class EmployeesDataController extends Controller
             'Start_Date'=>'sometimes', // تاريخ التعيين
             'Start_DateHij'=>'sometimes', //  هجرى تاريخ التعيين
             'Depm_No'   =>'sometimes', // الادارة
+            'Loc_No'    =>'sometimes', // الادارة
             'Residn_Chld'=>'sometimes', // المرافقين
             'Blood_Type'=>'sometimes', // فصيلة الدم
             'On_WorkDt' =>'sometimes', // تايخ مباشرة العمل
             'On_WorkDtHij'=>'sometimes', // تايخ مباشرة العمل هجرى
             'Job_Stu'=>'sometimes', // الحالة
-            
+
             'Status_Type'=>'sometimes', // الحالة الاجتماعية
             'End_Tstdt'  =>'sometimes', // انهاء التجربة
             'End_TstdtHij'=>'sometimes', // انهاء التجربة هجرى
             'Job_No'    =>'sometimes', // الوظيفة
             'Educt_Type'=>'sometimes', // الحالة التعليمية
-            
+
             'Ownr_No'=>'sometimes', // الكفيل
             'EmpType_No'=>'sometimes', // فئة الموظف
             'Bsc_Salary'=>'sometimes',
-            
+
             // تراخيص مزاولة المهنة
             'Rcrd_LicNo1' => 'sometimes',
             'Rcrd_Endt' => 'sometimes',
@@ -537,7 +547,7 @@ class EmployeesDataController extends Controller
             'Budg_typ' => 'sometimes',
             'Cnt_Endt' => 'sometimes', // نهاية التعقاد
             'Ensurans_No' => 'sometimes', // رقم التامينات الاجتماعية
-            'Work_Lic' => 'sometimes', // Work_Lic ملف مكتب العمل 
+            'Work_Lic' => 'sometimes', // Work_Lic ملف مكتب العمل
             'Specl_Need' => 'sometimes', // طبيعى / احتياجات خاصة
             'Lic_Plc' => 'sometimes',
             'Lic_Typ' => 'sometimes',
@@ -545,14 +555,14 @@ class EmployeesDataController extends Controller
             'Lic_Sdt' => 'sometimes',
             'Lic_No' => 'sometimes',
             'Work_PLC' => 'sometimes', // مكان الاصدار
-            'Work_Endt' => 'sometimes', // 
-            'Work_StDt' => 'sometimes', //  
+            'Work_Endt' => 'sometimes', //
+            'Work_StDt' => 'sometimes', //
             'Residn_Plc' => 'sometimes', // مكان الاصدار
             'Residn_Ty' => 'sometimes', // النوع
             'Residn_Edt' => 'sometimes', // الانتهاء
             'Residn_Sdt' => 'sometimes', // الاصدار
             'Civl_No' => 'sometimes', // الرقم المدني
-            'CivL_StDt' => 'sometimes', // 
+            'CivL_StDt' => 'sometimes', //
             'Civl_Plc' => 'sometimes', // مكان الانتهاء
             'Residn_No' => 'sometimes', //   // بيانات الاقامه الرقم
             'Cnt_Period' => 'sometimes', // نهاية التعاقد
@@ -693,16 +703,16 @@ class EmployeesDataController extends Controller
                 'Ln_No.*' => 'sometimes',
                 'Attch_Ty.*' => 'sometimes',
                 'Attch_Desc.*' => 'sometimes',
-                
+
             ],[],[
                 'Photo' => trans('admin.photo'),
             ]);
             foreach ($request->Photo as  $key => $Photo)
             {
-                
+
                 $filePath = 'files/employees';
                 $extension = $Photo->getClientOriginalExtension();
-                $name = $Photo->getClientOriginalName(); 
+                $name = $Photo->getClientOriginalName();
                 $fileName = $name . '_' . time() . '.' .$extension;
                 $Photo->move($filePath, $fileName);
                 HREmpAttach::create([
@@ -713,13 +723,13 @@ class EmployeesDataController extends Controller
                     'Ln_No' => $request->Ln_No[$key],
                     'Attch_Ty' => $request->Attch_Ty[$key],
                     'Attch_Desc' => $request->Attch_Desc[$key],
-    
+
                 ]);
             }
         }
 
 
-        
+
 // dd($data);
         if($request->Emp_NmAr1 Or $request->Emp_NmAr2 Or $request->Emp_NmAr3 Or $request->Emp_NmAr4){
             $data['Emp_NmAr'] = $request->Emp_NmAr1 .' '. $request->Emp_NmAr2 .' '. $request->Emp_NmAr3 .' '. $request->Emp_NmAr4;
@@ -765,7 +775,7 @@ class EmployeesDataController extends Controller
                 $last_sub =  1;
             }
             return response()->json($last_sub);
-        }   
+        }
     }
 
     // higiri date

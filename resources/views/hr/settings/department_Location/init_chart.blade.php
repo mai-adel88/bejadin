@@ -2,7 +2,7 @@
 @section('title',trans('hr.dep_loc'))
 @section('content')
 @push('js')
-    <script> 
+    <script>
         var timer = 0;
         var delay = 100;
         var prevent = false;
@@ -225,7 +225,7 @@
             {!! Form::open(['method'=>'POST','route' => ['departmentLoc.store'], 'id' => 'edit_form', 'files' => true]) !!}
             {{csrf_field()}}
         <div class="box-body table-responsive" id="create_chart">
-            <div class="row col-md-10">
+            <div class="row col-md-12">
                 <div class="col-md-7">
                     <input type="text" name="Parnt_DepmLoc" id="Prj_Parnt" value="{{0}}" hidden>
                     <input type="text" name="Level_No" id="Level_No" value="{{1}}" hidden>
@@ -260,47 +260,56 @@
                         <input type="text" name="Level_No" id="Level_No" value="{{1}}" hidden>
                         {{-- Parnt_DepmLoc end --}}
 
-                        
-                        <div class="row col-md-12 pull-left">
-                            <button type="submit" class="btn btn-primary pull-left"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                        </div>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <div class="panel-title">{{trans('admin.add')}}</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row col-md-12 pull-left">
+                                    <button type="submit" class="btn btn-primary pull-left"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
 
-                            {{-- رقم الاداره --}}
-                        <div class="row">
-                            <label for="DepmLoc_No" class="col-md-4">{{trans('hr.dep_number')}}:</label>
-                            <input type="text" name="DepmLoc_No" readonly id="Costcntr_No" class="form-control col-md-3" value="{{$Depm_No}}">
-                        </div>
-                            {{-- رقم الاداره --}}
-                            <br>
-                            {{-- تصنيف الاداره رئيسي / فرعي --}}
-                            <input type="text" value="{{0}}" name="Level_Status" hidden>
-                            {{-- نهاية تصنيف الاداره --}}
+                                {{-- رقم الاداره --}}
+                                <div class="row">
+                                    <label for="DepmLoc_No" class="col-md-4">{{trans('hr.dep_number')}}:</label>
+                                    <input type="text" name="DepmLoc_No" readonly id="Costcntr_No" class="form-control col-md-3" value="{{$Depm_No}}">
+                                </div>
+                                {{-- رقم الاداره --}}
+                                <br>
+                                {{-- تصنيف الاداره رئيسي / فرعي --}}
+                                <input type="text" value="{{0}}" name="Level_Status" hidden>
+                                {{-- نهاية تصنيف الاداره --}}
+                                <div class="col-md-12">
 
-                        {{-- اسم الاداره عربى --}}
-                        <div class="form-group row">
-                            <label class="col-md-4" for="DepmLoc_NmAr">{{trans('admin.name_ar')}}:</label>
-                                <input type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-8 form-control">
-                        </div>
-                        {{-- نهاية اسم الاداره عربى --}}
+                                    {{-- اسم الاداره عربى --}}
+                                    <div class="form-group row">
+                                        <label class="col-md-4" for="DepmLoc_NmAr">{{trans('admin.name_ar')}}:</label>
+                                            <input type="text" name="DepmLoc_NmAr" id="DepmLoc_NmAr" class="col-md-8 form-control">
+                                    </div>
+                                    {{-- نهاية اسم الاداره عربى --}}
 
-                        {{-- اسم الاداره انجليزى --}}
-                        <div class="form-group row">
-                            <label class="col-md-4" for="DepmLoc_NmEn">En</label>
-                            <input type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-8 form-control">
+                                    {{-- اسم الاداره انجليزى --}}
+                                    <div class="form-group row">
+                                        <label class="col-md-4" for="DepmLoc_NmEn">En</label>
+                                        <input type="text" name="DepmLoc_NmEn" id="DepmLoc_NmEn" class=" col-md-8 form-control">
+                                    </div>
+                                    {{-- نهاية اسم الاداره انجليزى --}}
+
+                                    {{-- الكفيل --}}
+                                    <div class="form-group row">
+                                        <label class="col-md-4" for="Ownr_No">{{trans('hr.Ownr_No')}}</label>
+                                        <select name="Ownr_No" id="Ownr_No" class=" col-md-8 form-control">
+                                            <option disables selected>{{trans('admin.select')}}</option>
+                                        </select>
+                                    </div>
+                                    {{--    الكفيل --}}
+
+                                </div>
+                            </div>
                         </div>
-                        {{-- نهاية اسم الاداره انجليزى --}}
-                        
-                        {{-- الكفيل --}}
-                        <div class="form-group row">
-                            <label class="col-md-4" for="Ownr_No">{{trans('hr.Ownr_No')}}</label>
-                            <select name="Ownr_No" id="Ownr_No" class=" col-md-8 form-control">
-                                <option disables selected>{{trans('admin.select')}}</option>
-                            </select>
-                        </div>
-                        {{--    الكفيل --}}
 
                     {!! Form::close() !!}
-                    
+
                 </div>
             </div>
         </div>

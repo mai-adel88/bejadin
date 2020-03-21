@@ -4,7 +4,7 @@
 @section('content')
         @push('css')
             <style>
-            
+
                 .datepicker{direction: rtl;}
                 .nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover{
                     border-top: 1px groove black;
@@ -173,9 +173,9 @@
             </style>
         @endpush
         @push('js')
-       
+
             <script>
-            
+
 
                 $('.datepicker').datepicker();
 
@@ -322,7 +322,7 @@
                         }
                     })
                 });
-                
+
                 // تاريخ مباشره العمل
                 $('input.On_WorkDt').change(function () {
                     let Hijri = $(this).val();
@@ -436,7 +436,7 @@
 
                 <br>
                 <!-- tap container -->
-                
+
                 <!-- last of day -->
                 <div class="col-md-12">
                     <div class="col-md-12 well">
@@ -606,14 +606,14 @@
                                     </div>
                                 </div> <!-- end of first col-md-4-->
                                 <div class="col-md-5">
-                                    <!-- Depm_No الادارة HrAstDeprtmnt -->
+                                    <!-- Depm_No الادارة HrAstDeprtmnt --> 
                                     <div class="col-md-12 form-group">
                                         <label class="col-md-4">{{trans('hr.Depm_No')}}</label>
                                         <div class="col-md-8">
                                             <select name="Depm_No" class="Depm_No form-control">
                                             <option>{{trans('admin.select')}}</option>
-                                            @foreach($administrations as $admin)
-                                                <option value="{{$admin->Class_No}}">{{$admin->{'Class_Nm'.ucfirst(session('lang'))} }}</option>
+                                            @foreach($Depm_No as $Depm)
+                                                <option value="{{$Depm->DepmLoc_No}}">{{$Depm->{'DepmLoc_Nm'.ucfirst(session('lang'))} }}</option>
                                             @endforeach
                                             </select>
                                         </div>
@@ -622,9 +622,11 @@
                                     <div class="col-md-12 form-group">
                                         <label class="col-md-6">القسم بالادارة</label>
                                         <div class="col-md-6">
-                                            <select name="" class="form-control">
-                                                <option value=""></option>
-                                                <option value=""></option>
+                                            <select name="Loc_No" class="Loc_No form-control">
+                                                <option>{{trans('admin.select')}}</option>
+                                                @foreach($Loc_No as $Loc)
+                                                    <option value="{{$Loc->DepmLoc_No}}">{{$Loc->{'DepmLoc_Nm'.ucfirst(session('lang'))} }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -682,7 +684,7 @@
                             </div> <!-- end of second col-md-4 -->
 
                         </div>
-                        
+
                     </div>
                         <div id="preview" class="col-md-2">
                         <img name="Photo[]" src="" class="Photo img-responsive" alt="">
@@ -787,7 +789,7 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group row hr_offse-1">
-                                                    
+
                                                     <label class="col-md-2">وسيلة السفر</label>
                                                     <label class="col-md-2">عدد التذاكر</label>
                                                     <label class="col-md-3">الدرجة</label>
@@ -798,7 +800,7 @@
                                                     <div class="col-md-2">
                                                     {{ Form::select('HldTrnsp_No',\App\Enums\Hr\HrTransType::toSelectArray() ,null,
                                                         array_merge(['id'=>'HldTrnsp_No', 'class' => 'select2 form-control HldTrnsp_No','placeholder'=>trans('admin.select')])) }}
-                                                    
+
                                                     </div>
                                                     <!-- Tkt_No عدد التذاكر  -->
                                                     <div class="col-md-2">
@@ -817,7 +819,7 @@
                                                     <div class="col-md-2">
                                                     {{ Form::select('HldTrnsp_No1',\App\Enums\Hr\HrTransType::toSelectArray() ,null,
                                                         array_merge(['id'=>'HldTrnsp_No1', 'class' => 'select2 form-control HldTrnsp_No1','placeholder'=>trans('admin.select')])) }}
-                                                    
+
                                                     </div>
                                                     <div class="col-md-2">
                                                         <input type="text" name="Tkt_No1" class="input_number">
@@ -835,7 +837,7 @@
                                                     <div class="col-md-2">
                                                     {{ Form::select('HldTrnsp_No2',\App\Enums\Hr\HrTransType::toSelectArray() ,null,
                                                         array_merge(['id'=>'HldTrnsp_No2', 'class' => 'select2 form-control HldTrnsp_No2','placeholder'=>trans('admin.select')])) }}
-                                                    
+
                                                     </div>
                                                     <div class="col-md-2">
                                                         <input type="text" name="Tkt_No2" class="input_number">
@@ -919,7 +921,7 @@
                                                 <div class="select_com_td col-md-6 p-0">
                                                 {{ Form::select('Huspym_No',\App\Enums\HrHousePaymentType::toSelectArray() ,null,
                                                     array_merge(['id'=>'Huspym_No', 'class' => 'select2 form-control Huspym_No','placeholder'=>trans('admin.select')])) }}
-                                            
+
                                                 </div>
                                             </div>
                                             <div class="col-md-3 p-0 mt-15">
@@ -927,7 +929,7 @@
                                                 <div class="select_com_td col-md-6 p-0">
                                                 {{ Form::select('Shift_Type',\App\Enums\ShiftTypes::toSelectArray() ,null,
                                                     array_merge(['id'=>'Shift_Type', 'class' => 'select2 form-control Shift_Type','placeholder'=>trans('admin.select')])) }}
-                    
+
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mt-15 p-0">
@@ -935,7 +937,7 @@
                                                 <div class="select_com_td col-md-6 p-0">
                                                 {{ Form::select('Salary_Class_No',\App\Enums\SalaryClassNo::toSelectArray() ,null,
                                                     array_merge(['id'=>'Salary_Class_No', 'class' => 'select2 form-control Salary_Class_No','placeholder'=>trans('admin.select')])) }}
-                    
+
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mt-15 p-0">
@@ -943,7 +945,7 @@
                                                 <div class="select_com_td col-md-6 p-0">
                                                 {{ Form::select('Pymnt_No',\App\Enums\SalaryPaymentWay::toSelectArray() ,null,
                                                     array_merge(['id'=>'Pymnt_No', 'class' => 'select2 form-control Pymnt_No','placeholder'=>trans('admin.select')])) }}
-                    
+
                                                 </div>
                                             </div>
                                         </div> <!-- end of first row -->
@@ -1055,7 +1057,7 @@
                                                     </div> <br> <br>
                                                 </div>
                                                 <div class="col-md-7">
-                                
+
                                 <div class="row well">
                                     <div class="row">
                                         <label class="col-md-3">{{trans('hr.Cnt_Stdt')}}</label>
@@ -1218,14 +1220,14 @@
                                                         <option value=""></option>
                                                     </select>
                                                 </div>
-                                            </div> 
+                                            </div>
                                             <!-- State_NmAr -->
                                             <div class="row form-group">
                                                 <label class="col-md-5">{{trans('hr.JobPLc_No')}}</label>
                                                 <div class="select_com_td col-md-7 p-0">
-                                                
+
                                                     <select name="JobPLc_No" class="JobPLc_No select2 form-control">
-                                                        @foreach($licences as $licence) 
+                                                        @foreach($licences as $licence)
                                                             <option value="{{$licence->State_No}}">{{ $licence->{'State_Nm'.ucfirst(session('lang'))} }}</option>
                                                         @endforeach
                                                     </select>
@@ -1236,7 +1238,7 @@
                                                 <label class="col-md-5 pl-0">{{trans('hr.JobCtg_No')}}</label>
                                                 <div class="select_com_td col-md-7 p-0">
                                                     <select name="JobCtg_No" class="select2  form-control">
-                                                        @foreach($job_techs as $job_tech) 
+                                                        @foreach($job_techs as $job_tech)
                                                             <option value="{{$job_tech->Job_No}}">{{ $job_tech->{'Job_Nm'.ucfirst(session('lang'))} }}</option>
                                                         @endforeach
                                                     </select>
@@ -1283,7 +1285,7 @@
                                                     <label class="col-md-6">التخصص</label>
                                                     <div class="select_com_td col-md-6 p-0">
                                                         <select name="JobCtg_No1" class="select2  form-control">
-                                                            @foreach($job_techs as $job_tech) 
+                                                            @foreach($job_techs as $job_tech)
                                                                 <option value="{{$job_tech->Job_No}}">{{ $job_tech->{'Job_Nm'.ucfirst(session('lang'))} }}</option>
                                                             @endforeach
                                                         </select>
@@ -1365,7 +1367,7 @@
                                             <div class="row form-group">
                                                 <label for="In_VisaDt" class="col-md-6 p-0">{{trans('hr.In_VisaDt')}}</label>
                                                 <input id="In_VisaDt" class="In_VisaDt col-md-6 br-5 form-control p-0 datepicker" type="text" name="In_VisaDt">
-                                            </div> 
+                                            </div>
                                             <!-- not yet -->
                                             <div class="row form-group">
                                                 <label for="In_Port" class="col-md-6 p-0 pl-0">{{trans('hr.In_Port')}}</label>
@@ -1476,7 +1478,7 @@
                                                 <input name="Residn_No" type="text" placeholder="{{trans('hr.numberr')}}" class="col-md-3 form-control">
                                                 <input name="Residn_Sdt" type="text" placeholder="{{trans('hr.version')}}" style="margin-left: 2px;" class="col-md-3 datepicker form-control">
                                                 <input name="Residn_Edt" type="text" placeholder="{{trans('hr.finishing')}}" class="col-md-3 form-control datepicker">
-                                            </div> 
+                                            </div>
                                             <div class="col-md-12">
                                                 <label class="col-md-4"></label>
                                                 <label class="col-md-4">{{trans('hr.type')}}</label>
@@ -1489,7 +1491,7 @@
                                                     array_merge(['id'=>'Residn_Ty', 'class' => 'select2 form-control Residn_Ty','placeholder'=>trans('admin.select')])) }}
                                                 </div>
                                                     <select name="Residn_Plc" class="col-md-5 form-control">
-                                                    @foreach($residencelicences as $residencelicence) 
+                                                    @foreach($residencelicences as $residencelicence)
                                                         <option value="{{$residencelicence->State_No}}">{{$residencelicence->{'State_Nm'.ucfirst(session('lang'))} }}</option>
                                                     @endforeach
                                                     </select>
@@ -1501,11 +1503,11 @@
                                                 <input name="CivL_StDt" type="text" placeholder="{{trans('hr.version')}}" class="datepicker col-md-2 form-control">
                                                 <label class="col-md-3">{{trans('hr.use_required')}}</label>
                                                 <select name="Civl_Plc" id="Civl_Plc" class="col-md-2 form-control">
-                                                    @foreach($civilcelicences as $civilcelicence) 
+                                                    @foreach($civilcelicences as $civilcelicence)
                                                     <option value="{{$civilcelicence->State_No}}">{{$civilcelicence->{'State_Nm'.ucfirst(session('lang'))} }}</option>
                                                     @endforeach
                                                 </select>
-                                                
+
                                             </div>
                                             <div class="col-md-12">
                                                 <label class="col-md-2" style="padding-left: 0;">{{trans('hr.work_permit')}}</label>
@@ -1539,12 +1541,12 @@
                                             </div>
                                             <div class="col-md-12" style="margin-bottom: 11px;">
                                                 <label class="col-md-2" style="padding-left: 0;"></label>
-                                                
+
                                                 {{ Form::select('Lic_Typ',\App\Enums\Hr\DriveLicenceType::toSelectArray() ,null,
                                                     array_merge(['id'=>'Lic_Typ', 'class' => 'form-control Lic_Typ col-md-4','placeholder'=>trans('admin.select')])) }}
 
                                                 <select name="Lic_Plc" type="text" class="col-md-5 form-control">
-                                                @foreach($drivelicences as $drivelicence) 
+                                                @foreach($drivelicences as $drivelicence)
                                                 <option value="{{$drivelicence->State_No}}">{{$drivelicence->{'State_Nm'.ucfirst(session('lang'))} }}</option>
                                                 @endforeach
                                                 </select>
