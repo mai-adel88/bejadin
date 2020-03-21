@@ -36,7 +36,7 @@ class HrEmpmfs extends Model
     //     'Specl_NeedTyp',
     //     'Cnt_Period',
     //     'Blood_Type',
-    //     'Emp_NmAr',
+        //     'Emp_NmAr',
     //     'Emp_NmEn',
     //     'Emp_BarCode',
     //     'Emp_NmAr1',

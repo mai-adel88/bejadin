@@ -19,7 +19,7 @@
         "laravel/framework": "5.7.*",
         "laravel/passport": "^7.3",
         "laravel/tinker": "^1.0",
-        "laravelcollective/html": "^5.4.0",
+        "laravelcollective/html": "^5.2.0",
         "nesbot/carbon": "1.39.1",
         "niklasravnsborg/laravel-pdf": "^3.1",
         "spatie/laravel-permission": "^2.29",
