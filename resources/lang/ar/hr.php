@@ -574,5 +574,20 @@ return [
     'address'   =>'العناوين',
     'Add_New_address'   =>'اضافة عنوان جديد',
     'emp' =>'الموظفين',
+    // attachments
+    'attachments'   =>'المرفقات',
+    'desc'   =>'الوصف',
+    'employee'   =>'الموظف',
+    'attach_type'   =>'نوع المرفق',
+    'add_new_attachment'   =>'اضافة مرفق جديد',
+    'photo'   =>'الصورة',
+    'photo'   =>'الصورة',
+    'Attch_Desc'   =>'وصف المرفق',
+    'edit_attachment'   =>'تعديل المرفق',
+    'show_attachment'   =>'عرض المرفق',
+    'employee_name'   =>'اسم الموظف',
+    'employees'   =>'الموظفين',
+    'fill_required_data'   =>'يجب ادخال الحقول التى قبلها *',
+    'emp_type'   =>'تصنيف العمالة',
     ];
 

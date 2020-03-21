@@ -13,6 +13,7 @@ use App\Enums\Hr\MBudg_typ; // فئة الموظفين
 use App\Enums\Hr\PassportType; // انواع جواز السفر
 use App\Enums\Hr\IDType; // انواع الإقامات
 use App\Enums\Hr\DriveLicenceType; // انواع رخص القيادة
+use App\Enums\Hr\HrAstAttachType; // انواع المرفقات
 use App\Enums\ShiftTypes;
 use App\Enums\SalaryClassNo;
 use App\Enums\Nationalities;
@@ -128,6 +129,13 @@ return [
     Nationalities::class => [
         Nationalities::Saudi => 'السعوديه',
         Nationalities::egyptian => 'المصريه',
+    ],
+    // المرفقات
+    HrAstAttachType::class => [
+        HrAstAttachType::photograph => 'صورة شخصية',
+        HrAstAttachType::residence => 'الاقامة',
+        HrAstAttachType::passport => 'جواز السفر',
+        HrAstAttachType::graduationCertificate => 'شهادة التخرج',
     ],
     EducationType::class => [
         EducationType::none => 'بدون', 

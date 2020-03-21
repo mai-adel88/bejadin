@@ -75,7 +75,10 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
            Route::get('hrhijri', 'EmployeesDataController@convertToDateToHijri')->name('hrhijri');
            Route::resource('pyjobs', 'PyjobsController');
            Route::view('/emp_data', 'hr.pages.emp_data_page')->name('emp_data');
-
+            // attachments المرفقات
+            Route::resource('attachments', 'AttachmentsController');
+            Route::get('getemployees', 'AttachmentsController@getemployees')->name('getemployees');
+            Route::get('getemployeeType', 'AttachmentsController@getemployeeType')->name('getemployeeType');
        });
 
 

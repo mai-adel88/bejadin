@@ -13,9 +13,8 @@ use BenSampo\Enum\Enum;
 // أنواع المرفقات 
 final class HrAstAttachType extends Enum implements LocalizedEnum
 {
-    const none = 1;
-    const photograph = 2;
-    const residence = 3;
-    const passport = 4;
-    const graduationCertificate = 5;
+    const photograph = 1;
+    const residence = 2;
+    const passport = 3;
+    const graduationCertificate = 4;
 }

@@ -1,5 +1,5 @@
 @extends('hr.index')
-@section('title','الموظفين')
+@section('title', trans('hr.employees'))
 
 @section('content')
     @push('css')
@@ -32,6 +32,19 @@
 
                     <div class="info-box-content">
                         <h2 class="info-box-text"> الوظائف</h2>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <a href="{{route('attachments.index')}}">
+                <div class="info-box">
+                    <span class="info-box-icon bg-warning"><i class="fa fa-users" aria-hidden="true"></i></span>
+
+                    <div class="info-box-content">
+                        <h2 class="info-box-text"> {{trans('hr.attachments')}}</h2>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
