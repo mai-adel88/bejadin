@@ -1,8 +1,7 @@
 
 @extends('hr.index')
 @section('title', trans('hr.escorts'))
-@section('root_link', route('hrcountries.index'))
-@section('root_name', trans('hr.departments'))
+@section('root_name', trans('hr.escorts'))
 @section('content')
     @can('create')
         @push('css')
@@ -51,7 +50,29 @@
                 dir: "{{direction()}}",
                 width: "100%"
             });
+
+            ////// الموظف بناء على الشركه /////
+            $('.Cmp_No').change(function(){
+                var Cmp_No = $(this).val();
+                $.ajax({
+                    url : "{{route('getEmployees')}}",
+                    type : 'get',
+                    dataType:'html',
+                    data: {"_token": "{{ csrf_token() }}", Cmp_No: Cmp_No},
+                    success : function(data){
+                        $('.Emp_No').html(data)
+                    }
+                });
+            });
+
+
          });
+         ////// رقم الموظف ////
+         $(document).on('change', '#Emp_No', function(){
+                var Emp_No = $(this).val();
+                console.log(Emp_No);
+                $('.emp_no').val(Emp_No);
+            });
         </script>
         @endpush
         <div class="box">
@@ -63,7 +84,7 @@
             </div>
             <div class="box-body">
 
-                    {{--First tap--}}
+                    <!-- First panel -->
                     <div class="panel panel-default">
                         <div class="panel-body" style="background-color: #708e70;color: #fff;">
                             <div class="row">
@@ -71,17 +92,25 @@
                                     <label>{{trans('admin.company')}}</label>
                                     <select name="Cmp_No" class="Cmp_No col-md-9 select2 form-control">
                                         <option disabled selected>{{trans('admin.select')}}</option>
+                                        @foreach($companies as $company)
+                                            <option value="{{$company->Cmp_No}}">{{$company->Cmp_NmAr}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4">
                                     <label>{{trans('hr.The_employee')}}</label>
-                                    <select name="Cmp_No" class="Cmp_No col-md-9 select2 form-control">
+                                    <select name="Emp_No" id="Emp_No" class="Emp_No col-md-9 select2 form-control">
                                         <option disabled selected>{{trans('admin.select')}}</option>
+
                                     </select>
                                 </div>
                                 <div class="col-md-2">
                                     <label>{{trans('hr.emp_no')}}</label>
-                                    <input readonly style="margin-bottom:6px;" class="form-control input_text col-md-10" type="text">
+                                    <input readonly style="margin-bottom:6px;" class="emp_no form-control input_text col-md-10" type="text">
+                                </div>
+                                <div class="col-md-2">
+                                    <label>{{trans('hr.Passprt_No')}}</label>
+                                    <input readonly name="Pasprt_No" style="margin-bottom:6px;" class="Pasprt_No form-control input_text col-md-10" type="text">
                                 </div>
                             </div>
                             <div class="panel panel-default">
@@ -90,14 +119,14 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.escorts_no')}}</label>
-                                            <input type="text" class="input_text form-control col-md-6" readonly>
+                                            <input type="text" name="Host_No" class="input_text form-control col-md-6" readonly>
                                         </div>
                                         <div class="col-md-9">
                                             <label class="col-md-1" style="padding:0px;">{{trans('hr.name_ar')}}</label>
-                                            <input name="Emp_NmAr1" class="Emp_NmAr1 col-sm-6 col-md-2 input_text mr-lr-2" placeholder="الاول" style="margin-bottom: 2px;" type="text">
-                                            <input name="Emp_NmAr2" class="Emp_NmAr2 col-sm-6 col-md-2 input_text mr-lr-2" placeholder="الثاني" type="text" >
-                                            <input name="Emp_NmAr3" class="Emp_NmAr3 col-sm-6 col-md-2 input_text mr-lr-2" placeholder="الثالث" type="text" >
-                                            <input name="Emp_NmAr4" class="Emp_NmAr4 col-sm-6 col-md-2 input_text" placeholder="الرابع" type="text" >
+                                            <input name="Host_NmAr1" class="Host_NmAr1 col-sm-6 col-md-2 input_text mr-lr-2" placeholder="الاول" style="margin-bottom: 2px;" type="text">
+                                            <input name="Host_NmAr2" class="Host_NmAr2 col-sm-6 col-md-2 input_text mr-lr-2" placeholder="الثاني" type="text" >
+                                            <input name="Host_NmAr3" class="Host_NmAr3 col-sm-6 col-md-2 input_text mr-lr-2" placeholder="الثالث" type="text" >
+                                            <input name="Host_NmAr4" class="Host_NmAr4 col-sm-6 col-md-2 input_text" placeholder="الرابع" type="text" >
                                         </div>
                                     </div>
                                     <!-- اسم الرافق EN ورقمه -->
@@ -108,28 +137,28 @@
                                         </div>
                                         <div class="col-md-9">
                                             <label class="col-md-1" style="padding:0px;">En</label>
-                                            <input name="Emp_NmAr1" class="Emp_NmAr1 col-sm-6 col-md-2 input_text mr-lr-2" type="text">
-                                            <input name="Emp_NmAr2" class="Emp_NmAr2 col-sm-6 col-md-2 input_text mr-lr-2" type="text" >
-                                            <input name="Emp_NmAr3" class="Emp_NmAr3 col-sm-6 col-md-2 input_text mr-lr-2" type="text" >
-                                            <input name="Emp_NmAr4" class="Emp_NmAr4 col-sm-6 col-md-2 input_text" type="text" >
+                                            <input name="Host_NmEn1" class="Host_NmEn1 col-sm-6 col-md-2 input_text mr-lr-2" type="text">
+                                            <input name="Host_NmEn2" class="Host_NmEn2 col-sm-6 col-md-2 input_text mr-lr-2" type="text" >
+                                            <input name="Host_NmEn3" class="Host_NmEn3 col-sm-6 col-md-2 input_text mr-lr-2" type="text" >
+                                            <input name="Host_NmEn4" class="Host_NmEn4 col-sm-6 col-md-2 input_text" type="text" >
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 15px;">
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.relative_relation')}}</label>
-                                            <select class="col-md-7 input_text" name="" id="">
+                                            <select class="col-md-7 input_text" name="Relation" id="Relation">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.nationality')}}</label>
-                                            <select class="col-md-7 input_text" name="" id="">
+                                            <select class="col-md-7 input_text" name="Cntry_No" id="">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.birth_date')}}</label>
-                                            <input class="col-md-7 datepicker" type="text" >
+                                            <input class="col-md-7 datepicker" name="Birth_dt" type="text" >
                                         </div>
                                         <div class="col-md-3">
                                             @foreach(\App\Enums\GenderType::toSelectArray() as $key => $value)
@@ -143,19 +172,19 @@
                                     <div class="row" style="margin-top: 15px;">
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.religion')}}</label>
-                                            <select class="col-md-7 input_text" name="" id="">
+                                            <select class="col-md-7 input_text" name="Reljan_No" id="">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.Pasprt_Ty')}}</label>
-                                            <select class="col-md-7 input_text" name="" id="">
+                                            <select class="col-md-7 input_text" name="Pasprt_Ty" id="">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.job')}}</label>
-                                            <select class="col-md-7 input_text" name="" id="">
+                                            <select class="col-md-7 input_text" name="Job" id="">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
                                             </select>
                                         </div>
@@ -171,18 +200,18 @@
                                         <!-- بيانات الاقامه -->
                                         <div class="col-md-9">
                                             <label class="col-md-2" style="padding:0px;">{{trans('hr.residence_data')}}</label>
-                                            <input name="Emp_NmAr1" class="Emp_NmAr1 col-sm-6 col-md-2 input_text mr-lr-2" type="text">
-                                            <input name="Emp_NmAr2" class="Emp_NmAr2 col-sm-6 col-md-2 input_text mr-lr-2" type="text" >
-                                            <input name="Emp_NmAr3" class="Emp_NmAr3 col-sm-6 col-md-2 datepicker input_text mr-lr-2" type="text" >
-                                            <input name="Emp_NmAr4" class="Emp_NmAr4 col-sm-6 col-md-2 datepicker input_text" type="text" >
+                                            <input name="Resid_No"  class="Resid_No col-sm-6 col-md-2 input_text mr-lr-2" type="text">
+                                            <input name="Resid_Plc" class="Resid_Plc col-sm-6 col-md-2 input_text mr-lr-2" type="text" >
+                                            <input name="Resid_Sdt" class="Resid_Sdt col-sm-6 col-md-2 datepicker input_text mr-lr-2" type="text" >
+                                            <input name="Resid_Edt" class="Resid_Edt col-sm-6 col-md-2 datepicker input_text" type="text" >
                                         </div>
                                         <!-- بيانات الجواز -->
                                         <div class="col-md-9">
-                                            <label class="col-md-2" style="padding:0px;">{{trans('hr.Passport_data')}}</label>
-                                            <input name="Emp_NmAr1" class="Emp_NmAr1 col-sm-6 col-md-2 input_text mr-lr-2" type="text">
-                                            <input name="Emp_NmAr2" class="Emp_NmAr2 col-sm-6 col-md-2 input_text mr-lr-2" type="text" >
-                                            <input name="Emp_NmAr3" class="Emp_NmAr3 col-sm-6 col-md-2 datepicker input_text mr-lr-2" type="text" >
-                                            <input name="Emp_NmAr4" class="Emp_NmAr4 col-sm-6 col-md-2 datepicker input_text" type="text" >
+                                            <label class="col-md-2"   style="padding:0px;">{{trans('hr.Passport_data')}}</label>
+                                            <input name="Passprt_No"  class="Passprt_No col-sm-6 col-md-2 input_text mr-lr-2" type="text">
+                                            <input name="Passprt_Plc" class="Passprt_Plc col-sm-6 col-md-2 input_text mr-lr-2" type="text" >
+                                            <input name="Passprt_Sdt" class="Passprt_Sdt col-sm-6 col-md-2 datepicker input_text mr-lr-2" type="text" >
+                                            <input name="Passprt_Edt" class="Passprt_Edt col-sm-6 col-md-2 datepicker input_text" type="text" >
                                         </div>
                                     </div>
                                     <!-- اسم الكفيل السابق -->
@@ -254,7 +283,7 @@
                                                 </div>
                                                 <!-- image -->
                                                 <div class="col-md-4">
-                                                    <input type="file" class="form-control">
+                                                    <input name="Photo" type="file" class="form-control">
                                                 </div>
                                             </div>
                                         </div>

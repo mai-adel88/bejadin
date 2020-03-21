@@ -568,8 +568,12 @@ return [
     'job'           =>'المهنه',
     'in_no'         =>'رقم الدخوليه',
     'in_date'       =>'تاريخ الدخوليه',
+    'Host_Nm'       =>'اسم المرافق',
+    'Passprt_No'    =>'رقم جواز السفر',
     'relative_relation' =>'صلة القرابه',
     'bail_transfer_date'=>'تاريخ نقل الكفاله',
+    'add_new_escorts'   =>'اضافة مرافق جديد',
+
     //    العناوين
     'address'   =>'العناوين',
     'Add_New_address'   =>'اضافة عنوان جديد',

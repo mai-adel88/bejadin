@@ -29,12 +29,7 @@ use Up;
 
 class EmployeesDataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @param MainCompanyDataTable $dataTable
-     * @return Response
-     */
+
     public function index(EmployeesDataDataTable $dataTable)
     {
         return $dataTable->render('hr.employee_data.index');
@@ -97,7 +92,6 @@ class EmployeesDataController extends Controller
      */
     public function store(Request $request)
     {
-    // dd($request->all());
         $data = $this->validate($request, [
             'Cmp_No'    => 'required', // رقم الشركة
             'SubCmp_No' =>'sometimes', // القسم
@@ -464,7 +458,6 @@ class EmployeesDataController extends Controller
      */
     public function update(Request $request, $ID_NO)
     {
-// dd($request->all());
         $update_emp = HrEmpmfs::findOrFail($ID_NO);
         $update_empCnt = HREmpCnt::where('ID_No', $ID_NO)->find($ID_NO);
         $update_empadr = HREmpadr::where('ID_No', $ID_NO)->find($ID_NO);
@@ -730,7 +723,6 @@ class EmployeesDataController extends Controller
 
 
 
-// dd($data);
         if($request->Emp_NmAr1 Or $request->Emp_NmAr2 Or $request->Emp_NmAr3 Or $request->Emp_NmAr4){
             $data['Emp_NmAr'] = $request->Emp_NmAr1 .' '. $request->Emp_NmAr2 .' '. $request->Emp_NmAr3 .' '. $request->Emp_NmAr4;
         }

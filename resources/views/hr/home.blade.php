@@ -256,7 +256,7 @@
             <!-- المرافقين -->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <a href="{{url('hr/emp_dependents/create')}}">
+                    <a href="{{route('dependents.index')}}">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
                         <div class="info-box-content">
                             <h5>{{trans('hr.escorts')}}</h5>
