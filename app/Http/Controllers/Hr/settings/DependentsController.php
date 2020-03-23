@@ -62,7 +62,7 @@ class DependentsController extends Controller
         }
         else{
             //if there is no image to upload -> it will be here an img by default
-            $validated['Photo'] = 'public/hr/files/dependents/defImg.jpg';
+            $validated['Photo'] = 'public/hr/defImg.jpg';
         }
         HREmpDependents::create($validated);
 
