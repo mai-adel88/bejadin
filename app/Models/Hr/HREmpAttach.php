@@ -19,7 +19,7 @@ class HREmpAttach extends Model
         'Photo', // صورة المرفق 
     ];
 
-    public function basic_information()
+    public function employee()
     {
         return $this->belongsTo(HrEmpmfs::class, 'Emp_No', 'Emp_No');
     }
