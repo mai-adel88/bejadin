@@ -62,6 +62,7 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
             //المرافقين
             Route::resource('dependents', 'DependentsController');
             Route::get('getemployees', 'DependentsController@getEmployees')->name('getEmployees');
+            Route::get('passportNo', 'DependentsController@passportNo')->name('passportNo');
 
 
         });

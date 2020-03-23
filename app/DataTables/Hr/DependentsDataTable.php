@@ -17,7 +17,7 @@ class DependentsDataTable extends DataTable
             ->addColumn('show', function($query){
                 return '<a href="'.route('dependents.show', $query->ID_No).'" class="btn btn-info"><i class="fa fa-info"></i></a>';
             })
-            ->addColumn('delete', 'hr.settings.emp_dependents.btn.delete')
+            ->addColumn('delete', 'hr.settings.dependents.btn.delete')
             ->rawColumns([
                 'edit','delete','show'
             ]);
@@ -36,7 +36,7 @@ class DependentsDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-//                    ->addAction(['width' => '80px'])
+                //    ->addAction(['width' => '80px'])
             ->parameters([
                 'dom' => 'Blfrtip',
                 'lengthMenu' => [
@@ -77,7 +77,8 @@ class DependentsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ['name'=>'Host_Nm','data'=>'Host_Nm','title'=>trans('hr.Host_Nm')],
+            ['name'=>'Host_No','data'=>'Host_No','title'=>trans('hr.escorts_no')],
+            ['name'=>'Host_NmAr','data'=>'Host_NmAr','title'=>trans('hr.Host_Nm')],
             ['name'=>'edit','data'=>'edit','title'=>trans('hr.edit')],
             ['name'=>'show','data'=>'show','title'=>trans('hr.show')],
             ['name'=>'delete','data'=>'delete','title'=>trans('hr.delete')],

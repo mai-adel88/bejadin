@@ -606,7 +606,7 @@
                                     </div>
                                 </div> <!-- end of first col-md-4-->
                                 <div class="col-md-5">
-                                    <!-- Depm_No الادارة HrAstDeprtmnt --> 
+                                    <!-- Depm_No الادارة HrAstDeprtmnt -->
                                     <div class="col-md-12 form-group">
                                         <label class="col-md-4">{{trans('hr.Depm_No')}}</label>
                                         <div class="col-md-8">
@@ -687,7 +687,7 @@
 
                     </div>
                         <div id="preview" class="col-md-2">
-                        <img name="Photo[]" src="" class="Photo img-responsive" alt="">
+                        <img name="Photo[]" src="" class="Photo img-responsive">
                         </div>
                         <div class="col-md-2 mt-15">
                             <input type="file" name="Photo[]" id="Photo" class="Photo">

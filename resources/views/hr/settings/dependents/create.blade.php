@@ -68,21 +68,34 @@
 
          });
          ////// رقم الموظف ////
-         $(document).on('change', '#Emp_No', function(){
-                var Emp_No = $(this).val();
-                console.log(Emp_No);
-                $('.emp_no').val(Emp_No);
+        $(document).on('change', '#Emp_No', function(){
+            var Emp_No = $(this).val();
+            $('.emp_no').val(Emp_No);
+
+            ////// رقم جواز السفر للموظف //////
+            $.ajax({
+                url : "{{route('passportNo')}}",
+                type : 'get',
+                dataType:'json',
+                data: {"_token": "{{ csrf_token() }}", Emp_No: Emp_No },
+                success : function(data){
+                    $('.Pasprt_No').val(data)
+                }
             });
+        });
         </script>
         @endpush
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">{{trans('hr.add_escorts')}}</h3>
-                @include('hr.layouts.message')
-                {{ Form::open(['method'=>'post', 'route' => 'hrdepartments.store']) }}
-                {{Form::submit(trans('hr.save'), ['class'=>'btn btn-outline-success my-2 my-sm-0 pull-left','style'=>'background-color: #708e70;color:#fff;'])}}
             </div>
+
             <div class="box-body">
+            @include('hr.layouts.message')
+                {{ Form::open(['method'=>'post', 'route' => 'dependents.store','files'=>true]) }}
+                <div style="padding-bottom: 42px;">
+                    {{Form::submit(trans('hr.save'), ['class'=>'btn btn-outline-success pull-left','style'=>'background-color: #708e70;color:#fff;'])}}
+                </div>
 
                     <!-- First panel -->
                     <div class="panel panel-default">
@@ -119,7 +132,7 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.escorts_no')}}</label>
-                                            <input type="text" name="Host_No" class="input_text form-control col-md-6" readonly>
+                                            <input type="text" name="Host_No" value="{{$last}}" class="input_text form-control col-md-6" readonly>
                                         </div>
                                         <div class="col-md-9">
                                             <label class="col-md-1" style="padding:0px;">{{trans('hr.name_ar')}}</label>
@@ -146,46 +159,50 @@
                                     <div class="row" style="margin-top: 15px;">
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.relative_relation')}}</label>
-                                            <select class="col-md-7 input_text" name="Relation" id="Relation">
-                                                <option disabled selected>{{trans('admin.select')}}</option>
-                                            </select>
+                                            {{ Form::select('Relation',\App\Enums\RelationType::toSelectArray() ,null,
+                                            array_merge(['class' => 'col-md-7 input_text','placeholder'=>trans('admin.select')])) }}
+
                                         </div>
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.nationality')}}</label>
-                                            <select class="col-md-7 input_text" name="Cntry_No" id="">
+                                            <select class="col-md-7 input_text" name="Cntry_No">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{$country->id}}">{{$country->country_name_ar}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.birth_date')}}</label>
-                                            <input class="col-md-7 datepicker" name="Birth_dt" type="text" >
+                                            <input name="Birth_dt" class="col-md-7 datepicker input_text" type="text" >
                                         </div>
                                         <div class="col-md-3">
-                                            @foreach(\App\Enums\GenderType::toSelectArray() as $key => $value)
-                                            <input id="{{$value}}" class="checkbox-inline" type="radio"
-                                                    name="Gender" value="{{$key}}"
-                                                     @if($key == 1) checked @endif>
-                                            <label for="{{$value}}">{{$value}}</label>
-                                            @endforeach
+                                        @foreach(\App\Enums\GenderType::toSelectArray() as $key => $value)
+                                            <input class="checkbox-inline" type="radio"
+                                                name="Gender" value="{{$key}}"
+                                                style="" @if($key == 1) checked @endif>
+                                            <label>{{$value}}</label>
+                                        @endforeach
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 15px;">
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.religion')}}</label>
-                                            <select class="col-md-7 input_text" name="Reljan_No" id="">
-                                                <option disabled selected>{{trans('admin.select')}}</option>
-                                            </select>
+                                            {{ Form::select('Reljan_No',\App\Enums\Hr\HrReligion::toSelectArray() ,null,
+                                            array_merge(['class' => 'col-md-7 input_text','placeholder'=>trans('admin.select')])) }}
                                         </div>
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.Pasprt_Ty')}}</label>
-                                            <select class="col-md-7 input_text" name="Pasprt_Ty" id="">
-                                                <option disabled selected>{{trans('admin.select')}}</option>
-                                            </select>
+                                            {{ Form::select('Pasprt_Ty',\App\Enums\Hr\PassportType::toSelectArray() ,null,
+                                            array_merge(['id'=>'Pasprt_Ty', 'class' => 'col-md-7 input_text form-control Pasprt_Ty', 'style'=>'padding-bottom: 0px','placeholder'=>trans('admin.select')])) }}
                                         </div>
                                         <div class="col-md-3">
                                             <label class="col-md-5" style="padding:0px;">{{trans('hr.job')}}</label>
-                                            <select class="col-md-7 input_text" name="Job" id="">
+                                            <select class="col-md-7 input_text" name="Job">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
+                                                @foreach($jobs as $job)
+                                                    <option value="{{$job->Job_No}}" name="Job_No">{{$job->{'Job_Nm'.ucfirst(session('lang'))} }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -218,7 +235,7 @@
                                     <div class="row" style="margin-top: 15px;">
                                         <div class="col-md-9">
                                             <label class="col-md-2" style="padding:0px;">{{trans('hr.Trnsfer_OLdNm')}}</label>
-                                            <input class="col-md-7 input_text" type="text" name="">
+                                            <input class="col-md-7 input_text" type="text" name="Trnsfer_OLdNm">
                                         </div>
                                     </div>
 
@@ -229,56 +246,65 @@
                                                 <div class="col-md-4">
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.In_Job')}}</label>
-                                                        <select class="col-md-6 mb-5 input_text" name="">
+                                                        <select class="col-md-6 mb-5 input_text" name="In_Job">
                                                             <option disabled selected>{{trans('admin.select')}}</option>
+                                                            @foreach($job_gov as $gov)
+                                                                <option value="{{$gov->Job_No}}">{{$gov->Job_NmAr}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.In_VisaNo')}}</label>
-                                                        <input class="col-md-6 mb-5 input_text datepicker" type="text">
+                                                        <input class="col-md-6 mb-5 input_text" name="In_VisaNo" type="text">
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.In_VisaDt')}}</label>
-                                                        <input class="col-md-6 mb-5 input_text" type="text">
+                                                        <input class="col-md-6 mb-5 input_text datepicker" name="In_VisaDt" type="text">
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.In_Port')}}</label>
-                                                        <select class="col-md-6 mb-5 input_text" name="">
+                                                        <select class="col-md-6 mb-5 input_text" name="In_Port">
                                                             <option disabled selected>{{trans('admin.select')}}</option>
+                                                            @foreach($ports as $port)
+                                                                <option value="{{$port->Ports_No}}">{{$port->{'Ports_Nm'.ucfirst(session('lang'))} }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.in_no')}}</label>
-                                                        <input class="col-md-6 mb-5 input_text" type="text">
+                                                        <input class="col-md-6 mb-5 input_text" name="In_EntrNo" type="text">
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.in_date')}}</label>
-                                                        <input class="col-md-6 input_text datepicker" type="text">
+                                                        <input class="col-md-6 input_text datepicker" name="In_Date" type="text">
                                                     </div>
                                                 </div>
                                                 <!-- تاشيرة المغادره -->
                                                 <div class="col-md-4">
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.Out_VisaNo')}}</label>
-                                                        <input class="col-md-6 input_text mb-5" type="text">
+                                                        <input class="col-md-6 input_text mb-5" name="Out_VisaNo" type="text">
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.Out_VisaDt')}}</label>
-                                                        <input class="col-md-6 input_text mb-5 datepicker" type="text">
+                                                        <input class="col-md-6 input_text mb-5 datepicker" name="Out_VisaDt" type="text">
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.Out_Date')}}</label>
-                                                        <input class="col-md-6 input_text mb-5 datepicker" type="text">
+                                                        <input class="col-md-6 input_text mb-5 datepicker" name="Out_Date" type="text">
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.Out_Port')}}</label>
-                                                        <select class="col-md-6 input_text mb-5" name="">
+                                                        <select class="col-md-6 input_text mb-5" name="Out_Port">
                                                             <option disabled selected>{{trans('admin.select')}}</option>
+                                                            @foreach($ports as $port)
+                                                                <option value="{{$port->Ports_No}}">{{$port->{'Ports_Nm'.ucfirst(session('lang'))} }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="col-md-6" style="padding:0px;">{{trans('hr.bail_transfer_date')}}</label>
-                                                        <input class="col-md-6 input_text datepicker" type="text">
+                                                        <input class="col-md-6 input_text datepicker" name="Trnsfer_Dt" type="text">
                                                     </div>
                                                 </div>
                                                 <!-- image -->

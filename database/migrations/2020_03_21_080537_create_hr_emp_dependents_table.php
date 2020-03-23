@@ -24,12 +24,12 @@ class CreateHrEmpDependentsTable extends Migration {
             $table->string('Host_NmAr')->nullable();
             $table->string('Host_NmEn')->nullable();
             $table->smallInteger('Cntry_No')->nullable();
-            $table->smallInteger('Pasprt_Ty')->nullable();
-            $table->string('Relation')->nullable();
+            $table->enum('Gender', [0,1])->default(1)->nullable();
+            $table->enum('Pasprt_Ty',[1,2,3,4,5])->nullable();
+            $table->enum('Relation',[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])->nullable();
             $table->date('Birth_dt')->nullable();
-            $table->smallInteger('Reljan_No')->nullable();
+            $table->enum('Reljan_No', [1,2,3,4])->nullable();
             $table->string('Job')->nullable();
-            $table->smallInteger('Ownr_No')->nullable();
             $table->string('Passprt_No')->nullable();
             $table->date('Passprt_Sdt')->nullable();
             $table->date('Passprt_Edt')->nullable();

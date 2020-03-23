@@ -1,6 +1,4 @@
 <?php
-
-
 use App\Models\Admin\GLjrnTrs;
 use App\Models\Admin\MtsCostcntr;
 use Illuminate\Database\Eloquent\Collection;

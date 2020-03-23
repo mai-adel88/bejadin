@@ -419,7 +419,7 @@ class EmployeesDataController extends Controller
         $departments = DepmCmp::get();      // الاقسام
         $jobs = Pyjobs::get();              // الوظائف
         $ports = HrAstPorts::get();        // منافذ الدخول والمغادره
-        $administrations = LocClass::get(); // الادارة
+        // $administrations = LocClass::get(); // الادارة
         $countries = country::get();        //الدول
         $cities = city::get();              //المدينه
 
@@ -446,7 +446,7 @@ class EmployeesDataController extends Controller
         $job_techs = Pyjobs::where('job_tech', 1)->get();               // التخصص المهنى
 
         return view('hr.employee_data.edit',
-        compact('Loc_No','Depm_No','ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments','administrations', 'banks','countries','cities','job_cmp','job_gov'));
+        compact('Loc_No','Depm_No','ports','civilcelicences','residencelicences','drivelicences','job_techs','licences','emp_data','companies','jobs','departments', 'banks','countries','cities','job_cmp','job_gov'));
     }
 
     /**
