@@ -11,6 +11,12 @@ class DependentsDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
+            ->addColumn('Photo', function ($query) {
+                $url= asset('/'.$query->Photo);
+                if ($query->Photo != null) {
+                    return '<img src="' . $url . '" border="0" height="100" align="center" />';
+                }
+            })
             ->addColumn('edit', function($query){
                 return '<a  href="dependents/'.$query->ID_No.'/edit" class="btn btn-success edit"><i class="fa fa-edit"></i></a>';
             })
@@ -19,7 +25,7 @@ class DependentsDataTable extends DataTable
             })
             ->addColumn('delete', 'hr.settings.dependents.btn.delete')
             ->rawColumns([
-                'edit','delete','show'
+                'Photo','edit','delete','show'
             ]);
     }
 
@@ -79,6 +85,7 @@ class DependentsDataTable extends DataTable
         return [
             ['name'=>'Host_No','data'=>'Host_No','title'=>trans('hr.escorts_no')],
             ['name'=>'Host_NmAr','data'=>'Host_NmAr','title'=>trans('hr.Host_Nm')],
+            ['name'=>'Photo','data'=>'Photo','title'=>trans('hr.escorts_img')],
             ['name'=>'edit','data'=>'edit','title'=>trans('hr.edit')],
             ['name'=>'show','data'=>'show','title'=>trans('hr.show')],
             ['name'=>'delete','data'=>'delete','title'=>trans('hr.delete')],

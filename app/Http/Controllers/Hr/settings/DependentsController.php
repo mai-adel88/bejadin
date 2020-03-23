@@ -157,10 +157,10 @@ class DependentsController extends Controller
         $dependent->delete();
         return  redirect()->route('dependents.index')->with(session()->flash('message', trans('hr.delete_success')));
     }
-    
+
     // ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 
-    public function getEmployees(Request $request)
+    public function getEmployeess(Request $request)
     {
         $employees = HrEmpmfs::where('Cmp_No', $request->Cmp_No)->get();   // الموظفين
         return view('hr.settings.dependents.get_employees', compact('employees'));

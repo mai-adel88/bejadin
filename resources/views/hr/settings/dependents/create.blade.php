@@ -55,7 +55,7 @@
             $('.Cmp_No').change(function(){
                 var Cmp_No = $(this).val();
                 $.ajax({
-                    url : "{{route('getEmployees')}}",
+                    url : "{{route('getEmployeess')}}",
                     type : 'get',
                     dataType:'html',
                     data: {"_token": "{{ csrf_token() }}", Cmp_No: Cmp_No},
