@@ -61,8 +61,9 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
             Route::get('get-employee-data', 'AddressController@getEmployeeData')->name('get-employee-data');
 
             //المرافقين
-            Route::view('emp_dependents/create', 'hr.settings.emp_dependents.create');
-            // Route::resource('emp_dependents', 'EmpDependentsController');
+            Route::resource('dependents', 'DependentsController');
+            Route::get('getemployeess', 'DependentsController@getEmployeess')->name('getEmployeess');
+            Route::get('passportNo', 'DependentsController@passportNo')->name('passportNo');
 
 
         });
@@ -76,7 +77,10 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
            Route::get('hrhijri', 'EmployeesDataController@convertToDateToHijri')->name('hrhijri');
            Route::resource('pyjobs', 'PyjobsController');
            Route::view('/emp_data', 'hr.pages.emp_data_page')->name('emp_data');
-
+            // attachments المرفقات
+            Route::resource('attachments', 'AttachmentsController');
+            Route::get('getemployees', 'AttachmentsController@getemployees')->name('getemployees');
+            Route::get('getemployeeType', 'AttachmentsController@getemployeeType')->name('getemployeeType');
        });
 
 

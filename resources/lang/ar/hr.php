@@ -563,16 +563,38 @@ return [
     //المرافقين
     'escorts'       =>'المرافقين',
     'add_escorts'   =>'اضافة مرافق',
+    'edit_escorts'  =>'تعديل بيانات المرافق',
+    'show_escorts'  =>'عرض بيانات المرافق',
     'escorts_no'    =>'رقم المرافق',
+    'escorts_img'   =>'صورة المرافق',
     'emp_no'        =>'رقم الموظف',
     'job'           =>'المهنه',
     'in_no'         =>'رقم الدخوليه',
     'in_date'       =>'تاريخ الدخوليه',
+    'Host_Nm'       =>'اسم المرافق',
+    'Passprt_No'    =>'رقم جواز السفر',
     'relative_relation' =>'صلة القرابه',
     'bail_transfer_date'=>'تاريخ نقل الكفاله',
+    'add_new_escorts'   =>'اضافة مرافق جديد',
+
     //    العناوين
     'address'   =>'العناوين',
     'Add_New_address'   =>'اضافة عنوان جديد',
     'emp' =>'الموظفين',
+    // attachments
+    'attachments'   =>'المرفقات',
+    'desc'   =>'الوصف',
+    'employee'   =>'الموظف',
+    'attach_type'   =>'نوع المرفق',
+    'add_new_attachment'   =>'اضافة مرفق جديد',
+    'photo'   =>'الصورة',
+    'photo'   =>'الصورة',
+    'Attch_Desc'   =>'وصف المرفق',
+    'edit_attachment'   =>'تعديل المرفق',
+    'show_attachment'   =>'عرض المرفق',
+    'employee_name'   =>'اسم الموظف',
+    'employees'   =>'الموظفين',
+    'fill_required_data'   =>'يجب ادخال الحقول التى قبلها *',
+    'emp_type'   =>'تصنيف العمالة',
     ];
 

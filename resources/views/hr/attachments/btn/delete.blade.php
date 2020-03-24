@@ -21,7 +21,7 @@
     });
 </script>
 
-<a class="btn btn-danger waves-effect waves-light remove-record" data-toggle="modal" data-url="{{ \Illuminate\Support\Facades\URL::route('hrdepartments.destroy', $ID_No) }}" data-id="{{$ID_No}}" data-target="#custom-width-modal"><i class="fa fa-trash"></i></a>
+<a class="btn btn-danger waves-effect waves-light remove-record" data-toggle="modal" data-url="{{ \Illuminate\Support\Facades\URL::route('attachments.destroy', $ID_NO) }}" data-id="{{$ID_NO}}" data-target="#custom-width-modal"><i class="fa fa-trash"></i></a>
 
 <form action="" method="POST" class="remove-record-model">
     <div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect remove-data-from-delete-form" data-dismiss="modal">{{trans('admin.close')}}</button>
-                    <button type="submit" class="btn btn-danger waves-effect waves-light">{{trans('admin.delete')}}</button>
+                    <button type="submit" class="btn btn-danger waves-effect waves-light">{{trans('hr.delete')}}</button>
                 </div>
             </div>
         </div>
