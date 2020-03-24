@@ -25,7 +25,7 @@ class CreateHREmpadrsTable extends Migration
 			$table->string('Phon_nerst')->nullable();
 			$table->string('Adrs_Nerst')->nullable();
 			$table->string('Notes')->nullable();
-			$table->string('Emp_City')->nullable();
+			$table->integer('Emp_City')->nullable();
 			$table->string('Emp_Street')->nullable();
 			$table->integer('Stat_No')->nullable();
 			$table->string('Emp_Phon')->nullable();
@@ -49,6 +49,10 @@ class CreateHREmpadrsTable extends Migration
 			$table->string('ParkEn_Dt')->nullable();
 			$table->string('ParkBuld_Nm')->nullable();
 			$table->string('Park_Florno')->nullable();
+
+            $table->foreign('Emp_City')->references('id')->on('cities')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
         });
     }
 

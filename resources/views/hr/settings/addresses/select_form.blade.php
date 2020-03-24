@@ -13,11 +13,11 @@
                     </select>
                 </div>
             </div>
-            <!-- القسم -->
+            <!-- الموظفين -->
             <div class="col-md-5 ">
                 <label class="col-md-3 ">{{trans('hr.emp')}}</label>
                 <div class="col-md-9 p-0">
-                    <select name="SubCmp_No" class="select2 SubCmp_No form-control">
+                    <select name="SubCmp_No" class="select2 Emp_No form-control">
                         <option>{{trans('admin.select')}}</option>
                     </select>
                 </div>
