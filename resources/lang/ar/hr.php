@@ -576,6 +576,8 @@ return [
     'relative_relation' =>'صلة القرابه',
     'bail_transfer_date'=>'تاريخ نقل الكفاله',
     'add_new_escorts'   =>'اضافة مرافق جديد',
+    //الاجازات
+    'hlds'          =>'الاجازات',
 
     //    العناوين
     'address'   =>'العناوين',
