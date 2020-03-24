@@ -1,5 +1,7 @@
 @extends('hr.index')
 
+{{--@inject('employee','App\Models\Hr\HREmpadr')--}}
+
 @section('root_name', trans('hr.title'))
 @section('content')
     @push('css')
@@ -10,18 +12,34 @@
     @endpush
     @push('js')
         <script>
+            $(document).ready(function () {
 
-            // employees for company
-            $(".Cmp_No").change(function () {
-                $.ajax({
-                    url : "{{route('get-employee')}}",
-                    type : 'get',
-                    dataType:'html',
-                    data: {"_token": "{{ csrf_token() }}", Cmp_No: $(this).val() },
-                    success : function(data){
-                        // alert('ss');
-                        $('.SubCmp_No').html(data)
-                    }
+                // get employees for company
+                $(".Cmp_No").change(function () {
+                    $.ajax({
+                        url: "{{route('get-employees')}}",
+                        type: 'get',
+                        dataType: 'html',
+                        data: {"_token": "{{ csrf_token() }}", Cmp_No: $(this).val()}, //why csrf_token?????
+                        success: function (data) {
+                            // alert('ss');
+                            $('.Emp_No').html(data)
+                        }
+                    });
+                });
+
+                //get employee data if he exists
+                $(".Emp_No").change(function () {
+                    $.ajax({
+                        url: "{{route('get-employee-data')}}",
+                        type: 'get',
+                        dataType: 'html',
+                        data: {"_token": "{{ csrf_token() }}", Emp_No: $(this).val()},
+                        success: function (data) {
+               //             alert('ss');
+                            $('.employee-data').html(data)
+                        }
+                    });
                 });
             });
         </script>

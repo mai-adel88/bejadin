@@ -57,7 +57,8 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
             // العناوين
             Route::resource('address', 'AddressController');
 
-            Route::get('get-employee', 'AddressController@getEmployee')->name('get-employee');
+            Route::get('get-employees', 'AddressController@getEmployee')->name('get-employees');
+            Route::get('get-employee-data', 'AddressController@getEmployeeData')->name('get-employee-data');
 
             //المرافقين
             Route::view('emp_dependents/create', 'hr.settings.emp_dependents.create');

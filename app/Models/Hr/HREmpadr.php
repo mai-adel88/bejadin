@@ -44,4 +44,8 @@ class HREmpadr extends Model
         'ParkBuld_Nm',
         'Park_Florno',
     ];
+    public function city()
+    {
+        return $this->belongsTo('App\city','Emp_City','id');
+    }
 }
