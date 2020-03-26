@@ -66,8 +66,8 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
             Route::get('passportNo', 'DependentsController@passportNo')->name('passportNo');
 
             //الاجازات
-            // Route::resource('empHlds', 'EmphldController');
-            Route::view('empHlds/create', 'hr.settings.emp_hld.create');
+            Route::resource('emphlds', 'EmphldController');
+            Route::get('getdepartmenthlds', 'EmphldController@getdepartmenthlds')->name('getdepartmenthlds');
 
 
 

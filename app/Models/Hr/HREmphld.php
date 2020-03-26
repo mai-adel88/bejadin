@@ -11,4 +11,8 @@ class HREmphld extends Model
     public $timestamps = true;
     protected $guarded = ['ID_No'];
 
+    public function employee()
+    {
+        return $this->belongsTo(HrEmpmfs::class, 'Emp_No', 'Emp_No');
+    }
 }

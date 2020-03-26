@@ -11,6 +11,7 @@ class CreateHrEmphldTable extends Migration {
 			$table->increments('ID_No');
 			$table->integer('Cmp_No')->nullable();
 			$table->integer('Emp_No')->nullable();
+			$table->integer('SubCmp_No')->nullable();
 			$table->float('Blnc_UnPaid')->nullable();
 			$table->float('Blnc_Paid')->nullable();
 			$table->smallInteger('Hld_Ern')->nullable();
@@ -22,6 +23,8 @@ class CreateHrEmphldTable extends Migration {
 			$table->date('Start_Lasthld')->nullable();
 			$table->date('Last_Ret_Dt')->nullable();
 			$table->smallInteger('Unpad_Nxtyer')->nullable();
+			$table->smallInteger('Pat_First')->nullable();
+			$table->smallInteger('Pat_Hld')->nullable();
 			$table->smallInteger('Inc_Typ')->nullable();
 			$table->smallInteger('Inc_Yer')->nullable();
 			$table->smallInteger('Inc_days')->nullable();
