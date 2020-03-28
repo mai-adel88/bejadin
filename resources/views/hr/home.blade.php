@@ -268,7 +268,7 @@
             <!-- الاجازات -->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <a href="{{URL('hr/empHlds/create')}}">
+                    <a href="{{route('emphlds.index')}}">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
                         <div class="info-box-content">
                             <h5>{{trans('hr.hlds')}}</h5>

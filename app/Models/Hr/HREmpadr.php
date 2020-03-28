@@ -48,4 +48,21 @@ class HREmpadr extends Model
     {
         return $this->belongsTo('App\city','Emp_City','id');
     }
+    public function state()
+    {
+        return $this->belongsTo('App\city','Stat_No','id');
+    }
+    public function country()
+    {
+        return $this->belongsTo('App\country','Cntry_No','id');
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(HrEmpmfs::class, 'Emp_No', 'Emp_No');
+    }
+    public function company()
+    {
+        return $this->belongsTo(HRMainCmpnam::class, 'Cmp_No', 'Cmp_No');
+    }
 }

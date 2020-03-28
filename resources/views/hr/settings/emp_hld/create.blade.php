@@ -83,6 +83,16 @@
                     $('.SubCmp_No').val(data)
                 }
             });
+            /////// الراتب /////
+            $.ajax({
+                url : "{{route('getSalaryhlds')}}",
+                type : 'get',
+                dataType:'json',
+                data: {"_token": "{{ csrf_token() }}", Emp_No: Emp_No },
+                success : function(data){
+                    $('#salary').val(data)
+                }
+            });
         });
         </script>
         @endpush
@@ -119,21 +129,22 @@
                                     </div>
                                     <div class="col-md-8">
                                         <label class="col-md-2" style="padding:0px;">{{trans('admin.dep')}}</label>
-                                        <input type="text" name="SubCmp_No" class="SubCmp_No col-md-10 input_text form-control">
+                                        <input type="text" readonly name="SubCmp_No" value="" class="SubCmp_No col-md-10 input_text form-control">
                                     </div>
                                 </div>
+
                                 <div class="col-md-4">
                                     <div class="col-md-12">
                                         <label class="col-md-3">{{trans('hr.it_date')}}</label>
-                                        <input type="text" class="col-md-7 input_text form-control datepicker">
+                                        <input type="text" readonly class="col-md-7 input_text form-control datepicker">
                                     </div>
                                     <div class="col-md-12">
                                         <label class="col-md-3">{{trans('hr.salary')}}</label>
-                                        <input type="text" class="col-md-7 input_text form-control">
+                                        <input type="text" readonly id="salary" class="col-md-7 input_text form-control">
                                     </div>
                                     <div class="col-md-12">
                                         <label class="col-md-3">{{trans('hr.jobb')}}</label>
-                                        <input type="text" class="col-md-7 input_text form-control">
+                                        <input type="text" readonly class="col-md-7 input_text form-control">
                                     </div>
                                 </div>
                             </div>

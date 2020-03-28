@@ -38,9 +38,8 @@ class country extends Model
         return $this->hasMany('App\Admin\Projectmfs','Country_No', 'id');
     }
 
-    // public function employees()
-    // {
-    //     return $this->hasMany(HrEmpmfs::class, 'Cntry_No','id');
-    // }
+    public function address(){
+        return $this->hasMany('App\Models\Hr\HREmpadr','Stat_No','id');
+    }
 
 }

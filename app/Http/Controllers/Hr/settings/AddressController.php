@@ -25,9 +25,7 @@ class AddressController extends Controller
         return $dataTable->render('hr.settings.addresses.index');
     }
     public function create(){
-
         // this function to call the blade of create new address
-
 //        $cities=city::pluck('city_name_'.session('lang'), 'id')->toArray();
         $cities=city::all();
         $countries=country::all();
@@ -36,75 +34,145 @@ class AddressController extends Controller
         return view('hr.settings.addresses.create', compact('cities','countries','companies','employees'));
     }
 
-    public function getEmployee(Request $request)
-    {
-        // this function is to get list of all employee in particular company after call ajax
-
-        if($request->ajax()){
-            $employees = HrEmpmfs::where('Cmp_No',  $request->Cmp_No)->get();
-            return view('hr.settings.addresses.getEmployees', compact('employees'));
-        }
-    }
-    public function getEmployeeData(Request $request)
-    {
-
-        // this function to get employee data if he already exists in database after call ajax
-
-        if($request->ajax()){
-//            $employee = HREmpadr::where('Emp_No',  $request->Emp_No)->get()->load('city');
-            $employee = HREmpadr::where('Emp_No',  $request->Emp_No)->get();
-
-
-
-            dd($employee);
-
-
-
-
-            $cities=city::all();
-            $countries=country::all();
-            $companies=HRMainCmpnam::all();
-            $employees=HrEmpmfs::all();
-            return view('hr.settings.addresses.getEmployeeData', compact('employee','cities','countries',
-                                                                    'companies','employees'));
-        }
-    }
     public function store(Request $request)
     {
         // validate input
 
-        $rules=[
-//            داخل المملكة
-            'Emp_City'=>'exists:cities,id',
-            'Stat_No'=>'',
-            'Emp_Phon'=>'digits_between:7,20',
-            'Emp_Mobile'=>'digits_between:7,20',
-            'Emp_Street'=>'',
-            'RefPerson_Nm'=>'',
-            'RefPerson_Mobile'=>'digits_between:7,20',
-            'E_Email'=>'email',
-//            خارج المملكة
-            'Cntry_No'=>'exists:countries,id',
-            'Phon_Cntry'=>'',
-            'Emp_Adrs'=>'',
-            'Name_Nerst'=>'',
-            'Phon_nerst'=>'',
-            'Adrs_Nerst'=>'',
-            'Notes'=>'',
-        ];
-        $this->validate($request,$rules);
+        // $data=$this->validate($request,[
+        //     'Cmp_No'        => 'required',
+        //     'Emp_No'        => 'required',
+        //     //  داخل المملكة
+        //     'Emp_City'=>'required|exists:cities,id',
+        //     'Stat_No'=>'sometimes',
+        //     'Emp_Phon'=>'digits_between:7,20',
+        //     'Emp_Mobile'=>'digits_between:7,20',
+        //     'Emp_Street'=>'sometimes',
+        //     'RefPerson_Nm'=>'sometimes',
+        //     'RefPerson_Mobile'=>'digits_between:7,20',
+        //     'E_Email'=>'email',
+        //     // خارج المملكة
+        //     'Cntry_No'=>'exists:countries,id',
+        //     'Phon_Cntry'=>'sometimes',
+        //     'Emp_Adrs'=>'sometimes',
+        //     'Name_Nerst'=>'sometimes',
+        //     'Phon_nerst'=>'sometimes',
+        //     'Adrs_Nerst'=>'sometimes',
+        //     'Notes'=>'sometimes',
+        // ],[],[
 
-//        $client->update($request->all());
+        // ]);
+        $data=$this->validate($request,[
+            'Cmp_No'        => 'required',
+            'Emp_No'        => 'required',
+            //  داخل المملكة
+            'Emp_City'=>'required',
+            'Stat_No'=>'sometimes',
+            'Emp_Phon'=>'sometimes',
+            'Emp_Mobile'=>'sometimes',
+            'Emp_Street'=>'sometimes',
+            'RefPerson_Nm'=>'sometimes',
+            'RefPerson_Mobile'=>'sometimes',
+            'E_Email'=>'sometimes',
+            // خارج المملكة
+            'Cntry_No'=>'sometimes',
+            'Phon_Cntry'=>'sometimes',
+            'Emp_Adrs'=>'sometimes',
+            'Name_Nerst'=>'sometimes',
+            'Phon_nerst'=>'sometimes',
+            'Adrs_Nerst'=>'sometimes',
+            'Notes'=>'sometimes',
+        ],[],[
+            'Cmp_No' => trans('admin.Cmp_No'),
+            'Emp_No' => trans('admin.Emp_No'),
+            'Emp_City' => trans('hr.Emp_City'),
+        ]);
+        $emp_data = HREmpadr::where('Emp_No', $request->Emp_No)->first();
+        
+        if($emp_data == null){
+            HREmpadr::create($data);
+            return redirect()->route('address.index')->with(session()->flash('message',trans('hr.add_success')));
+        }else{
+            $emp_data->update($data);
+            return redirect()->route('address.index')->with(session()->flash('message',trans('hr.update_success')));
+        }   
+    }
 
+    public function show($ID_No)
+    {
+        $emp_data = HREmpadr::findOrFail($ID_No);
+        $employees = HrEmpmfs::get();
+        $companies=HRMainCmpnam::all();
+        $cities=city::all();
+        $countries=country::all();
+        return view('hr.settings.addresses.show', compact(['companies','employees','emp_data','cities','countries']));
+    }
+    public function edit($ID_No)
+    {
+        $emp_data = HREmpadr::findOrFail($ID_No);
+        $employees = HrEmpmfs::get();
+        $companies=HRMainCmpnam::all();
+        $cities=city::all();
+        $countries=country::all();
+        return view('hr.settings.addresses.edit', compact(['companies','employees','emp_data','cities','countries']));
+    }
 
-        // create new company
+    public function update(Request $request, $ID_No){
+        $data = $this->validate($request,[
+            'Cmp_No'        => 'required',
+            'Emp_No'        => 'required',
+            //  داخل المملكة
+            'Emp_City'=>'required',
+            'Stat_No'=>'sometimes',
+            'Emp_Phon'=>'sometimes',
+            'Emp_Mobile'=>'sometimes',
+            'Emp_Street'=>'sometimes',
+            'RefPerson_Nm'=>'sometimes',
+            'RefPerson_Mobile'=>'sometimes',
+            'E_Email'=>'sometimes',
+            // خارج المملكة
+            'Cntry_No'=>'sometimes',
+            'Phon_Cntry'=>'sometimes',
+            'Emp_Adrs'=>'sometimes',
+            'Name_Nerst'=>'sometimes',
+            'Phon_nerst'=>'sometimes',
+            'Adrs_Nerst'=>'sometimes',
+            'Notes'=>'sometimes',
+        ],[],[
+            'Cmp_No' => trans('admin.Cmp_No'),
+            'Emp_No' => trans('admin.Emp_No'),
+            'Emp_City' => trans('hr.Emp_City'),
+        ]);
+        // get the id of a given record 
+        $emp_data = HREmpadr::findOrFail($ID_No);
+        // if select another employee [if change the employee]
+        if($emp_data->Emp_No != $request->Emp_No){
+            $emp_data = HREmpadr::where('Emp_No', $request->Emp_No)->first();
+            $emp_data->update($data);
+            return redirect()->route('address.index')->with(session()->flash('message',trans('hr.update_success')));
+        }else{
+            $emp_data->update($data);
+            return redirect()->route('address.index')->with(session()->flash('message',trans('hr.update_success')));
+        }
+    }
 
-        $address=HREmpadr::create($request->all());
-        $address->save();
+    public function destroy($ID_No){
+        $emp_data = HREmpadr::findOrFail($ID_No);
+        $emp_data->delete();
+        return redirect()->route('address.index')->with(session()->flash('message',trans('he.delete_success')));
+    }
 
-//        flash()->success('success');
-
-        return redirect(route('address.index'));
+    // ajax to get employee address data 
+    public function getemployeeaddressData(Request $request){
+        if($request->ajax()){
+            $emp_data = HREmpadr::where('Emp_No', $request->Emp_No)->first();
+            $countries = country::get();        //الدول
+            $cities = city::get(); 
+            if($emp_data != null){
+                return view('hr.settings.addresses.get_employee_data', compact(['emp_data','countries','cities']));
+            }else{
+                return view('hr.settings.addresses.default_add_form', compact(['emp_data','countries','cities']));
+            }
+        }
     }
 
 

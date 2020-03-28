@@ -29,4 +29,8 @@ class city extends Model
     public function country(){
         return $this->hasOne('App\country','id','country_id');
     }
+
+    public function address(){
+        return $this->hasMany('App\Models\Hr\HREmpadr','Stat_No','id');
+    }
 }

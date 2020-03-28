@@ -1,10 +1,7 @@
 @extends('hr.index')
-
-@section('title', trans('hr.Add_New_address'))
+@section('title', trans('hr.edit_address'))
 @section('root_link', route('address.index'))
 @section('root_name', trans('hr.address'))
-
-
 
 @section('content')
         @push('css')
@@ -55,7 +52,6 @@
                         success : function(data){
                             // alert();
                             $('.Emp_No').html(data);
-                            $('.empAddressData').children('input').val('');
                         }
                     });
                 });
@@ -70,7 +66,6 @@
                         success : function(data){
                             // alert();
                             $('.empAddressData').html(data);
-                            $('.empAddressData').children('input').val('');
                         }
                     });
                 });
@@ -87,8 +82,7 @@
             </div>
             <div class="box-body">
                 @include('hr.layouts.message')
-                {!! Form::open(['method'=>'POST','route' => 'address.store','files'=> true]) !!}
-
+                {!! Form::model($emp_data,['method'=>'PUT','route'=>['address.update',$emp_data->ID_No]]) !!}
                 <div class="col-md-12 card text-white bg-info mb-3" style="margin-bottom: 15px;">
                     <div class="card-header">
                         {{Form::submit(trans('admin.create'),['class'=>'btn mt-15', 'style'=>'background-color: #538a9e;color:#fff;float:left;'])}}
@@ -104,7 +98,7 @@
                                             <select name="Cmp_No" class="select2 Cmp_No form-control">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
                                                 @foreach($companies as $mainCompany)
-                                                    <option value="{{$mainCompany->Cmp_No}}">{{$mainCompany->{'Cmp_Nm'.ucfirst(session('lang'))} }}</option>
+                                                    <option {{$emp_data->Cmp_No == $mainCompany->Cmp_No ? 'selected' : ''}} value="{{$mainCompany->Cmp_No}}">{{$mainCompany->{'Cmp_Nm'.ucfirst(session('lang'))} }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -117,6 +111,9 @@
                                         <div class="col-md-9 p-0">
                                             <select name="Emp_No" class="Emp_No select2 form-control">
                                                 <option disabled selected>{{trans('admin.select')}}</option>
+                                                @foreach($employees as $employee)
+                                                <option {{$emp_data->Emp_No == $employee->Emp_No ? 'selected' : ''}} value="{{$employee->Emp_No}}">{{$employee->{'Emp_Nm'.ucfirst(session('lang'))} }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -127,7 +124,7 @@
                 </div>
                 
                 <!-- second row -->
-                @include('hr.settings.addresses.default_add_form')
+                @include('hr.settings.addresses.get_employee_data')
                 <!-- end of second row -->
 
                 {!! Form::close() !!}

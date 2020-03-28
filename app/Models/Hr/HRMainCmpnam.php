@@ -94,4 +94,15 @@ class HRMainCmpnam extends Model
     {
         return $this->hasMany(DepmCmp::class, 'Cmp_No', 'Cmp_No');
     }
+
+    // address
+    public function empAdr()
+    {
+        return $this->hasMany(HREmpadr::class, 'Cmp_No', 'Cmp_No');
+    }
+    // attaches
+    public function attaches()
+    {
+        return $this->hasMany(HREmpAttach::class, 'Cmp_No', 'Cmp_No');
+    }
 }

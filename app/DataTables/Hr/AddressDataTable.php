@@ -1,7 +1,6 @@
 <?php
 
 namespace App\DataTables\Hr;
-
 use App\Models\Hr\HREmpadr;
 use Yajra\DataTables\Services\DataTable;
 
@@ -16,6 +15,10 @@ class AddressDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
+            ->addColumn('employee', function($query){
+                return $query->employee ? $query->employee->{'Emp_Nm'.ucfirst(session('lang'))} : '';
+            })
+
             ->addColumn('edit', function($query){
                 return '<a  href="address/'.$query->ID_No.'/edit" class="btn btn-success edit"><i class="fa fa-edit"></i></a>';
             })
@@ -24,7 +27,7 @@ class AddressDataTable extends DataTable
             })
             ->addColumn('delete', 'hr.settings.addresses.btn.delete')
             ->rawColumns([
-                'edit','delete','show'
+                'edit','delete','show','employee'
             ]);
     }
 
@@ -90,7 +93,9 @@ class AddressDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ['name'=>'Emp_Adrs','data'=>'Emp_Adrs','title'=>trans('hr.name')],
+            ['name'=>'employee','data'=>'employee','title'=>trans('hr.employee_name')],
+            ['name'=>'Emp_Adrs','data'=>'Emp_Adrs','title'=>trans('hr.Emp_Adrs_out')],
+            ['name'=>'Emp_Street','data'=>'Emp_Street','title'=>trans('hr.Emp_Adrs_in')],
             ['name'=>'edit','data'=>'edit','title'=>trans('hr.edit')],
             ['name'=>'show','data'=>'show','title'=>trans('hr.show')],
             ['name'=>'delete','data'=>'delete','title'=>trans('hr.delete')],

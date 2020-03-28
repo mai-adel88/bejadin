@@ -132,4 +132,10 @@ class HREmpCnt extends Model
         'DB22',
     ];
 
+
+    public function vacation()
+    {
+        return $this->hasOne(HREmphld::class, 'Emp_No', 'Emp_No');
+    }
+
 }

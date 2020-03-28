@@ -15,4 +15,9 @@ class HREmphld extends Model
     {
         return $this->belongsTo(HrEmpmfs::class, 'Emp_No', 'Emp_No');
     }
+
+    public function employeeCnt()  //البيانات الماليه للموظفين
+    {
+        return $this->belongsTo(HREmpCnt::class, 'Emp_No', 'Emp_No');
+    }
 }

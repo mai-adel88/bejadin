@@ -204,6 +204,10 @@ class EmployeesDataController extends Controller
             //التعاقد
             // dd($request->Gross_Salary);
             $emp = $this->validate($request, [
+                'Cmp_No'    => 'sometimes',
+                'Emp_No'    => 'sometimes',
+                'Gender'    => 'sometimes',
+                'SubCmp_No' => 'sometimes',
                 'Bsc_Salary'=> 'sometimes',
                 'Hous_Alw'  => 'sometimes',
                 'Emp_NmAr'  => 'sometimes',
@@ -261,6 +265,9 @@ class EmployeesDataController extends Controller
                 'Cmp_No'        => 'sometimes',
                 'Emp_No'        => 'sometimes',
                 'Gender'        => 'sometimes',
+                'SubCmp_No'     => 'sometimes',
+                'Emp_NmAr'      => 'sometimes',
+                'Emp_NmEn'      => 'sometimes',
                 'Tkt_No2'       => 'sometimes',
                 'Tkt_Class2'    => 'sometimes',
                 'Tkt_Sector2'   => 'sometimes',
@@ -573,6 +580,10 @@ class EmployeesDataController extends Controller
             //التعاقد
             // dd($request->Gross_Salary);
             $emp = $this->validate($request, [
+                'Cmp_No'    => 'sometimes',
+                'Emp_No'    => 'sometimes',
+                'Gender'    => 'sometimes',
+                'SubCmp_No' => 'sometimes',
                 'Bsc_Salary'=> 'sometimes',
                 'Hous_Alw'  => 'sometimes',
                 'Emp_NmAr'  => 'sometimes',
@@ -631,6 +642,9 @@ class EmployeesDataController extends Controller
                 'Cmp_No'        => 'sometimes',
                 'Emp_No'        => 'sometimes',
                 'Gender'        => 'sometimes',
+                'SubCmp_No'     => 'sometimes',
+                'Emp_NmAr'      => 'sometimes',
+                'Emp_NmEn'      => 'sometimes',
                 'Tkt_No2'       => 'sometimes',
                 'Tkt_Class2'    => 'sometimes',
                 'Tkt_Sector2'   => 'sometimes',

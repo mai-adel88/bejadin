@@ -56,6 +56,7 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
 
             // العناوين
             Route::resource('address', 'AddressController');
+            Route::get('getemployeeaddressData', 'AddressController@getemployeeaddressData')->name('getemployeeaddressData');
 
             Route::get('get-employees', 'AddressController@getEmployee')->name('get-employees');
             Route::get('get-employee-data', 'AddressController@getEmployeeData')->name('get-employee-data');
@@ -68,6 +69,7 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
             //الاجازات
             Route::resource('emphlds', 'EmphldController');
             Route::get('getdepartmenthlds', 'EmphldController@getdepartmenthlds')->name('getdepartmenthlds');
+            Route::get('getSalaryhlds', 'EmphldController@getSalaryhlds')->name('getSalaryhlds');
 
 
 

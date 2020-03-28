@@ -160,9 +160,10 @@ class HrEmpmfs extends Model
     {
         return $this->belongsTo(HREmpCnt::class, 'Emp_No', 'Emp_No');
     }
+    // address
     public function empAdr()
     {
-        return $this->belongsTo(HREmpadr::class, 'Emp_No', 'Emp_No');
+        return $this->hasOne(HREmpadr::class, 'Emp_No', 'Emp_No');
     }
     public function department()
     {

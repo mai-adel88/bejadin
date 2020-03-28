@@ -721,6 +721,13 @@
                             </div>
                         </div> <!-- end of third row col-md-10 -->
 
+                        {{-- <div id="preview" class="col-md-2">
+                            <img name="Photo[]" src="" class="Photo img-responsive" alt="">
+                        </div>
+                        <div class="col-md-2 mt-15">
+                            <input type="file" name="Photo[]" id="Photo" class="Photo">
+                        </div> --}}
+
                     </div>   {{--end of head__first_row--}}
 
                     <div class="tail__second_row">
@@ -1130,7 +1137,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-body">
 
-                                    <div class="row">
+                                        <div class="row">
                                             <div class="for-group row">
                                                 <div class="col-md-6">
                                                     <fieldset id="tableFilter">
@@ -1214,12 +1221,8 @@
                                                         </div>
                                                     </fieldset>
                                                 </div> <!-- end of col-md-6 خارج المملكة-->
-
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </div>

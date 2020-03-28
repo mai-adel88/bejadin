@@ -23,4 +23,9 @@ class HREmpAttach extends Model
     {
         return $this->belongsTo(HrEmpmfs::class, 'Emp_No', 'Emp_No');
     }
+
+    public function company()
+    {
+        return $this->belongsTo(HRMainCmpnam::class, 'Cmp_No', 'Cmp_No');
+    }
 }

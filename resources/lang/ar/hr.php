@@ -476,6 +476,7 @@ return [
     'administration'=>'الاداره',
     'job_status'    =>'الحالة الوظيفيه',
     'duration_contract'=>'مدة العقد',
+    'duration_of_vacation'=>'مدة الاجازه',
     'Huspym_No'     =>'دفع بدل السكن ',
     'Salary_Class_No'=>'تصنيف الراتب',
     'basic_salary'  =>'راتب اساسي',
@@ -612,7 +613,12 @@ return [
     //    العناوين
     'address'   =>'العناوين',
     'Add_New_address'   =>'اضافة عنوان جديد',
+    'show_address'   =>'عرض العنوان',
+    'edit_address'   =>'تعديل العنوان',
     'emp' =>'الموظفين',
+    'Emp_Adrs_out' =>'العنوان خارج اللملكة',
+    'Emp_Adrs_in' =>'العنوان داخل اللملكة',
+    'Emp_City' =>'المدينة',
     // attachments
     'attachments'   =>'المرفقات',
     'desc'   =>'الوصف',

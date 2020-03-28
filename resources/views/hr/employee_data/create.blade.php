@@ -465,7 +465,7 @@
                                 <!-- رقم الموظف بالقسم -->
                                 <div class="col-md-3">
                                     <label for="Emp_SubNo" class="col-md-6 p-0">{{trans('hr.dep_no')}}</label>
-                                    <input id="Emp_SubNo" readonly value="" name="Emp_SubNo" class="Emp_SubNo form-control col-md-6" type="text">
+                                    {{Form::text('Emp_SubNo','',array_merge(['readonly'=>'readonly','class'=>'Emp_SubNo form-control col-md-6','id'=>'Emp_SubNo']))}}
                                 </div>
                         </div> <!-- end of first row -->
 
@@ -481,7 +481,8 @@
                             <!-- الحاسب الالى -->
                             <div class="col-md-3">
                                 <label for="computer" class="col-md-6 p-0">{{trans('hr.computer')}}</label>
-                                <input id="computer" readonly name="" class="form-control col-md-6" type="text">
+                                {{Form::text('computer','',['readonly'=>'readonly','class'=>'form-control col-md-6'])}}
+
                             </div>
                         </div> <!-- end of second row -->
 
@@ -493,12 +494,13 @@
                                 <input id="Emp_No" name="Emp_No" value="{{$last}}" placeholder="{{$last}}" readonly type="number" class="form-control">
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <label class="col-sm-12 col-md-2" for="Emp_NmAr">{{trans('hr.name')}}</label>
+                                <label class="col-sm-12 col-md-2 p-0" for="Emp_NmAr">{{trans('hr.name')}}</label>
                                 <!-- <input id="Emp_NmAr" name="Emp_NmAr" value="" class="Emp_NmAr col-sm-6 col-md-8 input_number" type="text"> -->
-                                <input name="Emp_NmAr1" class="Emp_NmAr1 col-sm-6 col-md-2 input_number mr-lr-2" type="text">
-                                <input name="Emp_NmAr2" class="Emp_NmAr2 col-sm-6 col-md-2 input_number mr-lr-2" type="text" >
-                                <input name="Emp_NmAr3" class="Emp_NmAr3 col-sm-6 col-md-2 input_number mr-lr-2" type="text" >
-                                <input name="Emp_NmAr4" class="Emp_NmAr4 col-sm-6 col-md-2 input_number " type="text" >
+
+                                {{Form::text('Emp_NmAr1', '',['class' => 'col-sm-6 col-md-2 input_number mr-lr-2 Emp_NmAr1'])}}
+                                {{Form::text('Emp_NmAr2', '',['class' => 'col-sm-6 col-md-2 input_number mr-lr-2 Emp_NmAr2'])}}
+                                {{Form::text('Emp_NmAr3', '',['class' => 'col-sm-6 col-md-2 input_number mr-lr-2 Emp_NmAr3'])}}
+                                {{Form::text('Emp_NmAr4', '',['class' => 'col-sm-6 col-md-2 input_number mr-lr-2 Emp_NmAr4'])}}
                             </div>
                             <!-- PyCntry الجنسية -->
                             <div class="col-md-2 n-mp">
@@ -515,7 +517,7 @@
                             <!-- Birth_Date تاريخ الميلاد -->
                             <div class="col-md-3">
                                 <label class="col-md-5 p-0" for="Birth_Date">{{trans('hr.birth_date')}}</label>
-                                <input type="text" name="Birth_Date" id="Birth_Date" class="Birth_Date p-0 col-md-7 datepicker form-control">
+                                {{Form::text('Birth_Date','',['class'=>'Birth_Date p-0 col-md-7 datepicker form-control','id'=>'Birth_Date'])}}
                             </div>
                         </div><!-- end of first row -->
                         <div class="second__row">
@@ -523,10 +525,10 @@
                             <div class="col-md-6 col-sm-12 mt-5">
                                 <label class="col-sm-12 col-md-2 p-0" for="Emp_NmEn">{{trans('hr.english_name')}}</label>
                                 <!-- <input id="Emp_NmEn" hidden name="Emp_NmEn" value="nameEn" class="Emp_NmEn col-sm-6 col-md-8 input_number " type="text"> -->
-                                <input name="Emp_NmEn1" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text">
-                                <input name="Emp_NmEn2" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text" >
-                                <input name="Emp_NmEn3" class="col-sm-6 col-md-2 input_number mr-lr-2" type="text" >
-                                <input name="Emp_NmEn4" class="col-sm-6 col-md-2 input_number " type="text" >
+                                {{Form::text('Emp_NmEn1','',['class'=>'Emp_NmEn1 col-sm-6 col-md-2 input_number mr-lr-2'])}}
+                                {{Form::text('Emp_NmEn2','',['class'=>'Emp_NmEn2 col-sm-6 col-md-2 input_number mr-lr-2'])}}
+                                {{Form::text('Emp_NmEn3','',['class'=>'Emp_NmEn3 col-sm-6 col-md-2 input_number mr-lr-2'])}}
+                                {{Form::text('Emp_NmEn4','',['class'=>'Emp_NmEn4 col-sm-6 col-md-2 input_number mr-lr-2'])}}
                             </div>
                             <!-- // الديانة Reljan -->
                             <div class="col-md-2 n-mp mt-5">
@@ -539,7 +541,7 @@
                             <!-- Birth_Plac مكان الميلاد -->
                             <div class="col-md-3 mt-5">
                                 <label class="col-md-5 p-0" for="Birth_Plac">{{trans('hr.birth_place')}}</label>
-                                <input id="Birth_Plac" type="text" name="Birth_Plac" class="Birth_Plac input_number col-md-7 p-0 form-control">
+                                {{Form::text('Birth_Plac','',['class'=>'Birth_Plac input_number col-md-7 p-0 form-control'])}}
                             </div>
                         </div> <!-- end of second second row -->
                     </div>
@@ -547,12 +549,12 @@
                         <div class="col-md-12 p-0 m-0">
                             <!-- خارجى -->
                             <div class="col-md-1 p-0">
-                                <input id="Int_Ext_1" type="radio" value="1" name="Int_Ext" class="Int_Ext col-md-2 radio-inline">
+                                <input {{ old('Int_Ext') == 1 ? "checked" : "" }} id="Int_Ext_1" type="radio" value="1" name="Int_Ext" class="Int_Ext col-md-2 radio-inline">
                                 <label for="Int_Ext_1" class="col-md-10 pl-0 p-0">{{trans('hr.external')}}</label>
                             </div>
                             <!-- داخلى -->
                             <div class="col-md-1 p-0">
-                                <input id="Int_Ext_2" type="radio" value="2" name="Int_Ext" class="Int_Ext p-0 col-md-6 radio-inline">
+                                <input {{ old('Int_Ext') == 2 ? "checked" : "" }} id="Int_Ext_2" type="radio" value="2" name="Int_Ext" class="Int_Ext p-0 col-md-6 radio-inline">
                                 <label for="Int_Ext_2" class="col-md-6 p-0 pr-5">{{trans('hr.internal')}}</label>
                             </div>
                             <div class="col-md-2 P-0">
@@ -686,11 +688,12 @@
                         </div>
 
                     </div>
-                        <div id="preview" class="col-md-2">
-                        <img name="Photo[]" src="" class="Photo img-responsive">
-                        </div>
-                        <div class="col-md-2 mt-15">
+
+                        <div class="col-md-2 mt-15 form-group">
                             <input type="file" name="Photo[]" id="Photo" class="Photo">
+                        </div>
+                        <div id="preview" class="col-md-2">
+                            <img src="" class="Photo img-responsive" alt="">
                         </div>
                     </div>
                      <!-- end of third row col-md-10 -->
@@ -759,7 +762,7 @@
                                                         <input type="text" name="HLd_Period" class="p-0 col-md-4 form-control">
                                                     </div><!-- end third col-md-2 -->
                                                     <div class="col-md-6 p-0">
-                                                        <label for="Cnt_Period_hld" class="col-md-5 p-0">{{trans('hr.cnt_period_hld')}}</label>
+                                                        <label for="Cnt_Period_hld" class="col-md-5 p-0">{{trans('hr.duration_contract')}}</label>
                                                         <input id="Cnt_Period_hld" type="number" name="Cnt_Period" class="p-0 col-md-4 form-control p-0">
                                                     </div><!-- end third col-md-2 -->
                                                 </div>
@@ -1106,8 +1109,7 @@
                         <div class="tab-pane fade" id="titles" role="tabpanel" aria-labelledby="home-tab">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-
-                                <div class="row">
+                                    <div class="row">
                                         <div class="form-group ">
                                             <div class="col-md-6">
                                                 <fieldset id="tableFilter">
@@ -1196,9 +1198,6 @@
 
                                         </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>

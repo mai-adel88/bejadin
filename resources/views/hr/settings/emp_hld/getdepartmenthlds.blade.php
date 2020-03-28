@@ -1,3 +1,5 @@
 @if($departments)
-    <input type="text" value="{{$departments->{'Depm_Nm'.ucfirst(session('lang'))} }}">
+    @foreach($departments as $dep)
+        <input type="text" value="{{$dep->department->{'Depm_Nm'.ucfirst(session('lang'))} }}">
+    @endforeach
 @endif
