@@ -35,7 +35,7 @@ class AddressController extends Controller
 
     public function store(Request $request)
     {
-
+ 
         $data=$this->validate($request,[
             'Cmp_No'        => 'required',
             'Emp_No'        => 'required',

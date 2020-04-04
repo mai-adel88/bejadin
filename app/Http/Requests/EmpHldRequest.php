@@ -85,7 +85,7 @@ class EmpHldRequest extends FormRequest
     public function messages()
     {
         return [
-            'Cmp_No.required' => 'الشركه مطلوبه',
+            'Cmp_No.required'  => 'الشركه مطلوبه',
             'Emp_No.required'  => 'اختيارالموظف مطلوب',
         ];
     }

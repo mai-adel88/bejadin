@@ -148,15 +148,6 @@
             });
         });
 
-        // function myfunc(){
-        //     var start  = $('#start_date').val();
-        //     var return_date = $('#return_date').val();
-
-        //     // return_date - start returns difference in milliseconds
-        //     var diff = new Date(return_date - start)/ (1000 * 60 * 60 * 24);
-        //     alert(Math.round(diff));
-        // }
-        // $('#period').val() = myfunc();
 
         </script>
         @endpush
@@ -282,7 +273,7 @@
                                             <!-- first tab -->
                                             <div class="tab-pane fade show active in" id="yearly" role="tabpanel" aria-labelledby="home-tab">
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-2" style="margin-top:10px;">
                                                         <div class="col-md-12">
                                                             <input type="radio" value="1" name="Inc_Typ" class="col-md-2 radio-inline">
                                                             <label class="col-md-10 pl-0 p-0">{{trans('hr.no_bonus')}}</label>
@@ -296,7 +287,7 @@
                                                             <label class="col-md-10 pl-0 p-0">{{trans('hr.ch_bonus')}}</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-3" style="margin-top:10px;">
                                                         <div class="col-md-12">
                                                             <label class="col-md-7">{{trans('hr.bonus_year')}}</label>
                                                             <input type="number" min="0" name="Inc_Yer" class="col-md-5 input_text form-control">

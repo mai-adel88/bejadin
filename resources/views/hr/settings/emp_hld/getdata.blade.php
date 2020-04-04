@@ -2,6 +2,7 @@
 </style>
 <script>
     $('.datepicker').datepicker();
+    //// نصيب الشهر ////
     var hld_period = $('#Hld_Ern_Prod').val();
     var month_share = (Number (hld_period)/12 );
     $('#month_share').val(month_share.toFixed(2));
@@ -15,25 +16,91 @@
         return Math.round(Math.abs(days));
     }
 
+    //// حساب الايام الفعليه ////
+    var hiring_date = $('#hiring_date').val();
+    var diff = daysdifference(Date. now(), hiring_date);
+    $('#actual_days').val(diff);
+
+    //// المستحق حتى تاريخه /////
+    var actual_days = $('#actual_days').val();
+    var month_share = $('#month_share').val();
+    var due_date = (Number (actual_days) * Number (month_share) )
+    $('#due_to_date').val(Math.round(due_date));
+
     $(document).ready(function(){
+        $('input[type=radio][name=Inc_Typ]').click( function(){
+            $('#Inc_Yer').removeAttr('disabled');
+            $('#Inc_days').removeAttr('disabled');
+        });
+        $('#first_Inc_Typ').click( function(){
+            $('#Inc_Yer').prop("disabled", true);
+            $('#Inc_days').prop("disabled", true);
+        });
         //// استحقاق الاجازه والمده
         $('#Hld_Ern').change(function(){
             $('#Hld_Ern_Prod').val($(this).val());
         });
-
+        /// نصيب الشهر
         $(document).on('change' ,'#Hld_Ern', function(){
-            // alert('d');
             var Hld_Ern = $(this).val();
             var month_share = (Number (Hld_Ern)/12 );
             $('#month_share').val(month_share.toFixed(2));
+
+            //// المستحق حتى تاريخه /////
+            var actual_days = $('#actual_days').val();
+            var month_share = $('#month_share').val();
+            var due_date = (Number (actual_days) * Number (month_share) )
+            $('#due_to_date').val(Math.round(due_date));
         });
-        ////// المده بين تاريخ البدء والعوده /////////
-        $(document).on('change', '#Hld_Stdt', function(){
-            $(document).on('change', '#Hld_Rtdt', function(){
-                var start       = $('#Hld_Stdt').val();
-                var return_date = $('#Hld_Rtdt').val();
-                var diff = daysdifference(return_date, start);
-                alert(diff);
+
+        ////// المده بين تاريخ البدء والعوده للاجازه السنويه/////////
+        $(document).on('change', '.Hld_Stdt1', function(){
+            $(document).on('change', '.Hld_Rtdt1', function(){
+                var start       = $('.Hld_Stdt1').val();
+                var return_date = $('.Hld_Rtdt1').val();
+                var diff = daysdifference(start, return_date);
+                // alert(diff);
+                $('.Hld_Prod1').val(diff);
+            });
+        });
+        ////// المده بين تاريخ البدء والعوده للاجازه الخاصه/////////
+        $(document).on('change', '.Hld_Stdt2', function(){
+            $(document).on('change', '.Hld_Rtdt2', function(){
+                var start       = $('.Hld_Stdt2').val();
+                var return_date = $('.Hld_Rtdt2').val();
+                var diff = daysdifference(start, return_date);
+                // alert(diff);
+                $('.Hld_Prod2').val(diff);
+            });
+        });
+        ////// المده بين تاريخ البدء والعوده للاجازه الطارئه/////////
+        $(document).on('change', '.Hld_Stdt3', function(){
+            $(document).on('change', '.Hld_Rtdt3', function(){
+                var start       = $('.Hld_Stdt3').val();
+                var return_date = $('.Hld_Rtdt3').val();
+                var diff = daysdifference(start, return_date);
+                // alert(diff);
+                $('.Hld_Prod3').val(diff);
+            });
+        });
+        ////// المده بين تاريخ البدء والعوده للاجازه المرضيه/////////
+        $(document).on('change', '.Hld_Stdt4', function(){
+            $(document).on('change', '.Hld_Rtdt4', function(){
+                var start       = $('.Hld_Stdt4').val();
+                var return_date = $('.Hld_Rtdt4').val();
+                var diff = daysdifference(start, return_date);
+                // alert(diff);
+                $('.Hld_Prod4').val(diff);
+            });
+        });
+        ////// المده بين تاريخ البدء والعوده لاجازه الوضع/////////
+        $(document).on('change', '.Hld_Stdt5', function(){
+            $(document).on('change', '.Hld_Rtdt5', function(){
+                var start       = $('.Hld_Stdt5').val();
+                var return_date = $('.Hld_Rtdt5').val();
+                var diff = daysdifference(start, return_date);
+                // alert(diff);
+                $('.Hld_Prod5').val(diff);
             });
         });
     });
@@ -61,7 +128,7 @@
                     </div>
                     <div class="col-md-12">
                         <label class="col-md-6" style="padding:0px;">{{trans('hr.due_to_date')}}</label>
-                        <input type="text" name="" class="col-md-6 input_text form-control">
+                        <input type="text" name="" id="due_to_date" class="col-md-6 input_text form-control">
                     </div>
                     <div class="col-md-12">
                         <label class="col-md-6" style="padding:0px;">{{trans('hr.Last_Ret_Dt')}}</label>
@@ -71,11 +138,11 @@
                 <div class="col-md-4">
                     <div class="col-md-12">
                         <label class="col-md-6" style="padding:0px;">{{trans('hr.date_of_hiring')}}</label>
-                        <input type="text" name="" value="{{$data->Start_Date? $data->Start_Date:''}}" class="col-md-6 input_text form-control datepicker">
+                        <input type="text" name="" id="hiring_date" value="{{$data->Start_Date? $data->Start_Date:''}}" class="col-md-6 input_text form-control datepicker">
                     </div>
                     <div class="col-md-12">
                         <label class="col-md-6" style="padding:0px;">{{trans('hr.actual_days')}}</label>
-                        <input type="text" name="" class="col-md-6 input_text form-control">
+                        <input type="text" name="" id="actual_days" class="col-md-6 input_text form-control">
                     </div>
                     <div class="col-md-12">
                         <label class="col-md-6" style="padding:0px;">{{trans('hr.Blnc_Paid')}}</label>
@@ -109,9 +176,9 @@
                 <!-- first tab -->
                 <div class="tab-pane fade show active in" id="yearly" role="tabpanel" aria-labelledby="home-tab">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2" style="margin-top:10px;">
                             <div class="col-md-12">
-                                <input type="radio" value="1" name="Inc_Typ" class="col-md-2 radio-inline">
+                                <input type="radio" value="1" checked id="first_Inc_Typ" name="Inc_Typ" class="col-md-2 radio-inline">
                                 <label class="col-md-10 pl-0 p-0">{{trans('hr.no_bonus')}}</label>
                             </div>
                             <div class="col-md-12">
@@ -123,14 +190,14 @@
                                 <label class="col-md-10 pl-0 p-0">{{trans('hr.ch_bonus')}}</label>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="margin-top:10px;">
                             <div class="col-md-12">
                                 <label class="col-md-7">{{trans('hr.bonus_year')}}</label>
-                                <input type="number" min="0" name="Inc_Yer" class="col-md-5 input_text form-control">
+                                <input type="number" min="1" disabled id="Inc_Yer" name="Inc_Yer" class="col-md-5 input_text form-control">
                             </div>
                             <div class="col-md-12">
                                 <label class="col-md-7">{{trans('hr.no_days')}}</label>
-                                <input type="number" min="0" name="Inc_days" class="col-md-5 input_text form-control">
+                                <input type="number" min="1" disabled id="Inc_days" name="Inc_days" class="col-md-5 input_text form-control">
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -347,11 +414,11 @@
                         </div>
                         <div class="col-md-2" style="padding: 2px;">
                             <label>{{trans('hr.star_date')}}</label>
-                            <input type="text" id="Hld_Stdt" name="Hld_Stdt1" class="input_text form-control datepicker">
-                            <input type="text" id="Hld_Stdt" name="Hld_Stdt2" class="input_text form-control datepicker">
-                            <input type="text" id="Hld_Stdt" name="Hld_Stdt4" class="input_text form-control datepicker">
-                            <input type="text" id="Hld_Stdt" name="Hld_Stdt3" class="input_text form-control datepicker">
-                            <input type="text" id="Hld_Stdt" name="Hld_Stdt5" class="input_text form-control datepicker">
+                            <input type="text" name="Hld_Stdt1" class="Hld_Stdt1 input_text form-control datepicker">
+                            <input type="text" name="Hld_Stdt2" class="Hld_Stdt2 input_text form-control datepicker">
+                            <input type="text" name="Hld_Stdt4" class="Hld_Stdt3 input_text form-control datepicker">
+                            <input type="text" name="Hld_Stdt3" class="Hld_Stdt4 input_text form-control datepicker">
+                            <input type="text" name="Hld_Stdt5" class="Hld_Stdt5 input_text form-control datepicker">
                         </div>
                         <div class="col-md-2" style="padding: 2px;">
                             <label>{{trans('hr.finishing_d')}}</label>
@@ -363,19 +430,19 @@
                         </div>
                         <div class="col-md-2" style="padding: 2px;">
                             <label>{{trans('hr.Hld_Rtdt1')}}</label>
-                            <input type="text" id="Hld_Rtdt" name="Hld_Rtdt1" class="input_text form-control datepicker">
-                            <input type="text" id="Hld_Rtdt" name="Hld_Rtdt2" class="input_text form-control datepicker">
-                            <input type="text" id="Hld_Rtdt" name="Hld_Rtdt4" class="input_text form-control datepicker">
-                            <input type="text" id="Hld_Rtdt" name="Hld_Rtdt3" class="input_text form-control datepicker">
-                            <input type="text" id="Hld_Rtdt" name="Hld_Rtdt5" class="input_text form-control datepicker">
+                            <input type="text" name="Hld_Rtdt1" class="Hld_Rtdt1 input_text form-control datepicker">
+                            <input type="text" name="Hld_Rtdt2" class="Hld_Rtdt2 input_text form-control datepicker">
+                            <input type="text" name="Hld_Rtdt4" class="Hld_Rtdt3 input_text form-control datepicker">
+                            <input type="text" name="Hld_Rtdt3" class="Hld_Rtdt4 input_text form-control datepicker">
+                            <input type="text" name="Hld_Rtdt5" class="Hld_Rtdt5 input_text form-control datepicker">
                         </div>
                         <div class="col-md-1" style="padding: 2px;">
                             <label>{{trans('hr.Hld_Prod1')}}</label>
-                            <input type="text" name="Hld_Prod1" class="input_text form-control">
-                            <input type="text" name="Hld_Prod2" class="input_text form-control">
-                            <input type="text" name="Hld_Prod4" class="input_text form-control">
-                            <input type="text" name="Hld_Prod3" class="input_text form-control">
-                            <input type="text" name="Hld_Prod5" class="input_text form-control">
+                            <input type="text" name="Hld_Prod1" class="Hld_Prod1 input_text form-control">
+                            <input type="text" name="Hld_Prod2" class="Hld_Prod2 input_text form-control">
+                            <input type="text" name="Hld_Prod4" class="Hld_Prod3 input_text form-control">
+                            <input type="text" name="Hld_Prod3" class="Hld_Prod4 input_text form-control">
+                            <input type="text" name="Hld_Prod5" class="Hld_Prod5 input_text form-control">
                         </div>
                         <div class="col-md-2" style="padding: 2px;">
                             <label>{{trans('hr.Isu_Bln1')}}</label>

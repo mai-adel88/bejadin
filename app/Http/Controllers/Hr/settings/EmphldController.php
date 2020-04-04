@@ -38,31 +38,43 @@ class EmphldController extends Controller
     public function store(EmpHldRequest $request)
     {
         $validated = $request->validated();
-
+        $emp_data = HREmphld::where('Emp_No', $request->Emp_No)->first();
+        $emp_cnt  = HREmpCnt::where('Emp_No', $request->Emp_No)->first();
+        if($emp_data == null){
+            HREmphld::create($validated);
+            HREmpCnt::create($validated);
+            return redirect()->route('emphlds.index')->with(session()->flash('message',trans('hr.add_success')));
+        }else{
+            $emp_data->update($validated);
+            $$emp_cnt->update($validated);
+            return redirect()->route('emphlds.index')->with(session()->flash('message',trans('hr.update_success')));
+        }
     }
 
 
-    public function show($id)
+    public function show($ID_No)
     {
         //
     }
 
 
-    public function edit($id)
+    public function edit($ID_No)
     {
         //
     }
 
 
-    public function update(EmpHldRequest $request, $id)
+    public function update(EmpHldRequest $request, $ID_No)
     {
         //
     }
 
 
-    public function destroy($id)
+    public function destroy($ID_No)
     {
-        //
+        $emp_data = HREmphld::findOrFail($ID_No);
+        $emp_data->delete();
+        return redirect()->route('emphlds.index')->with(session()->flash('message',trans('he.delete_success')));
     }
 
     public function getData(Request $request)
