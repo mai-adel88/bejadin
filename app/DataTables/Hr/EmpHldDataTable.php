@@ -61,7 +61,7 @@ class EmpHldDataTable extends DataTable
                 ],
                 'buttons' => [
                     [
-                        'text' => '<i class="fa fa-plus"></i> ' . trans('hr.add_new_attachment'),
+                        'text' => '<i class="fa fa-plus"></i> ' . trans('hr.add_hld_data'),
                         'className' => 'btn btn-primary create',
                         'action' => 'function( e, dt, button, config){
                                 window.location = "emphlds/create";

@@ -349,6 +349,9 @@
                         }
                     })
                 });
+                $('#Hld_Ern').change(function(){
+                    $('#Hld_Ern_Prod').val($(this).val());
+                });
                 // تاريخ استحقاق الاجازة
                 $('input.DueDt_Hldy').change(function () {
                     let Hijri = $(this).val();
@@ -739,9 +742,17 @@
                                             <div class="vacancy__select-single col-md-12 form-group">
                                                 <label class="col-md-6 ptb-initial fs-12">{{ trans('admin.HLdy_Ty')}}</label>
                                                 <div class=" col-md-6 ptb-initial">
-                                                    {{ Form::select('HLdy_Ty',\App\Enums\Hr\AstcHldyEarn::toSelectArray() ,null,
-                                                    array_merge(['class' => 'form-control', 'placeholder'=>trans('admin.select')])) }}
+                                                    <select name="HLdy_Ty" id="Hld_Ern" class="form-control" placeholder="{{trans('admin.select')}}">
+                                                        <option>{{trans('hr.select')}}</option>
+                                                        <option value="">حسب القانون</option>
+                                                        <option value="15">سنويه 15</option>
+                                                        <option value="30">سنويه 30</option>
+                                                        <option value="21">سنويه 21</option>
+                                                        <option value="45">سنويه 45</option>
+                                                        <option value="30">سنتين 30</option>
+                                                    </select>
                                                 </div>
+
                                             </div>
                                             <!-- DueDt_Hldy تاريخ استحقاق الاجازة -->
                                             <div class="col-md-12 form-group">
@@ -759,7 +770,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-md-6 p-0">
                                                         <label class="col-md-5 p-0">{{trans('hr.duration_of_vacation')}}</label>
-                                                        <input type="text" name="HLd_Period" class="p-0 col-md-4 form-control">
+                                                        <input type="text" id="Hld_Ern_Prod" name="HLd_Period" class="p-0 col-md-4 form-control">
                                                     </div><!-- end third col-md-2 -->
                                                     <div class="col-md-6 p-0">
                                                         <label for="Cnt_Period_hld" class="col-md-5 p-0">{{trans('hr.duration_contract')}}</label>

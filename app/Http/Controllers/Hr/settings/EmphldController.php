@@ -10,6 +10,7 @@ use App\Models\Hr\HRMainCmpnam;
 use App\DataTables\Hr\EmpHldDataTable;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmpHldRequest;
 
@@ -53,7 +54,7 @@ class EmphldController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(EmpHldRequest $request, $id)
     {
         //
     }
@@ -64,6 +65,32 @@ class EmphldController extends Controller
         //
     }
 
+    public function getData(Request $request)
+    {
+        if($request->ajax()){
+            $data = HREmpCnt::where('Emp_No', $request->Emp_No)->first();
+            if($data != null){
+                return view('hr.settings.emp_hld.getdata', compact('data'));
+            }else{
+                return view('hr.settings.emp_hld.set_data', compact('data'));
+            }
+        }
+    }
+
+
+    public function getJob(Request $request)
+    {
+        if($request->ajax()){
+            $job_No = HrEmpmfs::where('Emp_No', $request->Emp_No)->pluck('Job_No');
+            $pyjobs = Pyjobs::where('Job_No', $job_No)->first();
+            if($pyjobs->Job_NmAr){
+                return response()->json($pyjobs->Job_NmAr);
+            }else{
+                return response()->json('');
+            }
+
+        }
+    }
 
     public function getdepartmenthlds(Request $request)
     {
@@ -71,24 +98,28 @@ class EmphldController extends Controller
             $departments = HrEmpmfs::where('Emp_No', $request->Emp_No)->with('department')->get();
             if($departments){
                 foreach($departments as $dep){
-                    $res = $dep->department->Depm_NmAr;
+                    $res = $dep->department;
+                    if($res != null){
+                        $res = $dep->department->Depm_Nm;
+                    }else{
+                        return response()->json(' ');
+                    }
                 }
             }
-
-            return response()->json($res);
         }
     }
 
     public function getSalaryhlds(Request $request)
     {
         if($request->ajax()){
-            $salary = HREmpCnt::where('Emp_No', $request->Emp_No)->pluck('Bsc_Salary');
-            ;
-            foreach($salary as $sal){
-                $result = $sal->Bsc_Salary;
+            $salary = HREmpCnt::where('Emp_No', $request->Emp_No)->first();
+            if($salary->Bsc_Salary != null){
+                return response()->json($salary->Bsc_Salary);
             }
-            // dd($result);
-            return response()->json($result);
+            else{
+                return response()->json(' ');
+            }
+
         }
     }
 }

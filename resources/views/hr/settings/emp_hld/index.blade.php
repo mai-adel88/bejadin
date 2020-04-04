@@ -10,7 +10,7 @@
     @endpush
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">{{trans('hr.escorts')}}</h3>
+            <h3 class="box-title">{{trans('hr.hlds')}}</h3>
         </div>
         <div class="box-body table-responsive">
             @include('hr.layouts.message')

@@ -87,6 +87,7 @@ class CreateHrEmpCntTable extends Migration {
 			$table->date('DueDt_Tkt')->nullable();
 			$table->date('DueDt_TktHij')->nullable();
 			$table->integer('HLdy_Ty')->nullable();
+			$table->integer('HLd_Period')->nullable();
 			$table->integer('HldTrnsp_No')->nullable();
 			$table->integer('Tkt_No')->nullable();
 			$table->string('Tkt_Class')->nullable();

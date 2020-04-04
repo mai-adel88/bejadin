@@ -605,8 +605,14 @@ return [
     'ch_bonus'      =>'زياده متغيره',
     'bonus_year'    =>'الزياده/سنه',
     'no_days'       =>'ايام الزياده',
-    'annual_increase'   =>'الزياده السنويه',
-    'last_vacation_data'=>'بيانات اخر اجازه',
+    'basic_data'    =>'البيانات الاساسيه',
+    'work_year'     =>'سنوات العمل',
+    'num_days'      =>'عدد ايام الزياده',
+    'month_share'   =>'نصيب الشهر',
+    'notes'         =>'ملاحظات',
+    'add_hld_data'  =>'اضافة بيانات اجازه',
+    'annual_increase'    =>'الزياده السنويه',
+    'last_vacation_data' =>'بيانات اخر اجازه',
 
 
 

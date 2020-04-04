@@ -68,7 +68,9 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
 
             //الاجازات
             Route::resource('emphlds', 'EmphldController');
+            Route::get('getData', 'EmphldController@getData')->name('getData');
             Route::get('getdepartmenthlds', 'EmphldController@getdepartmenthlds')->name('getdepartmenthlds');
+            Route::get('getJob', 'EmphldController@getJob')->name('getJob');
             Route::get('getSalaryhlds', 'EmphldController@getSalaryhlds')->name('getSalaryhlds');
 
 

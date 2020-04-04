@@ -473,7 +473,7 @@ class EmployeesDataController extends Controller
             'SubCmp_No' =>'sometimes', // القسم
             'Emp_SubNo' =>'sometimes', // رقم الموظف بالقسم
             'Emp_Type'  =>'sometimes', // تصنيف العمالة
-            'Emp_No'    => 'sometimes', // رقم
+            'Emp_No'    =>'sometimes', // رقم
             'Emp_NmAr'  =>'sometimes', // الاسم
             'Emp_NmAr1' => 'sometimes',
             'Emp_NmAr2' => 'sometimes',
