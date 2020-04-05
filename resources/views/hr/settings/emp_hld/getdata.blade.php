@@ -257,7 +257,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row"> 
                             <div class="col-md-12" style="padding:0px;">
                                 <div class="col-md-8">
                                     <label class="col-md-8" style="padding:0px;">{{trans('hr.DueDt_Tkt')}}</label>

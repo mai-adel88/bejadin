@@ -49,7 +49,7 @@ class EmphldController extends Controller
             $$emp_cnt->update($validated);
             return redirect()->route('emphlds.index')->with(session()->flash('message',trans('hr.update_success')));
         }
-    }
+    } 
 
 
     public function show($ID_No)
@@ -107,16 +107,11 @@ class EmphldController extends Controller
     public function getdepartmenthlds(Request $request)
     {
         if($request->ajax()){
-            $departments = HrEmpmfs::where('Emp_No', $request->Emp_No)->with('department')->get();
-            if($departments){
-                foreach($departments as $dep){
-                    $res = $dep->department;
-                    if($res != null){
-                        $res = $dep->department->Depm_Nm;
-                    }else{
-                        return response()->json(' ');
-                    }
-                }
+            $departments = HrEmpmfs::where('Emp_No', $request->Emp_No)->first();
+            if($departments->Depm_No != null){
+                return response()->json($departments->department->Depm_NmAr);
+            }else{
+                return response()->json(' ');
             }
         }
     }
