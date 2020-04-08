@@ -9,6 +9,7 @@ class HREmphld extends Model
 
     protected $table = 'hr_emphld';
     public $timestamps = true;
+    protected $primaryKey = 'ID_No';
     protected $guarded = ['ID_No'];
 
     public function employee()

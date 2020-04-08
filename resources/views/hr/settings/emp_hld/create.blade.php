@@ -95,8 +95,8 @@
                     }
                 });
             });
-            $('#Hld_Ern').change(function(){
-                $('#Hld_Ern_Prod').val($(this).val());
+            $('#HLdy_Ty').change(function(){
+                $('#HLd_Period').val($(this).val());
             });
          });
 
@@ -155,7 +155,7 @@
 
             <div class="box-body">
             @include('hr.layouts.message')
-                {{ Form::open(['method'=>'post', 'route' => 'dependents.store','files'=>true]) }}
+                {{ Form::open(['method'=>'post', 'route' => 'emphlds.store','files'=>true]) }}
                 <div style="padding-bottom: 42px;">
                     {{Form::submit(trans('hr.save'), ['class'=>'btn btn-outline-success pull-left','style'=>'background-color: #4d6672;color:#fff;'])}}
                 </div>
@@ -178,7 +178,6 @@
                                         <label class="col-md-2" style="padding:0px;">{{trans('admin.The_employee')}}</label>
                                         <select name="Emp_No" class="Emp_No col-md-7 input_text form-control">
                                             <option disabled selected>{{trans('admin.select')}}</option>
-
                                         </select>
                                         <input type="text" class="emp_no col-md-3 input_text form-control">
                                     </div>
@@ -191,7 +190,7 @@
                                 <div class="col-md-4">
                                     <div class="col-md-12">
                                         <label class="col-md-3">{{trans('hr.it_date')}}</label>
-                                        <input type="text" readonly value="{{Carbon\Carbon::now()->format('Y-m-d')}}" class="col-md-7 input_text form-control">
+                                        <input type="text" name="today_date" readonly value="{{Carbon\Carbon::now()->format('Y-m-d')}}" class="col-md-7 input_text form-control">
                                     </div>
                                     <div class="col-md-12">
                                         <label class="col-md-3">{{trans('hr.salary')}}</label>
@@ -216,6 +215,10 @@
                                                     <label class="col-md-5" style="padding:0px;">{{trans('hr.Open_Balnc')}}</label>
                                                     <input type="text" name="Open_Balnc" class="col-md-6 input_text form-control">
                                                 </div>
+                                                <div class="col-md-12">
+                                                    <label class="col-md-5" style="padding:0px;">{{trans('hr.Pat_Hld')}}</label>
+                                                    <input type="text" name="Pat_Hld" class="col-md-6 input_text form-control">
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="col-md-12">
@@ -229,7 +232,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <label class="col-md-6" style="padding:0px;">{{trans('hr.Last_Ret_Dt')}}</label>
-                                                    <input type="text" name="" class="col-md-6 input_text form-control">
+                                                    <input type="text" name="Last_Ret_Dt" class="col-md-6 input_text form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -261,12 +264,12 @@
                                                 aria-selected="true">{{trans('hr.annual_increase')}}</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="home-tab1" data-toggle="tab" href="#basic_data" role="tab" aria-controls="home"
-                                                aria-selected="true">{{trans('hr.basic_data')}}</a>
-                                            </li>
-                                            <li class="nav-item">
                                                 <a class="nav-link" id="home-tab1" data-toggle="tab" href="#vacancies" role="tab" aria-controls="home"
                                                 aria-selected="true">{{trans('hr.last_vacation_data')}}</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="home-tab1" data-toggle="tab" href="#basic_data" role="tab" aria-controls="home"
+                                                aria-selected="true">{{trans('hr.basic_data')}}</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="myTabContent1">
@@ -316,13 +319,80 @@
                                                 </div>
                                             </div>
                                             <!-- second tab -->
+                                            <div class="tab-pane fade" id="vacancies" role="tabpanel" aria-labelledby="home-tab">
+                                                <div class="row">
+                                                    <div class="col-md-2" style="margin-top: 35px;">
+                                                        <label style="padding:0px;">{{trans('hr.hld_year')}}</label>
+                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.Hld_No2')}}</label>
+                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.hld_emergency')}}</label>
+                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.Hld_No3')}}</label>
+                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.Hld_No5')}}</label>
+                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.Visainout')}}</label>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 2px;">
+                                                        <label>{{trans('hr.star_date')}}</label>
+                                                        <input type="date" name="Hld_Stdt1" class="Hld_Stdt1 input_text form-control">
+                                                        <input type="date" name="Hld_Stdt2" class="Hld_Stdt2 input_text form-control">
+                                                        <input type="date" name="Hld_Stdt4" class="Hld_Stdt3 input_text form-control">
+                                                        <input type="date" name="Hld_Stdt3" class="Hld_Stdt4 input_text form-control">
+                                                        <input type="date" name="Hld_Stdt5" class="Hld_Stdt5 input_text form-control">
+                                                        <input type="date" name="Visainout_ActDt" class="Visainout_ActDt input_text form-control">
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 2px;">
+                                                        <label>{{trans('hr.finishing_d')}}</label>
+                                                        <input type="date" name="Hld_Endt1" class="input_text form-control">
+                                                        <input type="date" name="Hld_Endt2" class="input_text form-control">
+                                                        <input type="date" name="Hld_Endt4" class="input_text form-control">
+                                                        <input type="date" name="Hld_Endt3" class="input_text form-control">
+                                                        <input type="date" name="Hld_Endt5" class="input_text form-control">
+                                                        <input type="date" name="Visainout_ExtDt" class="Visainout_ExtDt input_text form-control">
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 2px;">
+                                                        <label>{{trans('hr.Hld_Rtdt1')}}</label>
+                                                        <input type="date" name="Hld_Rtdt1" class="Hld_Rtdt1 input_text form-control">
+                                                        <input type="date" name="Hld_Rtdt2" class="Hld_Rtdt2 input_text form-control">
+                                                        <input type="date" name="Hld_Rtdt4" class="Hld_Rtdt3 input_text form-control">
+                                                        <input type="date" name="Hld_Rtdt3" class="Hld_Rtdt4 input_text form-control">
+                                                        <input type="date" name="Hld_Rtdt5" class="Hld_Rtdt5 input_text form-control">
+                                                        <label class="col-md-12">{{trans('hr.visa')}}</label>
+                                                    </div>
+                                                    <div class="col-md-1" style="padding: 2px;">
+                                                        <label>{{trans('hr.Hld_Prod1')}}</label>
+                                                        <input type="text" name="Hld_Prod1" class="Hld_Prod1 input_text form-control">
+                                                        <input type="text" name="Hld_Prod2" class="Hld_Prod2 input_text form-control">
+                                                        <input type="text" name="Hld_Prod4" class="Hld_Prod3 input_text form-control">
+                                                        <input type="text" name="Hld_Prod3" class="Hld_Prod4 input_text form-control">
+                                                        <input type="text" name="Hld_Prod5" class="Hld_Prod5 input_text form-control">
+                                                        <input type="text" name="Visainout_Period" class="input_text form-control" placeholder="مدة التأشيره">
+                                                    </div>
+                                                    <div class="col-md-2" style="padding: 2px;">
+                                                        <label>{{trans('hr.Isu_Bln1')}}</label>
+                                                        <input type="text" name="Isu_Bln1" class="input_text form-control">
+                                                        <input type="text" name="Isu_Bln2" class="input_text form-control">
+                                                        <input type="text" name="Isu_Bln4" class="input_text form-control">
+                                                        <input type="text" name="Isu_Bln3" class="input_text form-control">
+                                                        <input type="text" name="Isu_Bln5" class="input_text form-control">
+                                                        <input type="text" name="Visainout_Type" class="input_text form-control" placeholder="نوع التأشيره">
+                                                    </div>
+                                                    <div class="col-md-1" style="padding: 2px;">
+                                                        <label>{{trans('hr.Hld_No1')}}</label>
+                                                        <input type="text" name="Hld_No1" class="input_text form-control">
+                                                        <input type="text" name="Hld_No2" class="input_text form-control">
+                                                        <input type="text" name="Hld_No4" class="input_text form-control">
+                                                        <input type="text" name="Hld_No3" class="input_text form-control">
+                                                        <input type="text" name="Hld_No5" class="input_text form-control">
+                                                        <input type="text" name="Visainout_ID" class="input_text form-control" placeholder="رقم التأشيره">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- third tab -->
                                             <div class="tab-pane fade" id="basic_data" role="tabpanel" aria-labelledby="home-tab">
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-12" style="margin-top:5px; padding:0px;">
                                                             <div class="col-md-6">
                                                                 <label class="col-md-6" style="padding:0px;">{{trans('hr.vacations_merit_types')}}</label>
-                                                                <select name="Hld_Ern" id="Hld_Ern" class="col-md-6 input_text form-control" placeholder="{{trans('admin.select')}}">
+                                                                <select name="HLdy_Ty" id="HLdy_Ty" class="col-md-6 input_text form-control" placeholder="{{trans('admin.select')}}">
                                                                     <option>{{trans('hr.select')}}</option>
                                                                     <option value="">حسب القانون</option>
                                                                     <option value="15">سنويه 15</option>
@@ -335,7 +405,7 @@
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <label class="col-md-6" style="padding:0px;">{{trans('hr.Hld_Ern_Prod')}}</label>
-                                                                <input type="text" id="Hld_Ern_Prod" name="Hld_Ern_Prod" class="col-md-6 input_text form-control">
+                                                                <input type="text" id="HLd_Period" name="HLd_Period" class="col-md-6 input_text form-control">
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <label class="col-md-6" style="padding:0px;">{{trans('hr.duration_contract')}}</label>
@@ -487,66 +557,6 @@
                                                         </div>
                                                     </div>
                                                 </div> <!-- نهاية استحقاق التذكرة -->
-                                            </div>
-                                            <!-- third tab -->
-                                            <div class="tab-pane fade" id="vacancies" role="tabpanel" aria-labelledby="home-tab">
-                                                <div class="row">
-                                                    <div class="col-md-2" style="margin-top: 35px;">
-                                                        <label style="padding:0px;">{{trans('hr.hld_year')}}</label>
-                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.Hld_No2')}}</label>
-                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.hld_emergency')}}</label>
-                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.Hld_No3')}}</label>
-                                                        <label style="padding:0px;margin-top: 10px;">{{trans('hr.Hld_No5')}}</label>
-                                                    </div>
-                                                    <div class="col-md-2" style="padding: 2px;">
-                                                        <label>{{trans('hr.star_date')}}</label>
-                                                        <input type="text" name="Hld_Stdt1" id="start_date" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Stdt2" id="start_date" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Stdt4" id="start_date" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Stdt3" id="start_date" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Stdt5" id="start_date" class="input_text form-control datepicker">
-                                                    </div>
-                                                    <div class="col-md-2" style="padding: 2px;">
-                                                        <label>{{trans('hr.finishing_d')}}</label>
-                                                        <input type="text" name="Hld_Endt1" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Endt2" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Endt4" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Endt3" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Endt5" class="input_text form-control datepicker">
-                                                    </div>
-                                                    <div class="col-md-2" style="padding: 2px;">
-                                                        <label>{{trans('hr.Hld_Rtdt1')}}</label>
-                                                        <input type="text" name="Hld_Rtdt1" id="return_date" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Rtdt2" id="return_date" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Rtdt4" id="return_date" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Rtdt3" id="return_date" class="input_text form-control datepicker">
-                                                        <input type="text" name="Hld_Rtdt5" id="return_date" class="input_text form-control datepicker">
-                                                    </div>
-                                                    <div class="col-md-1" style="padding: 2px;">
-                                                        <label>{{trans('hr.Hld_Prod1')}}</label>
-                                                        <input type="text" name="Hld_Prod1" id="period" class="input_text form-control">
-                                                        <input type="text" name="Hld_Prod2" id="period" class="input_text form-control">
-                                                        <input type="text" name="Hld_Prod4" id="period" class="input_text form-control">
-                                                        <input type="text" name="Hld_Prod3" id="period" class="input_text form-control">
-                                                        <input type="text" name="Hld_Prod5" id="period" class="input_text form-control">
-                                                    </div>
-                                                    <div class="col-md-2" style="padding: 2px;">
-                                                        <label>{{trans('hr.Isu_Bln1')}}</label>
-                                                        <input type="text" name="Isu_Bln1" class="input_text form-control">
-                                                        <input type="text" name="Isu_Bln2" class="input_text form-control">
-                                                        <input type="text" name="Isu_Bln4" class="input_text form-control">
-                                                        <input type="text" name="Isu_Bln3" class="input_text form-control">
-                                                        <input type="text" name="Isu_Bln5" class="input_text form-control">
-                                                    </div>
-                                                    <div class="col-md-1" style="padding: 2px;">
-                                                        <label>{{trans('hr.Hld_No1')}}</label>
-                                                        <input type="text" name="Hld_No1" class="input_text form-control">
-                                                        <input type="text" name="Hld_No2" class="input_text form-control">
-                                                        <input type="text" name="Hld_No4" class="input_text form-control">
-                                                        <input type="text" name="Hld_No3" class="input_text form-control">
-                                                        <input type="text" name="Hld_No5" class="input_text form-control">
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

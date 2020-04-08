@@ -200,10 +200,8 @@ class EmployeesDataController extends Controller
             'Attch_Desc' => 'sometimes' ,
         ]);
 
-        if($request->Gross_Salary){
-            //التعاقد
-            // dd($request->Gross_Salary);
-            $emp = $this->validate($request, [
+        if($request->Gross_Salary && $request->HLdy_Ty || $request->HLd_Period){
+            $emp_hld = $this->validate($request, [
                 'Cmp_No'    => 'sometimes',
                 'Emp_No'    => 'sometimes',
                 'Gender'    => 'sometimes',
@@ -254,6 +252,84 @@ class EmployeesDataController extends Controller
                 'Tkt_Class2'    => 'sometimes',
                 'Tkt_Sector2'   => 'sometimes',
                 'Tkt_No'        => 'sometimes',
+                'Cnt_Period'    => 'sometimes',
+                'HLd_Period'    => 'sometimes',
+                'DueDt_Hldy'    => 'sometimes',
+                'DueDt_HldyHij' => 'sometimes',
+                'DueDt_Tkt'     => 'sometimes',
+                'DueDt_TktHij'  => 'sometimes',
+                'HLdy_Ty'       => 'sometimes',
+                'HldTrnsp_No'   => 'sometimes',
+                'Tkt_Class'     => 'sometimes',
+                'Tkt_Sector'    => 'sometimes',
+                'HldTrnsp_No1'  => 'sometimes',
+                'Tkt_No1'       => 'sometimes',
+                'Tkt_Class1'    => 'sometimes',
+                'Tkt_Sector1'   => 'sometimes',
+                'HldTrnsp_No2'  => 'sometimes',
+                'Tkt_Sector1'   => 'sometimes',
+                'Tkt_Ty1'       => 'sometimes',
+                'Tkt_Ty2'       => 'sometimes',
+                'Tkt_Ty3'       => 'sometimes',
+                'Tkt_Ty4'       => 'sometimes',
+                'Tkt_Ty5'       => 'sometimes',
+                'Tkt_Ty6'       => 'sometimes',
+                'Tkt_Ty7'       => 'sometimes',
+
+            ]);
+            HREmpCnt::create($emp_hld);
+        }
+        if($request->Gross_Salary){
+            //التعاقد
+            // dd($request->Gross_Salary);
+            $emp = $this->validate($request, [
+                'Cmp_No'    => 'sometimes',
+                'Emp_No'    => 'sometimes',
+                'Gender'    => 'sometimes',
+                'SubCmp_No' => 'sometimes',
+                'Bsc_Salary'=> 'sometimes',
+                'Hous_Alw'  => 'sometimes',
+                'Emp_NmAr'  => 'sometimes',
+                'Emp_NmEn'  => 'sometimes',
+                'Emp_No'    => 'sometimes', // رقم
+                'Trnsp_Alw' => 'sometimes',
+                'Food_Alw' => 'sometimes',
+                'Other_Alw' => 'sometimes',
+                'Add_Alw' => 'sometimes',
+                'ALw1' => 'sometimes',
+                'ALw2' => 'sometimes',
+                'ALw3' => 'sometimes',
+                'ALw4' => 'sometimes',
+                'ALw5' => 'sometimes',
+                'Gross_Salary'  => 'sometimes',
+                'Huspym_No'     => 'sometimes',
+                'Wrk_Hour'      => 'sometimes',
+                'Wrk_CostHour'  => 'sometimes',
+                'Total_Wrk_CostHour' => 'sometimes',
+                'Wrk_OvrTime'   => 'sometimes',
+                'OvrTime_Rate'  => 'sometimes',
+                'OvrTime_HR1'   => 'sometimes',
+                'OvrTime_HR2'   => 'sometimes',
+                'OvrTime_HR3'   => 'sometimes',
+                'Lunch_hour'    => 'sometimes',
+                'Cnt_Stdt'      => 'sometimes',
+                'Cnt_StdtHij'   => 'sometimes',
+                'Cnt_Endt'      => 'sometimes',
+                'Cnt_EndtHij'   => 'sometimes',
+                'Cnt_Nwdt'      => 'sometimes',
+                'Cnt_NwdtHij'   => 'sometimes',
+                'Start_Date'    => 'sometimes',
+                'Start_DateHij' => 'sometimes',
+                'Dection_ExpireDt'=> 'sometimes',
+                'Bouns_Prct'    => 'sometimes',
+                'Start_Paid'    => 'sometimes',
+                'Start_UnPaid'  => 'sometimes',
+                'Fbal_Db'       => 'sometimes',
+                'Fbal_CR'       => 'sometimes',
+                'Acc_NoDb1'     => 'sometimes',
+                'Prj_No'        => 'sometimes',
+                'PjLoc_No'      => 'sometimes',
+
             ]);
             HREmpCnt::create($emp);
         }

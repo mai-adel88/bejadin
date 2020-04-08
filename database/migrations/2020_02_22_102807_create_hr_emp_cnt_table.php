@@ -10,7 +10,6 @@ class CreateHrEmpCntTable extends Migration {
 	{
 		Schema::create('hr_emp_cnt', function(Blueprint $table) {
 			$table->increments('ID_No');
-			$table->timestamps();
 			$table->integer('Cmp_No')->nullable();
 			$table->enum('Emp_Type', [1,2,3])->nullable();
 			$table->integer('Emp_No')->nullable();
@@ -94,7 +93,6 @@ class CreateHrEmpCntTable extends Migration {
 			$table->string('Tkt_Sector')->nullable();
 			$table->integer('HldTrnsp_No1')->nullable();
 			$table->integer('Tkt_No1')->nullable();
-			$table->string('HLd_Period')->nullable();
 			$table->string('Tkt_Class1')->nullable();
 			$table->string('Tkt_Sector1')->nullable();
 			$table->integer('HldTrnsp_No2')->nullable();
@@ -132,6 +130,8 @@ class CreateHrEmpCntTable extends Migration {
             $table->decimal('DB20')->nullable();
             $table->decimal('DB21')->nullable();
             $table->decimal('DB22')->nullable();
+            $table->timestamps();
+
 		});
 	}
 

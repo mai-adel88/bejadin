@@ -73,6 +73,8 @@ Route::group(['namespace' => 'Hr', 'prefix'=>'hr'], function (){
             Route::get('getJob', 'EmphldController@getJob')->name('getJob');
             Route::get('getSalaryhlds', 'EmphldController@getSalaryhlds')->name('getSalaryhlds');
 
+            // الرواتب
+            Route::view('/salaries_menu', 'hr.pages.salaries_menu')->name('salaries_menu');
 
 
         });

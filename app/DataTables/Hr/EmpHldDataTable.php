@@ -22,11 +22,11 @@ class EmpHldDataTable extends DataTable
                 return '<a  href="emphlds/'.$query->ID_No.'/edit" class="btn btn-success edit"><i class="fa fa-edit"></i></a>';
             })
             ->addColumn('show', function($query){
-                return '<a href="'.route('emphlds.show', $query->ID_NO).'" class="btn btn-info"><i class="fa fa-info"></i></a>';
+                return '<a href="'.route('emphlds.show', $query->ID_No).'" class="btn btn-info"><i class="fa fa-info"></i></a>';
             })
 
 
-            ->addColumn('delete', 'hr.emphlds.btn.delete')
+            ->addColumn('delete', 'hr.settings.emp_hld.btn.delete')
             ->rawColumns([
                 'edit','delete','show','employee'
             ]);
@@ -94,7 +94,7 @@ class EmpHldDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ['name'=>'Emp_No','data'=>'Emp_No','title'=>trans('hr.employee_name')],
+            ['name'=>'employee','data'=>'employee','title'=>trans('hr.employee_name')],
             ['name'=>'edit','data'=>'edit','title'=>trans('hr.edit')],
             ['name'=>'show','data'=>'show','title'=>trans('hr.show')],
             ['name'=>'delete','data'=>'delete','title'=>trans('hr.delete')],

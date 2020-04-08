@@ -224,6 +224,16 @@
                 </div>
                 <!-- /.info-box -->
             </div>
+            <!-- الرواتب -->
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
+                    <div class="info-box-content">
+                        <h5><a href="{{route('salaries_menu')}}">{{trans('hr.salaries')}}</a></h5>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua"><i class="fa fa-compass"></i></span>

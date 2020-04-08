@@ -7,6 +7,7 @@ use App\Models\Hr\HrEmpmfs;
 use App\Models\Hr\HREmpCnt;
 use App\Models\Hr\HREmphld;
 use App\Models\Hr\HRMainCmpnam;
+use App\Models\Hr\PyempHLDInc;
 use App\DataTables\Hr\EmpHldDataTable;
 
 use Illuminate\Http\Request;
@@ -40,21 +41,48 @@ class EmphldController extends Controller
         $validated = $request->validated();
         $emp_data = HREmphld::where('Emp_No', $request->Emp_No)->first();
         $emp_cnt  = HREmpCnt::where('Emp_No', $request->Emp_No)->first();
+        $emp_pyemp= PyempHLDInc::where('Emp_No', $request->Emp_No)->first();
+
+        if($request->Work_Yer || $request->Increase_Days || $request->Notes){
+            $pyemp = $this->validate($request, [
+                'Emp_No'        => 'sometimes',
+                'Work_Yer'      => 'sometimes',
+                'Increase_Days' => 'sometimes',
+                'Notes'         => 'sometimes',
+            ]);
+            if($emp_pyemp == null){
+                PyempHLDInc::create($pyemp);
+            }else{
+                $emp_pyemp->update($pyemp);
+            }
+        }
+
         if($emp_data == null){
             HREmphld::create($validated);
-            HREmpCnt::create($validated);
             return redirect()->route('emphlds.index')->with(session()->flash('message',trans('hr.add_success')));
         }else{
             $emp_data->update($validated);
-            $$emp_cnt->update($validated);
             return redirect()->route('emphlds.index')->with(session()->flash('message',trans('hr.update_success')));
         }
-    } 
+
+        if($emp_cnt == null){
+            HREmpCnt::create($validated);
+            return redirect()->route('emphlds.index')->with(session()->flash('message',trans('hr.add_success')));
+        }else{
+            $emp_cnt->update($validated);
+            return redirect()->route('emphlds.index')->with(session()->flash('message',trans('hr.update_success')));
+        }
+
+    }
 
 
-    public function show($ID_No)
+    public function show($ID_No, Request $request)
     {
-        //
+        $emp_data = HREmphld::findOrFail($ID_No);
+        $data  = HREmpCnt::where('Emp_No', $request->Emp_No)->get();
+        $emp_pyemp= PyempHLDInc::where('Emp_No', $request->Emp_No)->get();
+
+        return view('hr.settings.emp_hld.show', compact('emp_data', 'data', 'emp_pyemp'));
     }
 
 
@@ -74,17 +102,20 @@ class EmphldController extends Controller
     {
         $emp_data = HREmphld::findOrFail($ID_No);
         $emp_data->delete();
-        return redirect()->route('emphlds.index')->with(session()->flash('message',trans('he.delete_success')));
+        return redirect()->route('emphlds.index')->with(session()->flash('message',trans('hr.delete_success')));
     }
 
     public function getData(Request $request)
     {
         if($request->ajax()){
-            $data = HREmpCnt::where('Emp_No', $request->Emp_No)->first();
-            if($data != null){
-                return view('hr.settings.emp_hld.getdata', compact('data'));
+            $data     = HREmpCnt::where('Emp_No', $request->Emp_No)->first();
+            $emp_data = HREmphld::where('Emp_No', $request->Emp_No)->first();
+            $emp_pyemp= PyempHLDInc::where('Emp_No', $request->Emp_No)->first();
+
+            if($data != null || $emp_data != null){
+                return view('hr.settings.emp_hld.getdata', compact('data', 'emp_data', 'emp_pyemp'));
             }else{
-                return view('hr.settings.emp_hld.set_data', compact('data'));
+                return view('hr.settings.emp_hld.set_data', compact('data', 'emp_data', 'emp_pyemp'));
             }
         }
     }

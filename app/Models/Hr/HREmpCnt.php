@@ -83,6 +83,7 @@ class HREmpCnt extends Model
         'PjLoc_No',         //مكان العمل بالمشروع(فرعى)
         'Gov_Cntrct',       //رقم العقد-الحكومى
         'DueDt_Hldy',       //تاريخ  استحاق الاجازة
+        'HLd_Period',       //مدة الاجازه
         'DueDt_HldyHij',    //هـ
         'DueDt_Tkt',        //تاريخ  استحاق التذكرة
         'DueDt_TktHij',     //هـ

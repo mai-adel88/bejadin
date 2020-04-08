@@ -16,7 +16,7 @@ class CreateHREmpadrsTable extends Migration
         Schema::create('hr_empadrs', function (Blueprint $table) {
             $table->increments('ID_No');
             $table->timestamps();
-            $table->integer('Cmp_No')->nullable();    
+            $table->integer('Cmp_No')->nullable();
 			$table->integer('Emp_No')->nullable();
 			$table->integer('Cntry_No')->nullable();    //خارج المملكه  //الدولة
 			$table->string('Phon_Cntry')->nullable();   //تليفون
@@ -50,9 +50,9 @@ class CreateHREmpadrsTable extends Migration
 			$table->string('ParkBuld_Nm')->nullable();
 			$table->string('Park_Florno')->nullable();
 
-            $table->foreign('Emp_City')->references('id')->on('cities')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+            // $table->foreign('Emp_City')->references('id')->on('cities')
+            //     ->onDelete('restrict')
+            //     ->onUpdate('restrict');
         });
     }
 
