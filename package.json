@@ -27,7 +27,7 @@
     "dependencies": {
         "laravel-vue-pagination": "^2.3.0",
         "luxon": "^1.14.0",
-        "moment": "^2.24.0",
+        "moment": "^2.29.2",
         "select2": "^4.0.10",
         "sweetalert2": "^8.11.1",
         "vform": "^1.0.0",
